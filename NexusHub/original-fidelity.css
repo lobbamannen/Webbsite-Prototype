@@ -1,0 +1,54 @@
+/* Only demo-specific additions. Production CSS is loaded unmodified first. */
+.portal-shell .nh-home{width:100%}
+.portal-shell .nh-total-link{display:flex;align-items:center;gap:15px;min-width:0;flex:1;text-align:left;color:inherit}
+.portal-shell .nh-total-icon{display:grid;place-items:center;flex:none;width:58px;height:58px;border-radius:17px;background:#483a713b;color:#c5a1ff}
+.portal-shell .nh-total-copy{display:flex;flex-direction:column;gap:7px;min-width:0}
+.portal-shell .nh-total-heading{font-weight:730;color:#f7f3ff}
+.portal-shell .nh-total-count{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.portal-shell .nh-total-count strong{font-size:31px;line-height:1;font-variant-numeric:tabular-nums;color:#f7f2ff}
+.portal-shell .nh-total-count span{color:#aebdd7;font-size:12px}
+.portal-shell .nh-dashboard-stats{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.portal-shell .nh-module-count{color:#c799ff!important;font-weight:700!important}
+.portal-shell .nh-module-card{cursor:pointer}
+.portal-shell .nh-home .nh-module-card .nh-module-copy{grid-column:1 / -1}
+.portal-shell .nh-home .nh-module-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:0}
+.portal-shell .nh-home .nh-module-card .nh-module-symbol{margin-bottom:14px}
+.portal-shell .nh-home .nh-module-chevron{position:absolute;right:17px;top:17px}
+.portal-shell .nh-home .nh-module-decoration{right:10px;bottom:-12px}
+.portal-shell .nh-home .nh-module-card{min-height:210px}
+.portal-shell .nh-recent-demo{display:flex;gap:11px;overflow:auto}
+.portal-shell .nh-recent-list-card{cursor:pointer}
+.portal-shell .original-demo-note{padding:10px 14px;margin:0 0 15px;border:1px solid #485173;border-radius:12px;background:#1e1b33;color:#b9c6df;font-size:12px}
+.portal-shell .demo-panel{padding:20px;border:1px solid #334361;border-radius:18px;background:#111c30}
+.portal-shell .demo-panel h2{font-size:21px;margin:0 0 12px}
+.portal-shell .demo-panel p{color:#acbbd4;font-size:14px;line-height:1.65}
+.portal-shell .demo-filters{display:flex;gap:8px;margin:16px 0;overflow:auto}
+.portal-shell .demo-filters button{border:1px solid #44516d;background:#19253a;color:#c0cae0;border-radius:20px;padding:9px 14px;white-space:nowrap}
+.portal-shell .demo-filters .selected{border-color:#b58eea;color:#eacfff}
+.portal-shell .demo-row{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;padding:17px;border:1px solid #30415d;background:#17243a;border-radius:14px;color:#eff3ff;margin-bottom:10px}
+.portal-shell .demo-row small{display:block;color:#aabbd6;margin-top:5px}
+.portal-shell .demo-toolbar{display:flex;gap:8px;margin:0 0 20px;align-items:center}
+.portal-shell .demo-toolbar input{background:#101a2c;border:1px solid #344665;color:white;border-radius:12px;padding:13px;font-size:16px;width:100%;min-width:0}
+.portal-shell .demo-overlay{position:fixed;inset:0;background:#000a;z-index:90;display:flex;align-items:flex-end;justify-content:center}
+.portal-shell .demo-sheet{width:min(640px,100%);max-height:88dvh;overflow:auto;background:#111b30;border:1px solid #455478;border-radius:20px 20px 0 0;padding:22px}
+.portal-shell .demo-sheet h2{font-size:22px;color:#f4f0ff;margin:0 0 14px}
+.portal-shell .demo-sheet button{color:#e6d8ff}
+.portal-shell .demo-menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.portal-shell .demo-menu-grid button{min-height:48px;padding:12px;border-radius:12px;border:1px solid #34425d;background:#18243a;text-align:left}
+.portal-shell .demo-close{float:right;padding:8px 12px;border:1px solid #65719b;border-radius:10px}
+.portal-shell .demo-reader{line-height:1.8;color:#c6d4ea;font-size:16px}
+.portal-shell .nh-home .nh-recent-heading{display:flex;gap:12px;align-items:center}
+.portal-shell .nh-recent-demo strong{font-size:14px}
+@media(max-width:800px){
+.portal-shell .nh-home .nh-module-card{min-height:142px}
+.portal-shell .nh-dashboard-stats{padding:17px 15px}
+.portal-shell .nh-total-icon{width:50px;height:50px}
+.portal-shell .nh-total-count strong{font-size:29px}
+.portal-shell .nh-total-heading{font-size:14px}
+.portal-shell .nh-home .nh-module-card{min-height:145px;padding:16px 13px}
+.portal-shell .nh-home .nh-module-card .nh-module-symbol{margin-bottom:14px}
+.portal-shell .nh-home .nh-module-card .nh-module-copy strong{font-size:16px}
+.portal-shell .nh-home .nh-module-card .nh-module-copy>span{font-size:11px}
+.portal-shell .nh-sync-state{max-width:100px;text-align:right}
+}
+@media(max-width:420px){.portal-shell .nh-total-count strong{font-size:25px}.portal-shell .nh-total-count span{font-size:10px}.portal-shell .nh-home .nh-module-card{min-height:150px}}
