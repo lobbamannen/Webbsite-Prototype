@@ -192,3 +192,43 @@
 .portal-shell .nh-watchlist-items button span{flex:1;min-width:0;overflow-wrap:anywhere}
 .portal-shell .nh-watchlist-items button svg:first-child{color:#c0a0eb;flex:none}
 @media(max-width:600px){.portal-shell .nh-watchlist-items{grid-template-columns:1fr}}
+
+/* Workshop-only cross-view UX polish: preserve existing structure and interactions. */
+.portal-shell .nh-module-dashboard-header{gap:16px}
+.portal-shell .nh-module-dashboard-title p{max-width:58ch;line-height:1.55}
+.portal-shell .nh-module-category-head{margin-top:3px}
+.portal-shell .nh-module-category-head h2{letter-spacing:-.25px}
+.portal-shell .nh-module-category-head p{line-height:1.55}
+.portal-shell .nh-module-category-card.selected{border-color:#b28ae8;box-shadow:inset 0 0 0 1px #a67de555,0 5px 17px #00000016}
+.portal-shell .nh-module-category-card:focus-visible,.portal-shell .nh-watchlist-items button:focus-visible{outline:3px solid #e0c1ff;outline-offset:2px}
+.portal-shell .nh-discovery-search input{min-width:0}
+.portal-shell .nh-discovery-search:focus-within{border-color:#a982dd}
+.portal-shell .nh-discovery-results{scroll-margin-top:16px}
+.portal-shell .nh-discovery-results :is(.film-list-heading,.stories-list-header,.hub-results-heading){margin-bottom:13px}
+.portal-shell .nh-catalog-status{color:#a5c7bd;font-weight:500}
+.portal-shell .nh-catalog-status small{color:#9baac0}
+.portal-shell .nh-settings-verification{line-height:1.6;color:#a9b9d1}
+.portal-shell .nh-settings-action:focus-visible,.portal-shell .nh-settings-section>summary:focus-visible{outline:3px solid #dfbcff;outline-offset:2px}
+.portal-shell .nh-watchlist-group .nh-module-category-head{margin-bottom:0}
+.portal-shell .nh-watchlist-items button{transition:border-color .18s,background-color .18s}
+.portal-shell .nh-watchlist-items button:hover{border-color:#8c71b8}
+.portal-shell .stories-reader-article,.portal-shell .reader{scroll-margin-top:12px}
+.portal-shell .reader .prose,.portal-shell .stories-reader-article{overflow-wrap:anywhere}
+.portal-shell .reader-controls{gap:10px}
+.portal-shell .portal-source,.portal-shell .source-info{line-height:1.6}
+.portal-shell .hub-plugin-card:focus-within,.portal-shell .hub-discovery-card:focus-within{outline:2px solid #bc9bed;outline-offset:2px}
+.portal-shell .hub-inbox-drop{scroll-margin-top:16px}
+@media(max-width:600px){
+ .portal-shell .nh-module-dashboard-title p{font-size:12px;line-height:1.55}
+ .portal-shell .nh-module-eyebrow{font-size:10px;letter-spacing:1.05px}
+ .portal-shell .nh-module-stat span{font-size:11px;line-height:1.4}
+ .portal-shell .nh-category-copy small{font-size:11px;line-height:1.4}
+ .portal-shell .nh-catalog-status small{font-size:11px}
+ .portal-shell .nh-module-category-head p{font-size:12px}
+ .portal-shell .nh-discovery-results :is(.film-list-heading,.stories-list-header,.hub-results-heading){margin-bottom:11px}
+ .portal-shell .nh-watchlist-items button{min-height:48px}
+ .portal-shell .reader-controls :is(button,summary){min-height:44px}
+ .portal-shell .stories-reader-actions button{min-height:44px}
+ .portal-shell .nh-settings-verification{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.portal-shell .nh-watchlist-items button{transition:none}}
