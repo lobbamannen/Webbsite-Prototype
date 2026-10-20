@@ -1,52 +1,30 @@
-/* Finding-specific prototype renderers for Meta AI + Vibe research.
-   Shared archetypes preserve each source finding separately; broad principles are shown as implementation criteria. */
+/* Meta AI + Vibe findings: finding-specific prototype compositions using Nexus demo data. */
 (function(){
-'use strict';
-var N=window.NEXUS;
-if(!N)return;
+'use strict';var N=window.NEXUS;if(!N)return;
 var esc=function(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
-var all=window.NEXUS_IDEAS||[];
-var nav=(N.views||[]), media=(N.data&&N.data.media)||[], stories=(N.data&&N.data.stories)||[], files=(N.data&&N.data.files)||[];
-function family(title){
- var t=title.toLowerCase();
- if(/princip|konsekvens|mental modell|designstrategi|filosofi|identitet|omdesign|krav|designspråk|inte.decorativ|trust|strategi|läsning först|mobil =|mobil mindre|timeless|retention|varningsexempel/.test(t))return 'principle';
- if(/search|sök|filter|tagg|kategori|scope|sorter|smart/.test(t))return 'search-filter';
- if(/navigation|nav|meny|drawer|bottom|botten|destination|genväg|flik|tabb|toppnavigation|back|tillbaka/.test(t))return 'navigation';
- if(/reader|läs|typograf|serif|sans|fokusläge|reading|progress i|sidfärg|brödtext|aa-knapp/.test(t))return 'reader';
- if(/arkiv|dokument|pdf|upload|uppladd|mapp|clean|papperskorg|dublett|sparning/.test(t))return 'archive';
- if(/tomma|tomt|empty state|inga resultat/.test(t))return 'empty';
- if(/aktivitet|dagbok|recent|senast|journal/.test(t))return 'activity';
- if(/statistik|räknare|widget|personaliserad statistik/.test(t))return 'stats';
- if(/progress|framsteg|avsnitt|säsong|watchlist|statusbadge|status i kort/.test(t))return 'progress';
- if(/kort|affisch|poster|omslag|thumbnail|miniatyr|bildförhållande|masonry|kollage|hero-bakgrund/.test(t))return 'content-card';
- if(/färg|accent|yta|surface|skugga|hierarki|kontrast|opacity|opacitet|dark|mörk|geometr|pill|radius|spacing|luft|chrome|svart|vit|seremant/.test(t))return 'visual-system';
- if(/tillägg|plugin|katalog|extensions/.test(t))return 'catalog';
- if(/favorit|saved view|sparade vy|samling|collection|objekt/.test(t))return 'collections';
- if(/tryckyta|enhands|tumzon|tillgäng|skalning|skärmläs|font|lättlästa/.test(t))return 'accessibility';
- return 'workflow';
+var items=window.NEXUS_IDEAS||[],d=N.data||{},views=N.views||[],media=d.media||[],stories=d.stories||[],files=d.files||[];
+var go=function(label,id){if(!views.some(function(v){return v.id===id;}))id='home';return '<button data-go="'+esc(id)+'">'+esc(label)+'</button>';};
+var action=function(label,a){return '<button data-action="'+esc(a)+'">'+esc(label)+'</button>';};
+var gallery=function(count,layout,badges){return '<div class="ai-idea-gallery '+layout+'">'+media.slice(0,count).map(function(m,i){return '<article class="ai-idea-card"><button class="ai-idea-art" data-open-media="'+esc(m.id)+'" style="background:'+esc(m.poster)+'"><span>'+esc(m.glyph)+'</span>'+(badges?'<b>'+esc(badges[i%badges.length])+'</b>':'')+'</button><div><strong>'+esc(m.title)+'</strong><small>'+esc(m.year+' · '+m.type+' · ★ '+m.rating)+'</small></div></article>';}).join('')+'</div>';};
+var principle=function(x,label){return '<section class="ai-idea-rule"><b>Designregel · '+label+'</b><p>'+esc(x.title.replace(/^[–—\s]+/,''))+'</p><details><summary>Acceptanskriterier</summary><ul><li>Kontrollera hierarki och läsbarhet på mobil.</li><li>Behåll konsekvens mellan relaterade Nexus-vyer.</li><li>Jämför mot demodata före godkännande.</li></ul></details>'+go('Granska i komponentbyggaren','home')+'</section>';};
+function make(x){var t=x.title.toLowerCase(),h=0;for(var i=0;i<(x.model+x.id).length;i++)h=(h*31+(x.model+x.id).charCodeAt(i))>>>0;var v=h%3;
+ if(/konsekvens|mental modell|designstrategi|filosofi|produktkärna|krav|omdesign|identitet|timeless|återhållsamhet|princip|läsning först|mobil =|mobil mindre|varningsexempel|avancerat men/.test(t))return {kind:'design-rule',render:function(){return principle(x,'produktregel');}};
+ if(/accent|dark|mörk|tonal|yta|surface|typografisk kontrast|kontrast|opacit|skugga|geometri|pill.and.circle|chrome|serifrubrik|delight|luft och personlighet|färg/.test(t))return {kind:'design-system-rule',render:function(){return principle(x,'visuell riktlinje')+'<p>Visuell riktning kräver ändring av design tokens och komponentstilar.</p>';}}
+ if(/tomma tillstånd|tomt läge|empty state/.test(t))return {kind:'empty-state',render:function(){return '<section class="ai-idea-empty"><span>◇</span><h3>Inget innehåll ännu</h3><p>Förklara vad som saknas och ge ett tydligt nästa steg.</p>'+go('Utforska biblioteket','films')+'</section>';}}
+ if(/watchlist|favorit/.test(t))return {kind:'watchlist-destination',render:function(){return '<section><h3>Bevakningslista</h3><p>En egen destination för innehåll att återvända till.</p>'+go('Öppna film- och seriebiblioteket','films')+gallery(2,'rows',['DEMO · STATUS','DEMO · STATUS'])+'</section>';}}
+ if(/progress|framsteg|nästa avsnitt|avsnitt|säsong/.test(t))return {kind:'continue-progress',render:function(){var m=media[v]||media[0],p=[28,56,82][v];return '<article class="ai-idea-progress"><button data-open-media="'+esc(m.id)+'">Fortsätt: '+esc(m.title)+'</button><p>Fortsättindikator · demodata</p><progress max="100" value="'+p+'">'+p+'%</progress><small>'+p+'% · exempelvärde</small>'+go('Visa biblioteket','films')+'</article>';}}
+ if(/statistik|räknare|widgetbaserad/.test(t))return {kind:'personal-stats',render:function(){return '<section class="ai-idea-stats"><div><small>Filmer & serier</small><b>'+media.length+'</b></div><div><small>Berättelser</small><b>'+stories.length+'</b></div><div><small>Dokument</small><b>'+files.length+'</b></div></section>'+go('Visa startsidan','home');}}
+ if(/aktivitet|dagbok|journal|triage/.test(t))return {kind:'activity-log',render:function(){return '<ol class="ai-idea-timeline"><li><b>Senaste media</b><button data-open-media="'+esc((media[0]||{}).id||'')+'">'+esc((media[0]||{}).title||'Öppna bibliotek')+'</button></li><li><b>Senaste dossier</b><button data-open-story="'+esc((stories[0]||{}).id||'dyatlov')+'">'+esc((stories[0]||{}).title||'Öppna läsaren')+'</button></li><li>'+go('Dokument i arkivet','files')+'</li></ol>';}}
+ if(/preview pane|förhandsgranskning i sök|global sök/.test(t))return {kind:'search-preview',render:function(){return '<section><header><b>Dokumentförhandsvisning</b><small>Välj ett resultat</small></header>'+files.slice(0,2).map(function(f,i){return '<button class="ai-idea-file-row" data-file="'+i+'"><b>'+esc(f.name)+'</b><small>'+esc(f.type+' · '+f.size)+'</small></button>';}).join('')+action('Sök i Nexus','search')+'</section>';}}
+ if(/search|sök|filter|tagg|kategori|sorter|mood|humör|genre|samlingar|dynamiska samlingar/.test(t))return {kind:'search-filter-controls',render:function(){return '<section><b>'+esc(x.title)+'</b><div class="ai-idea-chips">'+['Alla','Film','Serie','Sett'].map(function(c){return action(c,'idea-filter:'+c);}).join('')+'</div><small>Val öppnar biblioteket och uppdaterar filmresultaten.</small>'+action('Öppna global sökning','search')+go('Öppna biblioteket','films')+'</section>';}}
+ if(/navigation|nav|meny|drawer|destination|botten|flik|topp|tabb|genväg|back|tillbaka|mini view|konsolidering|tillgänglig navigation/.test(t))return {kind:'navigation-pattern',render:function(){var ids=['home','films','stories','knowledge','files'],list=views.filter(function(z){return ids.indexOf(z.id)>=0;}).slice(0,v===0?3:5);return '<nav aria-label="Prototypnavigation">'+list.map(function(z){return '<button data-go="'+esc(z.id)+'"><span>'+esc(z.icon)+'</span> '+esc(z.name)+'</button>';}).join('')+'</nav><small>'+esc(x.title)+' · välj en vy.</small>';}}
+ if(/serif|sans|typograf|läsinställ|font|lättläst|sidfärg|reading|läsare|readwise|läsprogress|läsning|progress i gränssnitt/.test(t))return {kind:'reader-settings',render:function(){return '<section><header><b>Läsinställningar</b><small>Kontroller för läsvyn</small></header>'+action('A−','font-minus')+action('A+','font-plus')+action('Fokusläge','focus')+go('Öppna läsaren','reader')+(stories[0]?'<button data-open-story="'+esc(stories[0].id)+'">Öppna '+esc(stories[0].title)+'</button>':'')+'</section>';}}
+ if(/plugin|tillägg|catalog|katalog/.test(t))return {kind:'plugin-catalog',render:function(){var p=d.plugins&&d.plugins[0];return '<section><b>Verktyg & tillägg</b><p>'+(p?esc(p.name+' · '+p.desc):'Utforska verktyg')+'</p>'+go('Öppna tillägg','plugins')+'</section>';}}
+ if(/arkiv|dokument|pdf|mapp|trash|papperskorg|clean|dublett|upload|uppladd/.test(t))return {kind:'archive-flow',render:function(){var fi=files.length?v%files.length:0,f=files[fi];return '<section><b>Arkivobjekt · exempel</b>'+(f?'<button data-file="'+fi+'"><span>'+esc(f.icon)+'</span>'+esc(f.name+' · '+f.type)+'</button>':'')+go('Öppna arkivet','files')+'</section>';}}
+ if(/kort|poster|affisch|omslag|thumbnail|miniatyr|bildförhållande|masonry|kollage|hero|franchise|objekt istället|typade objekt|metadata per typ|inline.render|blockbaserad|bokmärkes/.test(t))return {kind:'content-layout',render:function(){var layout=['poster-first','three-column','wide-cover'][v],status=/statusbadge|status i kort/.test(t)?['Sett','Pågår','Vill se']:null;return '<section><b>'+esc(x.title)+'</b>'+gallery(v===1?3:2,layout,status)+'<small>Varje kort öppnar sin detaljvy i Nexus demodata.</small></section>';}}
+ if(/tryckyta|enhands|tumzon|skalning|accessib|tillgäng|wcag|touch/.test(t))return {kind:'accessibility-rule',render:function(){return principle(x,'tillgänglighet')+action('Öka text','font-plus')+action('Minska text','font-minus');}}
+ return {kind:'workflow-proposal',render:function(){var dest=/reader|läs/.test(t)?'reader':/dokument|fil|arkiv/.test(t)?'files':/kunskap|objekt|relation/.test(t)?'knowledge':'home';return '<section><b>Prototypflöde</b><p>'+esc(x.title)+'</p>'+go('Prova relevant Nexus-vy',dest)+'</section>';}}
 }
-function target(kind){return kind==='reader'?'reader':kind==='archive'?'files':kind==='navigation'?'home':kind==='search-filter'?'films':kind==='activity'?'activity':kind==='catalog'?'plugins':kind==='collections'?'knowledge':kind==='stats'?'home':'films';}
-function mediaCards(limit){
- return media.slice(0,limit||3).map(function(m){return '<button class="ai-module-media" data-open-media="'+esc(m.id)+'"><span style="background:'+esc(m.poster)+'">'+esc(m.glyph)+'</span><b>'+esc(m.title)+'</b><small>'+esc(m.year+' · '+m.type+' · ★ '+m.rating)+'</small></button>';}).join('');
-}
-function renderBody(kind,idea){
- if(kind==='content-card')return '<div class="ai-module-content-grid">'+mediaCards(3)+'</div><small>Affisch, status och metadata visas i en kompakt innehållsgrid.</small>';
- if(kind==='progress')return '<div class="ai-progress-list">'+media.slice(0,3).map(function(m,i){var p=[68,42,15][i];return '<button class="ai-module-row" data-open-media="'+esc(m.id)+'"><span>'+esc(m.glyph)+'</span><span><b>'+esc(m.title)+'</b><small>'+esc(m.type)+' · '+p+'% klart</small><i class="ai-progress-track"><i style="width:'+p+'%"></i></i></span><span>›</span></button>';}).join('')+'</div>';
- if(kind==='navigation')return '<nav class="ai-module-links" aria-label="Prototypnavigation">'+nav.slice(0,3).map(function(v){return '<button data-go="'+esc(v.id)+'">'+esc(v.icon+' '+v.name)+'</button>';}).join('')+'</nav><small>Tre synliga huvudmål; varje knapp öppnar motsvarande vy.</small>';
- if(kind==='search-filter')return '<div class="ai-module-links"><button data-action="search">⌕ Sök i hela Nexus</button><button data-action="idea-filter:Alla">Alla</button><button data-action="idea-filter:Film">Film</button><button data-action="idea-filter:Sett">Sett</button></div><small>Sök och filter öppnar eller uppdaterar prototypens biblioteksflöde.</small>';
- if(kind==='reader')return '<div class="ai-module-reader-tools"><button data-action="font-minus" aria-label="Minska text">A−</button><button data-action="font-plus" aria-label="Öka text">A+</button><button data-action="focus">Fokusläge</button></div><button class="ai-module-row" data-open-story="'+esc((stories[0]||{}).id||'dyatlov')+'"><span>◈</span><b>'+(esc((stories[0]||{}).title||'Öppna läsaren'))+'</b><span>→</span></button>';
- if(kind==='archive')return '<div class="ai-module-links"><button data-go="files">▤ Öppna arkivet</button><button data-file="0">Senast sparade dokumentet</button><button data-action="search">Sök i arkivet</button></div><small>'+(files.length||0)+' dokument i demobiblioteket.</small>';
- if(kind==='empty')return '<div class="ai-module-empty"><b>Inget innehåll ännu</b><p>Tomt läge med förklaring och en tydlig nästa åtgärd.</p><button data-go="'+target(kind)+'" class="action-btn">Utforska innehåll →</button></div>';
- if(kind==='activity')return '<div class="ai-module-activity"><div>◈ <b>Läsning</b><small>'+esc((stories[0]||{}).title||'Senaste dossier')+'</small></div><div>▣ <b>Media</b><small>'+esc((media[0]||{}).title||'Senast öppnat')+'</small></div><button data-go="activity">Visa hela historiken →</button></div>';
- if(kind==='stats')return '<div class="ai-module-stats"><span><b>'+media.length+'</b><small>titlar</small></span><span><b>'+stories.length+'</b><small>dossierer</small></span><span><b>'+files.length+'</b><small>dokument</small></span></div><button data-go="home">Visa startsidan</button>';
- if(kind==='catalog')return '<button class="ai-module-row" data-go="plugins"><span>✦</span><b>Sökbar tilläggskatalog</b><small>Kategorier · installerade · upptäck</small><span>→</span></button>';
- if(kind==='collections')return '<div class="ai-module-links"><button data-go="knowledge">◇ Sparade objekt</button><button data-go="files">▤ Samlingar</button><button data-action="builder">Skapa en vy</button></div>';
- if(kind==='accessibility')return '<div class="ai-module-reader-tools"><button data-action="font-minus">A−</button><button data-action="font-plus">A+</button><button data-action="focus">Växla fokusläge</button></div><small>Kontroller ändrar läsinställningar i denna prototyp.</small>';
- if(kind==='visual-system')return '<p><b>Designsystemsförslag</b> · visuell riktning, inte en fristående funktion.</p><div class="ai-module-swatches" aria-hidden="true"><i></i><i></i><i></i></div><small>Illustrativa ytnivåer och accentroll. Jämför de faktiska temavarianterna i byggaren.</small><button data-action="builder">Öppna temavarianter i byggaren</button>';
- if(kind==='principle')return '<details class="ai-module-criteria" open><summary>Designprincip · acceptanskriterier</summary><ul><li>Behåll källans avsikt: '+esc(idea.title.replace(/^[–—\s]+/,''))+'</li><li>Kontrollera läsbarhet och tydlig hierarki på mobil.</li><li>Prova med Nexus demodata före godkännande.</li></ul><button data-action="builder">Öppna komponentbyggaren</button></details>';
- return '<div class="ai-module-workflow"><button data-go="'+target(kind)+'">Prova flödet i Nexus →</button><button data-action="search">Sök</button><details><summary>Fyndets avsikt</summary><p>'+esc(idea.title)+'</p></details></div>';
-}
-function make(idea){var kind=family(idea.title);return {kind:kind,title:idea.title,source:idea.model+' '+idea.id,render:function(x){return renderBody(kind,x||idea);}};}
-var registry=window.NEXUS_IDEA_MODULES||(window.NEXUS_IDEA_MODULES={});
-all.filter(function(x){return x.model==='Meta AI'||x.model==='Vibe';}).forEach(function(x){registry[x.model+'::'+x.id]=make(x);});
+var r=window.NEXUS_IDEA_MODULES||(window.NEXUS_IDEA_MODULES={});
+items.filter(function(x){return x.model==='Meta AI'||x.model==='Vibe';}).forEach(function(x){var d=make(x);d.title=x.title;d.source=x.model+' '+x.id;r[x.model+'::'+x.id]=d;});
 })();
