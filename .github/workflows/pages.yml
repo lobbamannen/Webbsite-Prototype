@@ -18,6 +18,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Nexus Hub workshop dependencies
+        run: npm install --prefix NexusHub/workshop --no-audit --no-fund --no-package-lock
+      - name: Build the actual React UI components
+        run: npm run build --prefix NexusHub/workshop
+      - name: Include compiled Nexus Hub without dependencies
+        run: |
+          cp -R NexusHub/dist/. NexusHub/
+          rm -rf NexusHub/workshop/node_modules NexusHub/dist
+          test -s NexusHub/index.html
+          test -d NexusHub/assets
       - uses: actions/configure-pages@v5
         with:
           enablement: true
