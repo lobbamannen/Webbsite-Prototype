@@ -40,7 +40,7 @@ export default function MediaOverview({mode,total,metrics,groups,selectedId,onSe
 
  return <section className="nh-module-dashboard nh-media-dashboard" aria-labelledby="nh-media-heading">
   <header className="nh-module-dashboard-header">
-   <div className="nh-module-dashboard-title"><span className="nh-module-heading-icon"><MainIcon size={29} aria-hidden="true"/></span><div><span className="nh-module-eyebrow">NEXUS HUB · {mode==='films'?'DITT FILMBIBLIOTEK':'DITT SERIEBIBLIOTEK'}</span><h1 id="nh-media-heading">{title}</h1><p>{mode==='films'?'Välj en genre och hitta dina filmer.':'Välj en genre och hitta dina serier.'}</p></div></div>
+   <div className="nh-module-dashboard-title"><span className="nh-module-heading-icon"><MainIcon size={29} aria-hidden="true"/></span><div><span className="nh-module-eyebrow">NEXUS HUB · {mode==='films'?'DITT FILMBIBLIOTEK':'DITT SERIEBIBLIOTEK'}</span><h1 id="nh-media-heading">{title}</h1><p>{mode==='films'?'Utforska genrer, sök och filtrera bland dina filmer.':'Utforska genrer, sök och filtrera bland dina serier.'}</p></div></div>
    <div className="nh-module-heading-actions">{onCreate&&<button className="primary" type="button" onClick={onCreate}><Plus size={17}/>Ny film</button>}<button className="nh-dashboard-refresh" type="button" disabled={loading} onClick={onRefresh}><RefreshCw size={16} className={loading?'spin':''}/>Uppdatera</button></div>
   </header>
   <div className="nh-media-quick-links" aria-label={title+' – snabbval'}>
@@ -52,7 +52,7 @@ export default function MediaOverview({mode,total,metrics,groups,selectedId,onSe
    </button>
   </div>
   {toolbar}
-  <div className="nh-module-category-head"><div><span className="nh-module-eyebrow">UTFORSKA</span><h2>{chosen.id==='genre'?'Huvudgenrer':chosen.label}</h2><p>{chosen.id==='genre'?'Välj en genre eller öppna dess undergenrer.':'Välj en kategori för att se dina titlar.'}</p></div></div>
+  <div className="nh-module-category-head"><div><span className="nh-module-eyebrow">UTFORSKA</span><h2>{chosen.id==='genre'?'Huvudgenrer':chosen.label}</h2><p>{chosen.id==='genre'?'Välj en genre för att se titlarna, eller visa undergenrer för att förfina urvalet.':'Välj en kategori för att se dina titlar.'}</p></div></div>
   <nav className="nh-category-tabs" aria-label="Välj typ av kategori">
    {groups.map(g=><button key={g.id} type="button" aria-current={chosen?.id===g.id?'true':undefined} className={chosen?.id===g.id?'active':''} onClick={()=>{setActiveGroup(g.id);setExpandedGenre(null);}}>{g.label}</button>)}
   </nav>
