@@ -56,7 +56,7 @@
     if (id==='044'||id==='050'||id==='051') return '<details style="'+card+'"><summary style="cursor:pointer">☷ Inspektör / bokmärken</summary><p style="'+muted+'">Titel · källa · senast ändrad</p>'+button('Spara bokmärke')+'</details>';
     if (id==='045') return '<div style="display:flex;gap:8px">'+['Bild 1','Bild 2','Bild 3'].map(function(x){return '<button type="button" style="'+card+'min-width:80px;min-height:70px;cursor:zoom-in" aria-label="Öppna '+x+' i förstoring">▧<br>'+x+'</button>';}).join('')+'</div>';
     if (id==='053') return '<div style="'+card+'"><label>Sök i sidan <input placeholder="sökord" style="background:#111;color:white;border:1px solid #514667;padding:8px"></label><p>Resultat: <mark style="background:#7c5bbe;color:white">sökord</mark> markeras i texten.</p></div>';
-    if (id==='054'||id==='099') return '<label style="display:block;text-align:center;border:1px dashed #9675d8;border-radius:14px;padding:20px;color:#eee">⇧ Släpp en fil eller välj från enheten<input type="file" style="display:block;margin:12px auto"></label>';
+    if (id==='054'||id==='099') return '<label style="display:block;text-align:center;border:1px dashed #9675d8;border-radius:14px;padding:20px;color:#eee">⇧ Välj en fil från enheten<input type="file" style="display:block;margin:12px auto"><small style="display:block;color:#a9a5b2">Endast filväljaren demonstreras; inget laddas upp.</small></label>';
     if (id==='065'||id==='077'||id==='080') return '<div style="'+card+'"><b>Uppdatera bibliotek</b><p style="'+muted+'">Visa tydligt när innehåll hämtas eller finns tillgängligt offline.</p><progress value="65" max="100" style="width:100%"></progress>'+button('Uppdatera nu')+'</div>';
     if (id==='067'||id==='050') return '<details style="'+card+'"><summary style="cursor:pointer">Öppna detaljark</summary><div style="padding:12px 0"><b>Objektdetaljer</b><p style="'+muted+'">Metadata och åtgärder ligger nära tummen.</p>'+button('Klart')+'</div></details>';
     if (id==='068'||id==='087') return '<div style="'+card+'"><span style="color:#83d7a2">✓</span> Inställningen sparades <button type="button" aria-label="Stäng notis" style="float:right;background:transparent;color:white;border:0">×</button></div>';
@@ -73,7 +73,7 @@
     if (id==='100') return '<details style="border:1px solid rgba(248,113,113,.5);background:#211719;color:#fee2e2;border-radius:14px;padding:14px"><summary style="cursor:pointer">Danger zone · Visa åtgärder</summary><p style="font-size:12px">Återställning påverkar endast prototypens lokala demo.</p><label>Skriv RESET för att aktivera <input aria-label="Bekräfta RESET" placeholder="RESET"></label><br><button type="button" style="margin-top:10px;border:1px solid #dc6262;background:#542727;color:white;padding:9px;border-radius:9px">Återställ demo</button></details>';
     return '<div style="'+card+'">Exempelkontroll för denna idé.</div>';
   }
-  var principles = { '037':1,'072':1,'081':1,'082':1,'083':1,'084':1,'085':1,'086':1,'088':1,'090':1,'092':1,'093':1,'094':1 };
+  var principles = { '004':1,'036':1,'037':1,'072':1,'081':1,'082':1,'083':1,'084':1,'085':1,'086':1,'088':1,'090':1,'092':1,'093':1,'094':1 };
   var registry = w.NEXUS_IDEA_MODULES = w.NEXUS_IDEA_MODULES || {};
   Object.keys(groups).forEach(function (family) {
     groups[family].forEach(function (num) {
@@ -81,7 +81,8 @@
       registry[key] = {
         model:'Gemini Argon', id:id, family:family, kind:principles[num]?'design-principle':'interaction-prototype',
         render:function (idea, ctx) {
-          return demo(num);
+          var example=demo(num);
+          return principles[num] ? '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">DESIGNSYSTEMREGEL · visuell provyta, inte en separat komponent</p>'+example+'</div>' : example;
         }
       };
     });
