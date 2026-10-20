@@ -273,8 +273,8 @@
  .portal-shell .hub-inbox-drop>div:nth-child(2){flex-basis:calc(100% - 75px)}
  .portal-shell .hub-inbox-drop>.primary{width:100%}
  .portal-shell .bottom-nav{padding:7px 8px calc(8px + env(safe-area-inset-bottom));background:#0b1321f5;border-color:#36445e}
- .portal-shell .bottom-nav>button{min-height:49px}
- .portal-shell .bottom-nav>button span{font-size:10px;font-weight:620}
+ .portal-shell .bottom-nav>button{min-height:49px}.portal-shell .icon-button{min-width:44px;min-height:44px}.portal-shell .reader-controls button{min-width:44px;min-height:44px}.portal-shell .pagination button{min-height:44px}
+ .portal-shell .bottom-nav>button span{font-size:11px;font-weight:620}
  .portal-shell .bottom-nav>button svg{width:21px;height:21px}
 }
 @media(max-width:480px){
