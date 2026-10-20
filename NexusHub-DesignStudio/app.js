@@ -106,7 +106,41 @@ function builderItems(){
 }
 function sheetHead(title,desc){return '<div class="sheet-head"><div><div class="eyebrow">NEXUS DESIGN STUDIO</div><h2>'+esc(title)+'</h2><p>'+esc(desc)+'</p></div><button class="sheet-exit" data-action="close" aria-label="Stäng">✕</button></div>';}
 function optionMeta(id,i){var integration=window.NEXUS_IDEA_INTEGRATION||{};if(id===integration.ruleFamily)return integration.rules&&integration.rules[i-(integration.ruleStart||0)];var fm=(integration.families||[]).find(function(x){return x.id===id;});return fm&&i>=fm.baseCount?fm.options[i-fm.baseCount]:null;}
-function familyPreview(f,i){var id=f.id,cat=builderCategory(f),label=String(f.options[i]||'');if(/media|season/i.test(id)){return '<div class="thumb-media"><div class="thumb-poster"></div><div class="thumb-lines"><b>'+esc(label.slice(0,30))+'</b><i></i><i></i></div></div>';}if(/reader|story/i.test(id)){return '<div class="thumb-reader"><b>'+esc(label.slice(0,32))+'</b><i></i><i></i><i></i><span>Aa　☰　◉</span></div>';}if(/nav|header|quick/i.test(id)){return '<div class="thumb-nav"><span>⌂</span><span>▦</span><span>⌕</span><span>＋</span></div><small>'+esc(label.slice(0,34))+'</small>';}if(/search|filter/i.test(id)){return '<div class="thumb-search">⌕　'+esc(label.slice(0,28))+'<div><span>Alla</span><span>Film</span><span>Serie</span></div></div>';}if(/file|inbox/i.test(id)){return '<div class="thumb-files"><div>▤　'+esc(label.slice(0,26))+'</div><div>▧　Dokument.pdf</div><div>▧　Anteckning</div></div>';}if(/knowledge|graph/i.test(id)){return '<div class="thumb-graph"><i></i><i></i><i></i><span>──</span></div><small>'+esc(label.slice(0,35))+'</small>';}if(/surface|type|shape|density|motion|globalRules/i.test(id)||cat==='Utseende, färger & rörelse'){return '<div class="thumb-theme"><b>'+esc(label.slice(0,32))+'</b><div><i></i><i></i><i></i></div><small>Före　→　Efter</small></div>';}if(/hero|launcher|continue|stats|activity|home/i.test(id)){return '<div class="thumb-home"><b>'+esc(label.slice(0,32))+'</b><div><i></i><i></i><i></i></div></div>';}return '<div class="thumb-unavailable">Ingen exakt miniatyr finns för den här familjen.</div>';}
+function familyPreview(f,i){
+ var id=f.id,label=String(f.options[i]||''),lo=label.toLocaleLowerCase(),title=esc(label);
+ var poster='<div class="thumb-poster"></div>',line='<i></i>';
+ if(id==='mediaCard'){
+  var overlay=/text på affisch|statusbadge/i.test(lo),clean=/ren affisch/i.test(lo),panel=/infopanel/i.test(lo),badge=/statusbadge/i.test(lo);
+  return '<div class="thumb-media '+(overlay?'is-overlay':'')+' '+(panel?'has-panel':'')+'">'+poster+(badge?'<em class="thumb-badge">SETT</em>':'')+(clean?'':'<div class="thumb-lines"><b>'+title+'</b>'+(!overlay?line+line:'')+'</div>')+'</div>';
+ }
+ if(id==='mediaLayout'||id==='continue'||id==='launcher'){
+  var list=/tabell|kompakt lista|rader|tidslinje/i.test(lo),hero=/spotlight|stora omslagskort|stora redaktionella/i.test(lo),cols=/mosaik|bento/i.test(lo)?'mosaic':list?'list':hero?'featured':'grid';
+  return '<div class="thumb-collection '+cols+'">'+(list?'<div>▰　'+title+'</div><div>▱　Film · 2026</div><div>▰　Serie · 8 avsnitt</div>':hero?'<div class="thumb-feature">'+poster+'<b>'+title+'</b><small>Fortsätt där du var</small></div>':'<div>'+poster+'<small>'+title+'</small></div><div>'+poster+'<small>Film · 2026</small></div><div>'+poster+'<small>Serie · 8 avsnitt</small></div>')+'</div>';
+ }
+ if(id==='nav'||id==='header'||id==='quick'){
+  var floating=/flytande|fab/i.test(lo),center=/central|plus/i.test(lo),icons=/ikoner/i.test(lo),cmd=/kommando/i.test(lo);
+  return cmd?'<div class="thumb-command">⌕　Sök eller kör kommando…<small>⌘K</small></div>':(id==='header'?'<div class="thumb-header"><b>NEXUS</b><span>⌕　☰</span></div>':'<div class="thumb-bottomnav '+(floating?'floating':'')+'">'+['⌂','▦','⌕','＋','◉'].map(function(x,j){return '<span>'+(icons?x:x+'<small>'+['Hem','Film','Sök','Lägg till','Mer'][j]+'</small>')+'</span>';}).join('')+'</div>');
+ }
+ if(id==='hero'){
+  return '<div class="thumb-hero '+(/filmisk|backdrop/i.test(lo)?'cinematic':'')+'"><small>GOD KVÄLL</small><h3>'+title+'</h3><div class="thumb-hero-actions"><span>Öppna</span><span>Sök</span></div></div>';
+ }
+ if(id==='reader'||id==='storyCard'||id==='storyLayout'){
+  var side=/delad|källpanel|fotnot/i.test(lo);
+  return '<div class="thumb-reading '+(side?'split':'')+'"><div><small>DOSSIER · 8 MIN</small><h3>'+title+'</h3><p>Berättelsen börjar i den gamla byggnaden…</p><p>Kapitel och källor hålls nära lästexten.</p></div>'+(side?'<aside>KÄLLOR<br>01 · Arkiv<br>02 · Notering</aside>':'')+'</div>';
+ }
+ if(id==='readerTools')return '<div class="thumb-toolbar"><span>Aa</span><span>☰ Kapitel</span><span>◉ Fokus</span><span>⌁ Noter</span><small>'+title+'</small></div>';
+ if(id==='filter'||id==='search')return '<div class="thumb-search"><div class="thumb-input">⌕　'+(id==='search'?'Sök i Nexus…':title)+'</div><div><span class="on">Alla</span><span>Film</span><span>Serie</span></div>'+(id==='search'?'<small>Film · Dune　　Dokument · Designnoter</small>':'<small>Sortera　　Tjänst　　Genre</small>')+'</div>';
+ if(id==='mediaDetail')return '<div class="thumb-detail">'+poster+'<div><small>FILM · 2026</small><h3>'+title+'</h3><span>▶　♡　＋</span><p>En kort presentation med information och relaterat innehåll.</p></div></div>';
+ if(id==='season')return '<div class="thumb-episodes"><b>'+title+'</b><div> S1　 S2　 S3 </div><p>▶　Avsnitt 01　·　42 min</p><p>✓　Avsnitt 02　·　39 min</p></div>';
+ if(id==='stats'||id==='activity')return '<div class="thumb-stats"><div><b>24</b><small>SEDDA</small></div><div><b>08</b><small>SPARADE</small></div><div><b>12</b><small>'+title.slice(0,12).toUpperCase()+'</small></div></div>';
+ if(id==='knowledge'||id==='graph')return '<div class="thumb-graph"><i></i><i></i><i></i><span>──</span><small>'+title+'</small></div>';
+ if(id==='fileLayout'||id==='fileCard'||id==='inbox')return '<div class="thumb-files '+(/grid|kort/i.test(lo)?'file-grid':'')+'"><b>'+title+'</b><div>▤　Dokument.pdf　　12 KB</div><div>▧　Researchnoter　　Igår</div><div>▧　Källor och länkar　　3 objekt</div></div>';
+ if(id==='plugin')return '<div class="thumb-plugin"><div><b>◈</b><span>'+title+'</span><button>På</button></div><div>◉　Sökverktyg　　Ansluten</div></div>';
+ if(id==='labels')return '<div class="thumb-labels"><h3>'+title+'</h3><small>01　AKTIV SEKTION</small><hr><span>Utforska biblioteket →</span></div>';
+ if(id==='surface'||id==='type'||id==='shape'||id==='density'||id==='motion'||id==='globalRules'||/^ux00[45]$/.test(id))return '<div class="thumb-theme '+id+'"><div class="theme-surface"></div><div><b>'+title+'</b><p>Rubriknivå · metadata · interaktivt tillstånd</p><span>Primär handling　　Sekundär</span></div></div>';
+ if(/^ux00[1-3]$/.test(id)||/^ux00[6-9]$/.test(id)||id==='ux010')return '<div class="thumb-home"><b>'+title+'</b><div><i></i><i></i><i></i></div><small>Exempel på aktiv komponent i startsidan</small></div>';
+ return '<div class="thumb-unavailable">Ingen exakt miniatyr finns för <b>'+title+'</b>.</div>';
+}
 function optionPreview(f,i,meta){if(meta&&meta.sources&&meta.sources.length){var idea=ideaForKey(meta.key||meta.sources[0]);if(idea&&!meta.rule){return '<div class="component-preview source-preview">'+ideaModuleMarkup(idea)+'</div><small class="preview-note">Fyndspecifik renderare · exempeldata</small>';}}
 if(meta&&meta.rule){return '<div class="component-preview rule-preview"><div><small>FÖRE</small><p>Ojämn stil och otydligt fokus</p></div><b>→</b><div><small>EFTER</small><p>'+esc(meta.change||f.options[i])+'</p></div></div><small class="preview-note">Regelprov · effekten visas globalt</small>';}
 return '<div class="component-preview">'+familyPreview(f,i)+'</div><small class="preview-note">Komponentfamiljens miniatyr</small>';}
