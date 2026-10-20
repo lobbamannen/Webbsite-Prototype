@@ -9,7 +9,7 @@ try{state=Object.assign({},DEFAULT,JSON.parse(localStorage.getItem(KEY)||'{}'));
 state.picks=Object.assign({},DEFAULT.picks,state.picks||{});
 state.order=Array.isArray(state.order)?state.order:DEFAULT.order.slice();
 state.hidden=Array.isArray(state.hidden)?state.hidden:[];
-state.ideaBoard=Array.isArray(state.ideaBoard)?state.ideaBoard:[];
+state.ideaBoard=Array.isArray(state.ideaBoard)?state.ideaBoard:[];var knownIdeaKeys=new Set((window.NEXUS_IDEAS||[]).map(function(x){return String(x.model)+'::'+String(x.id);}));state.ideaBoard=state.ideaBoard.filter(function(key){return typeof key==='string'&&knownIdeaKeys.has(key);});
 state.collapsedSections=state.collapsedSections&&typeof state.collapsedSections==='object'?state.collapsedSections:{};
 var runtime={sheet:null,slot:null,selectedMedia:null,selectedNode:null,selectedFile:null,filmFilter:'Alla',mediaSearch:'',researchQuery:'',researchModel:'Alla',researchLimit:25,builderFilter:'',readerFoot:false,chapter:0,selectedIdeaKey:null,aiModuleLimit:12};
 var byId=function(id){return document.getElementById(id);};
