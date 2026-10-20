@@ -83,7 +83,7 @@
     if (id==='064') return '<nav style="border:1px solid #393544;background:#171720;border-radius:14px;padding:12px"><b>Dokumentinnehåll</b><ol>'+['Översikt','Källor','Slutsats'].map(function(x,i){return '<li><button type="button" data-chapter="'+i+'">'+x+'</button></li>';}).join('')+'</ol></nav>';
     if (id==='069') return '<div style="border:1px solid #393544;background:#171720;border-radius:14px;padding:12px"><p>Öppna den befintliga vylistan som sidopanel.</p><button type="button" data-action="menu">☰ Visa vyer</button></div>';
     if (id==='071') return '<div style="border:1px solid #393544;background:#171720;border-radius:14px;padding:12px"><button type="button" data-go="stories">‹ Tillbaka till Berättelser</button></div>';
-    if (id==='077') return '<div aria-label="Laddar innehåll" aria-busy="true" style="display:grid;gap:8px">'+[1,2,3].map(function(){return '<div style="height:18px;border-radius:8px;background:linear-gradient(90deg,#20202a,#35303d,#20202a)"></div>';}).join('')+'<small style="color:#aaa">Platshållare för väntetillstånd</small></div>';
+    if (id==='077') return '<div aria-label="Skelettskärmsexempel" style="display:grid;gap:8px">'+[1,2,3].map(function(){return '<div style="height:18px;border-radius:8px;background:linear-gradient(90deg,#20202a,#35303d,#20202a)"></div>';}).join('')+'<small style="color:#aaa">Platshållare för väntetillstånd</small></div>';
     if (id==='097') return '<div style="display:grid;gap:8px">'+plugins.map(function(p,i){return '<div style="border:1px solid #393544;background:#171720;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px"><span>'+esc(p.icon||'✦')+'</span><span style="flex:1"><b>'+esc(p.name)+'</b><small style="display:block;color:#aaa">'+esc(p.desc)+' · demo</small></span><button type="button" data-plugin="'+i+'">Växla</button></div>';}).join('')+'</div>';
     var card = 'border:1px solid rgba(255,255,255,.12);background:#171720;color:#f3f1f7;border-radius:14px;padding:14px;';
     var muted = 'color:#a9a5b2;font-size:12px;';
@@ -123,7 +123,7 @@
     if (id==='054'||id==='099') return '<label style="display:block;text-align:center;border:1px dashed #9675d8;border-radius:14px;padding:20px;color:#eee">⇧ Välj en fil från enheten<input type="file" style="display:block;margin:12px auto"><small style="display:block;color:#a9a5b2">Endast filväljaren demonstreras; inget laddas upp.</small></label>';
     if (id==='065'||id==='077'||id==='080') return '<div style="'+card+'"><b>Uppdatera bibliotek</b><p style="'+muted+'">Visa tydligt när innehåll hämtas eller finns tillgängligt offline.</p><progress value="65" max="100" style="width:100%"></progress>'+button('Uppdatera nu')+'</div>';
     if (id==='067'||id==='050') return '<details style="'+card+'"><summary style="cursor:pointer">Öppna detaljark</summary><div style="padding:12px 0"><b>Objektdetaljer</b><p style="'+muted+'">Metadata och åtgärder ligger nära tummen.</p>'+button('Klart')+'</div></details>';
-    if (id==='068'||id==='087') return '<div style="'+card+'"><span style="color:#83d7a2">✓</span> Inställningen sparades <button type="button" aria-label="Stäng notis" style="float:right;background:transparent;color:white;border:0">×</button></div>';
+    if (id==='068'||id==='087') return '<div style="'+card+'"><span style="color:#83d7a2">✓</span> Toast-prov · ingen inställning har sparats <button type="button" aria-label="Stäng notis" style="float:right;background:transparent;color:white;border:0">×</button></div>';
     if (id==='072'||id==='092'||id==='094') return '<div style="'+card+'display:flex;gap:10px;align-items:center"><button type="button" style="min-width:48px;min-height:48px;border:2px solid #a78bfa;background:#272033;color:white;border-radius:12px">✓</button><span>Stor tryckyta · tydlig fokusram</span></div>';
     if (id==='073') return '<div style="'+card+'"><span style="'+muted+'">Listans plats sparas som en navigationsprincip.</span></div>';
     if (id==='079') return '<div style="'+card+'"><span style="'+muted+'">Hoppa tillbaka till sidans början.</span><div style="text-align:right;margin-top:12px"><button type="button" data-action="back-to-top" style="border:1px solid #55417c;background:#292136;color:#f5f0ff;border-radius:999px;padding:10px 14px">↑ Till toppen</button></div></div>';
@@ -135,16 +135,17 @@
     if (id==='091') return '<label style="'+card+'display:flex;justify-content:space-between;align-items:center">Hög kontrast <input type="checkbox" aria-label="Slå på hög kontrast"></label>';
     if (id==='097') return '<div style="display:grid;gap:8px">'+plugins.map(function(p,i){return '<div style="'+card+'display:flex;align-items:center;gap:10px"><span>'+esc(p.icon||'✦')+'</span><div style="flex:1"><b>'+esc(p.name)+'</b><div style="'+muted+'">'+esc(p.desc)+'</div></div><button type="button" data-plugin="'+i+'" aria-label="Växla '+esc(p.name)+'">Växla</button></div>';}).join('')+'</div>';
     if (id==='098') return '<pre style="'+card+'font:12px/1.8 monospace;white-space:pre-wrap"><span style="color:#82b9ff">INFO</span> Local demo ready\n<span style="color:#8dd8a6">OK</span> Preferences saved\n<span style="color:#e5c06f">WARN</span> Sync is not connected</pre>';
-    if (id==='100') return '<details style="border:1px solid rgba(248,113,113,.5);background:#211719;color:#fee2e2;border-radius:14px;padding:14px"><summary style="cursor:pointer">Danger zone · Visa åtgärder</summary><p style="font-size:12px">Återställning påverkar endast prototypens lokala demo.</p><label>Skriv RESET för att aktivera <input aria-label="Bekräfta RESET" placeholder="RESET"></label><br><button type="button" style="margin-top:10px;border:1px solid #dc6262;background:#542727;color:white;padding:9px;border-radius:9px">Återställ demo</button></details>';
+    if (id==='100') return '<details style="border:1px solid rgba(248,113,113,.5);background:#211719;color:#fee2e2;border-radius:14px;padding:14px"><summary style="cursor:pointer">Danger zone · Visa åtgärder</summary><p style="font-size:12px">Återställning påverkar endast prototypens lokala demo.</p><label>Skriv RESET för att aktivera <input aria-label="Bekräfta RESET" placeholder="RESET"></label><br><span aria-disabled="true" title="Visuell provyta; ingen återställning sker." style="display:inline-block;margin-top:10px;border:1px dashed #dc6262;background:#342326;color:#c8a0a0;padding:9px;border-radius:9px;opacity:.7">Återställ · endast exempel</span></details>';
     return '<div style="'+card+'">Exempelkontroll för denna idé.</div>';
   }
   var principles = { '004':1,'036':1,'037':1,'040':1,'072':1,'073':1,'074':1,'081':1,'082':1,'083':1,'084':1,'085':1,'086':1,'088':1,'090':1,'092':1,'093':1,'094':1,'095':1 };
+  var displayOnly = { '015':1,'020':1,'077':1,'087':1,'089':1,'098':1,'099':1,'100':1 };
   var registry = w.NEXUS_IDEA_MODULES = w.NEXUS_IDEA_MODULES || {};
   Object.keys(groups).forEach(function (family) {
     groups[family].forEach(function (num) {
       var id='UX-'+num, key='Gemini Argon::'+id;
       registry[key] = {
-        model:'Gemini Argon', id:id, family:family, kind:principles[num]?'design-principle':'interaction-prototype',
+        model:'Gemini Argon', id:id, family:family, kind:principles[num]?'design-principle':(displayOnly[num]?'state-illustration':'interaction-prototype'),
         render:function (idea, ctx) {
           var example=neutralizeDisplayOnlyButtons(demo(num,ctx));
           var sourceText=String(idea&&idea.text||'').replace(/\u200b/g,'');
@@ -152,7 +153,9 @@
           var findingNote=noteMatch?esc(noteMatch[1].split(/\n\s*(?:●|•|Varför|Källa|Prioritet|Förändring|---)/)[0].replace(/\\s+/g,' ').trim().slice(0,190)):'';
           var note=findingNote?'<p style="margin:0 0 10px;color:#aaa;font-size:12px"><b style="color:#cbb8ff">Fyndets förslag:</b> '+findingNote+'</p>':'';
           example=note+example;
-          return principles[num] ? '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">DESIGNSYSTEMREGEL · visuell provyta, inte en separat komponent</p>'+example+'</div>' : example;
+          if(principles[num]) return '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">DESIGNSYSTEMREGEL · visuell provyta, inte en separat komponent</p>'+example+'</div>';
+          if(displayOnly[num]) return '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">STATISKT EXEMPEL · bakomliggande appfunktion saknas</p>'+example+'</div>';
+          return example;
         }
       };
     });
