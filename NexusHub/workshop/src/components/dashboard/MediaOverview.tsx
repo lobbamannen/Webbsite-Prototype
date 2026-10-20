@@ -1,8 +1,15 @@
 'use client';
 import React,{useState} from 'react';
-import {Clapperboard,Bookmark,Layers,Plus,Tag,Tv,ChevronRight,ChevronDown,RefreshCw} from 'lucide-react';
+import {Clapperboard,Bookmark,Layers,Plus,Tag,Tv,ChevronRight,ChevronDown,RefreshCw,Swords,Search,Heart,Rocket,Ghost,WandSparkles,Smile,Trophy,BookOpen,Compass,Clapperboard as FilmIcon} from 'lucide-react';
 
 type Category={id:string,label:string,count:number,children?:{id:string,label:string,count:number}[]};
+/** Matches the canonical GENRE_GROUPS IDs. Unknown groups retain Tag. */
+const GENRE_ICONS:Record<string,React.ElementType>={
+ 'genregroup:action':Swords,'genregroup:kriminal':Search,'genregroup:drama':Heart,
+ 'genregroup:scifi':Rocket,'genregroup:skrack':Ghost,'genregroup:fantasy':WandSparkles,
+ 'genregroup:komedi':Smile,'genregroup:livsstil':Trophy,'genregroup:dokumentar':BookOpen,
+ 'genregroup:natur':Compass,'genregroup:reality':Tv,'genregroup:ovrigt':FilmIcon
+};
 type Group={id:string,label:string,items:Category[]};
 type Metric={label:string,value:number};
 type Props={
@@ -53,14 +60,15 @@ export default function MediaOverview({mode,total,metrics,groups,selectedId,onSe
    {pairs.map((pair,i)=>{const opened=pair.find(x=>x.id===expandedGenre&&x.children?.length);
     return <React.Fragment key={pair.map(x=>x.id).join('|')}>
      {pair.map((x,j)=>{const selected=selectedId===x.id||!!x.children?.some(child=>child.id===selectedId);
+      const GenreIcon=chosen.id==='genre'?(GENRE_ICONS[x.id]||Tag):null;
       const categoryButton=<button type="button" className={'nh-module-category-card nh-category-'+(i*2+j)%4+(selected?' selected':'')} aria-pressed={selectedId===x.id} onClick={()=>onSelect(x.id)}>
-       <span className="nh-category-icon">{chosen.id==='genre'?<Tag size={22}/>:chosen.id==='provider'?<Tv size={22}/>:chosen.id==='filmseries'?<Clapperboard size={22}/>:<Layers size={22}/>}</span><span className="nh-category-copy"><strong>{x.label}</strong><small>{x.count.toLocaleString('sv-SE')} {mode==='films'?(x.count===1?'film':'filmer'):(x.count===1?'serie':'serier')}</small></span><ChevronRight size={18} className="nh-category-arrow"/>
+       <span className="nh-category-icon">{GenreIcon?<GenreIcon size={22} aria-hidden="true"/>:chosen.id==='provider'?<Tv size={22}/>:chosen.id==='filmseries'?<Clapperboard size={22}/>:<Layers size={22}/>}</span><span className="nh-category-copy"><strong>{x.label}</strong><small>{x.count.toLocaleString('sv-SE')} {mode==='films'?(x.count===1?'film':'filmer'):(x.count===1?'serie':'serier')}</small></span><ChevronRight size={18} className="nh-category-arrow"/>
       </button>;
       if(!x.children?.length)return <React.Fragment key={x.id}>{categoryButton}</React.Fragment>;
       const open=expandedGenre===x.id;
       return <div className="nh-genre-category nh-genre-category-unified" key={x.id}>
        {categoryButton}
-       <button type="button" className="nh-genre-expand" aria-expanded={open} aria-controls={mode+'-'+x.id+'-subgenres'} onClick={()=>setExpandedGenre(open?null:x.id)} aria-label={(open?"Dölj":"Visa")+" undergenrer för "+x.label}><ChevronDown size={16} className={open?'nh-rotated':''}/>{open?'Dölj':'Visa'} undergenrer ({x.children.length})</button>
+       <button type="button" className="nh-genre-expand" aria-expanded={open} aria-controls={open?mode+'-'+x.id+'-subgenres':undefined} onClick={()=>setExpandedGenre(open?null:x.id)} aria-label={(open?"Dölj":"Visa")+" undergenrer för "+x.label}><ChevronDown size={17} className={open?'nh-rotated':''} aria-hidden="true"/><span>{open?'Dölj':'Visa'} undergenrer ({x.children.length})</span></button>
       </div>;
      })}
      {opened&&<section id={mode+'-'+opened.id+'-subgenres'} className="nh-genre-subgenre-panel" aria-label={'Undergenrer inom '+opened.label}>
