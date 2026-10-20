@@ -66,7 +66,7 @@ function navMarkup(mode,mini){
  return '<nav class="bottomnav nav-mode-'+mode+(mini?' nav-mini':'')+'" aria-label="Huvudnavigation">'+links+'</nav>';
 }
 function bottomNav(){return slot('nav',navMarkup(variant('nav'),false),'nav-wrapper');}
-function previewBanner(){return '<div class="studio-banner"><div><strong>DIN BYGGSTUDIO</strong><br><small>Kort tryck öppnar · håll inne 0,5 s för designval</small></div><div class="control-row"><button data-action="labels">'+(state.labels?'✓ Etiketter på':'▤ Visa etiketterna')+'</button><button data-action="toggle-ai-demos" aria-pressed="'+state.showAiDemos+'">'+(state.showAiDemos?'Dölj AI-demokort':'Visa AI-demokort')+'</button>'+(state.hiddenAiDemos.length?'<button data-action="restore-ai-demos">Återställ dolda ('+state.hiddenAiDemos.length+')</button>':'')+'</div></div>';}
+function previewBanner(){return '<div class="studio-banner"><div><strong>DIN BYGGSTUDIO</strong><br><small>Kort tryck öppnar · håll inne 0,5 s för designval</small></div><div class="control-row"><button data-action="layout">Ordna/dölj moduler</button><button data-action="labels">'+(state.labels?'✓ Etiketter på':'▤ Visa etiketterna')+'</button><button data-action="toggle-ai-demos" aria-pressed="'+state.showAiDemos+'">'+(state.showAiDemos?'Dölj AI-demokort':'Visa AI-demokort')+'</button>'+(state.hiddenAiDemos.length?'<button data-action="restore-ai-demos">Återställ dolda ('+state.hiddenAiDemos.length+')</button>':'')+'</div></div>';}
 function heroMarkup(v,mini){
  var head='<div class="eyebrow">NEXUS HUB · DESIGNSTUDIO</div>';
  var link=function(label,go){return mini?'<span class="hero-demo-link">'+label+'</span>':'<button class="action-btn ghost" data-go="'+go+'">'+label+'</button>';};
