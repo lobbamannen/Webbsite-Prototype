@@ -39,6 +39,16 @@ families:[
 {id:"search",name:"Global sökning",group:"Skal & navigation",options:["Kommandopalett","Fullskärmssökning","Sökkapsel","Flytande sökpanel","Snabblänkar","Objektsökning","Filterbar arkivsök"]},
 {id:"labels",name:"Avsnittsrubriker",group:"Visuell identitet",options:["Små versaler","Stora serifrubriker","Linjeaccent","Numrerade kapitel","Strama etiketter","Rubrik + undermening"]},
 {id:"quick",name:"Snabbåtgärd",group:"Skal & navigation",options:["Central +","Flytande FAB","Kommandopalett","Snabbvals-sheet","Rad i header","Ingen permanent knapp","Skapa-menykort"]}
+,{id:"ux001",name:"Adaptivt snabbval",group:"AI-moduler",options:["Genvägar","Aktuell vy först","Aktuell vy och smart ordning"]},
+{id:"ux002",name:"Sektionsrubriker med räknare",group:"AI-moduler",options:["Rubriker","Rubriker med antal","Numrerade rubriker med antal"]},
+{id:"ux003",name:"Fortsätt-karusell",group:"AI-moduler",options:["Affischrad","Fortsättkort med progress","Kompakt kortgrid"]},
+{id:"ux004",name:"Tonala bakgrundsytor",group:"AI-moduler",options:["Enhetlig","Tonala sektioner","Kontrastsektioner"]},
+{id:"ux005",name:"Accentlinje för aktiv sektion",group:"AI-moduler",options:["Standard","Accentlinje","Accentlinje med glöd"]},
+{id:"ux006",name:"Kommandopalett",group:"AI-moduler",options:["Global sökning","Sök och genvägar","Kommandopalett"]},
+{id:"ux007",name:"Systemstatus",group:"AI-moduler",options:["Dold","Statuskort","Utökad status"]},
+{id:"ux008",name:"Slumpmässig upptäckt",group:"AI-moduler",options:["Dold","Upptäcktskort","Upptäck med slumpknapp"]},
+{id:"ux009",name:"Statistikpiller",group:"AI-moduler",options:["Statistikpaneler","Kompakta statistikpiller"]},
+{id:"ux010",name:"Fällbara sektioner",group:"AI-moduler",options:["Alltid öppna","Fällbara sektioner"]}
 ],
 views:[
 {id:"home",name:"Hem",icon:"⌂"},{id:"films",name:"Film & serier",icon:"▣"},{id:"stories",name:"Berättelser",icon:"◈"},{id:"reader",name:"Läsaren",icon:"☷"},{id:"knowledge",name:"Kunskapsbank",icon:"✳"},{id:"files",name:"Utforska filer",icon:"▤"},{id:"inbox",name:"Inkorg",icon:"✉"},{id:"plugins",name:"Plugins",icon:"⬡"},{id:"activity",name:"Aktivitet",icon:"◷"},{id:"settings",name:"Inställningar",icon:"⚙"},{id:"research",name:"AI-idéarkiv",icon:"◇"}
