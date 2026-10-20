@@ -43,7 +43,8 @@ var auditedClusters=[{"name":"poster_status_badge","ids":["Copilot::UX-002","Dee
 function resolvedHost(id){return directHosts[id]||hostMap[id]||(/^(new|proposed):/.test(id)?'global':id);}
 var clusterFor={},mergedClusterCount=0,mergedSourceCount=0;
 auditedClusters.forEach(function(c){
- var valid=c.ids.filter(function(id){return !!raw[id];});
+ var valid=c.ids.filter(function(id){return !!raw[id]&&!raw[id].rule;});
+ if(valid.length<2)return;
  var fs={},hs={};valid.forEach(function(id){var f=String(raw[id].targetFamily||'');fs[f]=(fs[f]||0)+1;var h=resolvedHost(f);hs[h]=(hs[h]||0)+1;});
  var familyNames=Object.keys(fs),hostNames=Object.keys(hs);
  if(familyNames.length!==1&&hostNames.length!==1)return;
