@@ -20,5 +20,5 @@ var families={
 };
 var groups={nav:[1,10],home:[11,18],media:[19,30],story:[31,36],card:[37,45],knowledge:[46,62],reader:[63,70],inbox:[71,79],visual:[80,80],state:[81,90]};
 function resolve(i){for(var k in groups){var g=groups[k];if(i>=g[0]&&i<=g[1])return k;}return 'state';}
-for(var i=1;i<=90;i++){var id='UX-'+String(i).padStart(3,'0'),key='Perplexity::'+id;registry[key]={kind:resolve(i),implementation:'prototype',render:function(idea,ctx){var n=Number(String(idea.id).slice(-3)),kind=resolve(n);return '<div class="idea-specific-prototype" data-idea-model="Perplexity" data-idea-id="'+esc(idea.id)+'" style="'+style+'"><div style="font-size:.78em;opacity:.7;margin-bottom:8px">PERPLEXITY · '+esc(idea.id)+' · PROTOTYP</div>'+families[kind](n)+'<details style="margin-top:10px"><summary>Varför detta förslag</summary><p>'+esc(idea.title)+'</p></details></div>';}};}
+for(var i=1;i<=90;i++){var id='UX-'+String(i).padStart(3,'0'),key='Perplexity::'+id;registry[key]={kind:resolve(i),implementation:'prototype',render:function(idea,ctx){var n=Number(String(idea.id).slice(-3)),kind=resolve(n);return families[kind](n);}};}
 })();
