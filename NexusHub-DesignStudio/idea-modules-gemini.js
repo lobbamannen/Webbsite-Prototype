@@ -94,7 +94,7 @@
       registry[key] = {
         model:'Gemini Argon', id:id, family:family, kind:principles[num]?'design-principle':'interaction-prototype',
         render:function (idea, ctx) {
-          var example=demo(num);
+          var example=neutralizeDisplayOnlyButtons(demo(num));
           return principles[num] ? '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">DESIGNSYSTEMREGEL · visuell provyta, inte en separat komponent</p>'+example+'</div>' : example;
         }
       };
