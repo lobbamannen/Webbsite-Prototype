@@ -51,7 +51,7 @@ export const CONTROLS=[
  choice('reader.contents','Innehållsförteckning',[['hidden','Dölj innehållsförteckning'],['top','Ovanför lästexten']],'Gäller berättelsens befintliga kapitelindex.'),
  choice('files.layout','Dokumentresultat',[['cards','Dokumentkort'],['compact','Kompakta rader']],'Gäller dokumentlistor i sökning och kunskapsbank.'),
  choice('files.summary','Dokumentutdrag',[['hidden','Dölj utdrag']],'Döljer sammanfattning i resultatlistan. Originaltexten finns i läsaren.'),
- choice('files.plugins','Pluginbibliotek',[['list','Kompakt lista'],['plain','Utan dekorationer']],'Ändrar de befintliga pluginlänkarna.'),
+ choice('files.plugins','Pluginbibliotek',[['list','Kompakt lista'],['plain','Enfärgade kort']],'Ändrar de befintliga pluginlänkarna.'),
 ];
 const byKey=new Map(CONTROLS.map(c=>[c.key,c]));
 const SECTIONS=['stats','modules','recent'];

@@ -31,3 +31,10 @@ test('all design CSS parses as CSS without recovery',async()=>{
  const {CONTROLS}=await import('../src/studio/config.mjs');
  for(const c of CONTROLS)for(const [value] of c.options||[]){const r=transform({filename:c.key+'.css',code:Buffer.from(designCSS({values:{[c.key]:value}})),errorRecovery:false});assert.deepEqual(r.warnings,[],c.key+' '+value);}
 });
+test('editor stacking context stays above the original fixed navigation',async()=>{
+ const {readFileSync}=await import('node:fs');const css=readFileSync(new URL('../src/studio/studio.css',import.meta.url),'utf8');
+ const root=css.match(/\.ds-ui\{([^}]+)\}/)?.[1]||'';
+ const position=root.match(/(?:^|;)position:([^;]+)/)?.[1]||'static';
+ const z=Number(root.match(/(?:^|;)z-index:([^;]+)/)?.[1]||0);
+ assert.ok(position!=='static'&&z>40,'The editor root, not just its children, must layer above the original navigation.');
+});

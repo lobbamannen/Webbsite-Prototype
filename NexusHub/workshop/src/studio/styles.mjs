@@ -49,6 +49,7 @@ export function designCSS(input){
  if(v['media.metadata']==='minimal')add('.film-card>small|.film-card-rating|.film-card .series-flags','display:none!important');
  if(v['media.details']==='stack'){add('.film-detail-hero','grid-template-columns:1fr!important');add('.film-detail-hero>.film-poster','max-width:240px;justify-self:center');}
  if(v['media.details']==='compact')add('.film-detail-hero','grid-template-columns:minmax(100px,150px) minmax(0,1fr)!important');
+ if(v['media.filters']==='open')add('.nh-discovery-options>summary','display:none');
  if(v['media.filters']==='sticky')add('.nh-discovery-options','position:sticky;top:80px;z-index:15;background:#121d30;padding:10px;border:1px solid #465471;border-radius:14px');
  if(v['stories.layout']){add('.stories-grid','grid-template-columns:1fr!important');add('.stories-card-main','display:grid!important;grid-template-columns:'+(v['stories.layout']==='compact'?'1fr':'100px minmax(0,1fr)')+'!important;align-items:center');if(v['stories.layout']==='compact')add('.stories-card-main .story-cover','display:none');add('.stories-card-info','padding:14px!important');}
  if(v['stories.titles']==='serif')add('.stories-card h3|.stories-reader-header h1','font-family:Georgia,serif!important;font-weight:500!important');
