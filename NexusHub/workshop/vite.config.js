@@ -7,6 +7,7 @@ const original=path.resolve(here,'../original');
 const names=['portal-polish','hub-design-system','home-dashboard','module-dashboards','discovery-polish','films','series','stories','mirror-inspector','mirror-audit'];
 export default defineConfig({
  base:'/Webbsite-Prototype/NexusHub/',
+ define:{'import.meta.env.VITE_STUDIO_BUILD':JSON.stringify(process.env.GITHUB_SHA||'local')},
  plugins:[tailwindcss()],
  resolve:{alias:[
   {find:'@',replacement:path.resolve(here,'src')},
