@@ -102,9 +102,9 @@
         model:'Gemini Argon', id:id, family:family, kind:principles[num]?'design-principle':'interaction-prototype',
         render:function (idea, ctx) {
           var example=neutralizeDisplayOnlyButtons(demo(num,ctx));
-          var sourceText=String(idea&&idea.text||'').replace(/\\u200b/g,'');
-          var noteMatch=sourceText.match(/(?:Förslag till anpassning|Nexus Hub|Relevans för Nexus Hub|Observation):\\s*([\\s\\S]{1,260})/i);
-          var findingNote=noteMatch?esc(noteMatch[1].split(/\\n\\s*(?:●|•|Varför|Källa|Prioritet|Förändring|---)/)[0].replace(/\\s+/g,' ').trim().slice(0,190)):'';
+          var sourceText=String(idea&&idea.text||'').replace(/\u200b/g,'');
+          var noteMatch=sourceText.match(/(?:Förslag till anpassning|Nexus Hub|Relevans för Nexus Hub|Observation):\s*([\s\S]{1,260})/i);
+          var findingNote=noteMatch?esc(noteMatch[1].split(/\n\s*(?:●|•|Varför|Källa|Prioritet|Förändring|---)/)[0].replace(/\\s+/g,' ').trim().slice(0,190)):'';
           var note=findingNote?'<p style="margin:0 0 10px;color:#aaa;font-size:12px"><b style="color:#cbb8ff">Fyndets förslag:</b> '+findingNote+'</p>':'';
           example=note+example;
           return principles[num] ? '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">DESIGNSYSTEMREGEL · visuell provyta, inte en separat komponent</p>'+example+'</div>' : example;
