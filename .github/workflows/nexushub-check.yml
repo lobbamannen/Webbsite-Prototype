@@ -1,0 +1,19 @@
+name: Validate Nexus Hub mockup
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'NexusHub/**'
+      - '.github/workflows/nexushub-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: node --check NexusHub/app.js
+      - name: Check required files
+        run: test -s NexusHub/index.html && test -s NexusHub/styles.css && test -s NexusHub/app.js
