@@ -13,7 +13,7 @@
 .portal-shell .nh-module-category-card .nh-category-icon svg{width:21px;height:21px}
 .portal-shell .nh-module-category-card .nh-category-copy{gap:3px}
 .portal-shell .nh-module-category-card .nh-category-copy strong{font-size:12px;line-height:1.28}
-.portal-shell .nh-module-category-card .nh-category-copy small{font-size:10px}
+.portal-shell .nh-module-category-card .nh-category-copy small{font-size:12px}
 .portal-shell .nh-module-dashboard .nh-module-category-head h2{font-size:19px}
 .portal-shell .nh-module-dashboard .nh-module-category-head p{font-size:11px}
 .portal-shell .nh-discovery{display:grid;gap:10px;padding:13px 14px;margin:18px 0 12px;border:1px solid #344967;border-radius:15px;background:linear-gradient(140deg,#17243a,#0e1a2d)}
@@ -62,17 +62,17 @@
  .portal-shell .nh-module-category-card{flex-direction:row;align-items:center;gap:8px;min-height:84px;padding:11px 9px}
  .portal-shell .nh-module-category-card .nh-category-icon{width:33px;height:33px;flex:none}
  .portal-shell .nh-module-category-card .nh-category-icon svg{width:20px;height:20px}
- .portal-shell .nh-module-category-card .nh-category-copy strong{font-size:11px}
- .portal-shell .nh-module-category-card .nh-category-copy small{font-size:10px}
+ .portal-shell .nh-module-category-card .nh-category-copy strong{font-size:12px}
+ .portal-shell .nh-module-category-card .nh-category-copy small{font-size:12px}
  .portal-shell .nh-module-category-card .nh-category-arrow{position:absolute;top:8px;right:8px;width:14px}
  .portal-shell .nh-module-category-card .nh-category-copy{padding-right:5px}
  .portal-shell .nh-story-mode-tabs{width:100%;align-self:stretch}
  .portal-shell .nh-story-mode-tabs button{flex:1}
  .portal-shell .nh-module-dashboard .nh-module-category-head h2{font-size:18px}
- .portal-shell .nh-discovery{padding:10px 11px;margin:13px 0 10px}
- .portal-shell .nh-discovery-main{flex-wrap:wrap}
+ .portal-shell .nh-discovery{padding:0;border:0;background:transparent;margin:7px 0 4px;box-shadow:none}
+ .portal-shell .nh-discovery-main{flex-wrap:wrap;gap:7px}.portal-shell .nh-discovery-search input{font-size:16px}
  .portal-shell .nh-discovery-search{width:100%;flex-basis:100%}
- .portal-shell .nh-discovery-main-action{width:100%}
+ .portal-shell .nh-discovery-main-action{width:100%;min-height:44px}
  .portal-shell .nh-discovery-bottom{gap:7px}
  .portal-shell .nh-discovery-small-note{flex-basis:100%;min-width:0}
  .portal-shell .nh-discovery-options .nh-advanced-filters{margin:4px 0 0}
@@ -81,8 +81,8 @@
 }
 @media(max-width:375px){
  .portal-shell .nh-module-category-card{min-height:94px;align-items:flex-start;flex-direction:column}
- .portal-shell .nh-module-category-card .nh-category-copy strong{font-size:11px}
- .portal-shell .nh-module-category-card .nh-category-copy small{font-size:9px}
+ .portal-shell .nh-module-category-card .nh-category-copy strong{font-size:12px}
+ .portal-shell .nh-module-category-card .nh-category-copy small{font-size:11px}
  .portal-shell .nh-discovery-options .nh-advanced-filters{grid-template-columns:1fr}
  .portal-shell .nh-module-stat strong{font-size:21px}
 }
@@ -116,8 +116,8 @@
  .portal-shell .nh-genre-guide{font-size:10px}
  .portal-shell .nh-genre-subgenre-panel{padding:11px}
  .portal-shell .nh-genre-subgenres{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
- .portal-shell .nh-genre-subgenres button{justify-content:space-between;width:100%;padding:7px 8px;font-size:10px}
- .portal-shell .nh-genre-results-chips button{font-size:10px}
+ .portal-shell .nh-genre-subgenres button{justify-content:space-between;width:100%;min-height:44px;padding:9px 8px;font-size:12px}
+ .portal-shell .nh-genre-results-chips button{font-size:12px;min-height:44px}
 }
 @media(max-width:375px){
  .portal-shell .nh-genre-subgenres{grid-template-columns:1fr}
@@ -143,33 +143,33 @@
 .portal-shell .nh-media-dashboard .nh-genre-subgenre-panel{grid-column:1/-1}
 .portal-shell .nh-media-dashboard :is(.nh-media-quick-link,.nh-genre-expand):focus-visible{outline:2px solid #e1c0ff;outline-offset:3px}
 @media(max-width:700px){
- .portal-shell .nh-media-dashboard{gap:11px;padding:14px 12px}
+ .portal-shell .nh-media-dashboard{gap:10px;padding:14px 12px;margin-bottom:8px}
  .portal-shell .nh-media-dashboard .nh-module-dashboard-header{gap:9px}
- .portal-shell .nh-media-dashboard .nh-module-dashboard-title{gap:9px}
- .portal-shell .nh-media-dashboard .nh-module-dashboard-title p{margin:4px 0 0;font-size:10px;line-height:1.4}
+ .portal-shell .nh-media-dashboard .nh-module-dashboard-title{gap:9px}.portal-shell .nh-media-dashboard .nh-module-dashboard-title .nh-module-eyebrow{display:none}
+ .portal-shell .nh-media-dashboard .nh-module-dashboard-title p{margin:3px 0 0;font-size:12px;line-height:1.45}
  .portal-shell .nh-media-dashboard .nh-module-heading-icon{width:39px;height:39px}
  .portal-shell .nh-media-dashboard .nh-module-heading-icon svg{width:23px;height:23px}
  .portal-shell .nh-media-dashboard .nh-module-dashboard-title h1{font-size:21px}
  .portal-shell .nh-media-dashboard .nh-module-heading-actions{width:auto;gap:7px}
- .portal-shell .nh-media-dashboard .nh-module-heading-actions>button{flex:none;min-height:34px;padding:7px 12px;font-size:11px}
+ .portal-shell .nh-media-dashboard .nh-module-heading-actions>button{flex:none;min-height:44px;padding:9px 12px;font-size:12px}
  .portal-shell .nh-media-quick-links{gap:7px}
  .portal-shell .nh-media-quick-link{gap:7px;min-height:61px;padding:8px 10px}
  .portal-shell .nh-media-quick-link strong{font-size:20px}
- .portal-shell .nh-media-quick-link small{font-size:10px}
+ .portal-shell .nh-media-quick-link small{font-size:12px}
  .portal-shell .nh-media-quick-link>svg:first-child{width:17px;height:17px}
  .portal-shell .nh-media-quick-link>svg:last-child{width:12px}
  .portal-shell .nh-media-dashboard .nh-module-category-head h2{font-size:17px}
- .portal-shell .nh-media-dashboard .nh-module-category-head p{margin:3px 0 0;font-size:10px}
+ .portal-shell .nh-media-dashboard .nh-module-category-head p{margin:3px 0 0;font-size:12px}
  .portal-shell .nh-media-dashboard .nh-category-tabs{margin:0;gap:6px}
- .portal-shell .nh-media-dashboard .nh-category-tabs button{min-height:36px;padding:7px 10px;font-size:11px}
- .portal-shell .nh-media-dashboard .nh-module-category-card{min-height:78px}
+ .portal-shell .nh-media-dashboard .nh-category-tabs button{min-height:44px;padding:8px 10px;font-size:12px}
+ .portal-shell .nh-media-dashboard .nh-module-category-card{min-height:78px;flex-direction:row;align-items:center;padding:10px 9px;gap:7px}
  .portal-shell .nh-media-dashboard .nh-genre-category>.nh-module-category-card{min-height:78px}
 }
 @media(max-width:375px){
  .portal-shell .nh-media-quick-link{padding:8px;gap:6px}
  .portal-shell .nh-media-quick-link strong{font-size:18px}
- .portal-shell .nh-media-dashboard .nh-module-category-card{min-height:91px}
- .portal-shell .nh-media-dashboard .nh-genre-category>.nh-module-category-card{min-height:91px}
+ .portal-shell .nh-media-dashboard .nh-module-category-card{min-height:84px;flex-direction:row;align-items:center}
+ .portal-shell .nh-media-dashboard .nh-genre-category>.nh-module-category-card{min-height:84px}
 }
 @media(prefers-reduced-motion:reduce){.portal-shell .nh-media-quick-link{transition:none}}
 
@@ -177,7 +177,7 @@
 .portal-shell .nh-module-dashboard>.nh-discovery{margin:0}
 .portal-shell .nh-genre-category-unified{gap:0;overflow:hidden;border:1px solid #3b4868;border-radius:13px;background:#142037}
 .portal-shell .nh-genre-category-unified>.nh-module-category-card{border:0;border-radius:0;min-height:72px}
-.portal-shell .nh-genre-category-unified>.nh-genre-expand{min-height:48px;width:100%;border:0;border-top:1px solid #394964;border-radius:0;background:#1a2942;padding:10px 8px;touch-action:manipulation}
+.portal-shell .nh-genre-category-unified>.nh-genre-expand{min-height:44px;font-size:12px;width:100%;border:0;border-top:1px solid #394964;border-radius:0;background:#1a2942;padding:10px 8px;touch-action:manipulation}
 .portal-shell .nh-genre-category-unified>.nh-genre-expand:focus-visible{outline:3px solid #e2b9ff;outline-offset:-3px}
 .portal-shell .nh-story-primary-actions{display:flex;justify-content:flex-start}
 .portal-shell .nh-story-primary-actions .primary{min-height:46px;font-size:13px}
