@@ -450,3 +450,35 @@ body.focus-mode .view{padding-top:12px}
 .file-layout-mini{gap:5px}.file-layout-mini .file-card{padding:6px;min-height:55px}.file-layout-mini .file-card h3{font-size:9px}.file-layout-mini .file-card p{font-size:8px}.file-layout-mini .file-icon{font-size:20px}
 .file-mini{max-width:200px;margin:auto}
 @media(max-width:600px){.graph-mode-6,.knowledge-mode-7{grid-template-columns:1fr}.graph-mode-6 .graph-inspector{display:none}.file-layout-mode-2,.file-layout-mode-5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* Navigation and quick actions: live/previews share markup. */
+.header-mode-1 .header-search-pill{flex:1;max-width:360px;border-radius:99px;padding:11px 15px;background:var(--surface2);color:var(--muted);font-size:12px;border:1px solid var(--line)}
+.header-mode-2 .header-editorial{display:grid;gap:1px;flex:1}.header-editorial strong{font-family:var(--serif);font-size:25px}.header-editorial small{font-size:9px;letter-spacing:.15em;color:var(--accent)}
+.header-mode-3{background:#241a3299;backdrop-filter:blur(18px);border:1px solid #ffffff24}
+.header-mode-4 .header-command-pill{flex:1;background:var(--surface2);border-radius:9px;padding:10px;color:var(--muted);font-size:11px}
+.header-mode-5{flex-wrap:wrap;gap:8px}.header-mode-5 .top-actions{width:100%;justify-content:space-around;border-top:1px solid var(--line);padding-top:8px}
+.header-mode-6{margin:8px;border-radius:20px;box-shadow:0 12px 26px #0007;background:#252030}
+.header-mode-7 .header-avatar{flex:1;display:grid;justify-items:end;color:var(--accent);font-size:27px}
+.header-mini{position:relative!important;inset:auto!important;min-height:55px;gap:6px;padding:9px!important;border-radius:12px}
+.header-mini .top-actions{gap:5px}.header-mini .logo{font-size:12px}.header-mini .logo small{font-size:8px}.header-mini .header-editorial strong{font-size:17px}
+.header-demo-build{font-size:9px;border-radius:8px;background:var(--accent);padding:6px;color:#1a1228}
+.bottomnav.nav-mode-2{width:max-content;min-width:65%;left:50%;transform:translateX(-50%);border-radius:24px;bottom:12px;box-shadow:0 12px 30px #000a}
+.bottomnav.nav-mode-3 .nav-item{min-width:0}
+.bottomnav.nav-mode-4 .nav-item span{display:none}
+.bottomnav.nav-mode-5 .nav-item b{display:none}.bottomnav.nav-mode-5 .nav-item span{font-size:11px}
+.bottomnav.nav-mode-6{width:85px;flex-direction:column;height:auto;right:auto;left:0;top:30%;bottom:auto;border-radius:0 16px 16px 0}
+.bottomnav.nav-mode-7{background:linear-gradient(110deg,#252033,#171220)}
+.bottomnav.nav-mode-8{opacity:.15;transition:opacity .2s}.bottomnav.nav-mode-8:hover,.bottomnav.nav-mode-8:focus-within{opacity:1}
+.nav-mini{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:100%!important;min-width:0!important;transform:none!important;height:auto!important;opacity:1!important;border-radius:12px!important;display:flex;flex-direction:row!important;padding:6px;gap:2px}
+.nav-mini .nav-item{min-width:0;padding:6px 2px}.nav-mini .nav-item b{font-size:15px}.nav-mini .nav-item span{font-size:8px}
+.nav-mini.nav-mode-6{width:100%!important;flex-direction:column!important;align-items:start}.nav-mini.nav-mode-6 .nav-item{display:flex;flex-direction:row;gap:10px}
+.quick-mode-2 .quick-fab{border-radius:50%}.quick-mode-3 .quick-fab{width:65px;border-radius:18px}
+.quick-mode-4 .quick-fab{right:25px;bottom:auto;top:80px;border-radius:11px}
+.quick-mode-6 .quick-fab{width:auto;padding:10px 18px;border-radius:18px}
+.quick-menu-demo{display:none;gap:5px;position:absolute;right:10px;bottom:60px;padding:8px;border:1px solid var(--line);background:var(--surface);border-radius:11px}
+.quick-mode-6:hover .quick-menu-demo{display:grid}.quick-menu-demo span{font-size:10px}
+.quick-mini{position:relative!important;width:100%;min-height:100px;display:flex;justify-content:center;align-items:center}
+.quick-mini .quick-fab{position:relative!important;right:auto!important;bottom:auto!important;top:auto!important;left:auto!important;margin:auto}
+.quick-mini .quick-menu-demo{display:grid;position:static}
+.quick-hidden-state{padding:20px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
