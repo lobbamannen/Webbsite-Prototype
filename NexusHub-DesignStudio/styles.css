@@ -272,3 +272,41 @@ body.focus-mode .view{padding-top:12px}
 .story-layout-mini.story-layout-mode-1{grid-template-columns:repeat(3,minmax(0,1fr))}
 .story-layout-mini.story-layout-mode-2 .story-dossier-seal{min-width:65px;height:75px}
 @media(max-width:430px){.story-layout-mode-1{grid-template-columns:repeat(2,minmax(0,1fr))}.story-layout-mode-2 .story-dossier-seal{min-width:78px}.story-layout-mode-6 .story-minimal-entry small{display:none}}
+
+
+/* Reader modes use the same article markup in the live view and thumbnails. */
+.reader-chapter-heading{font-family:var(--serif);font-weight:400}
+.reader-mode-0{max-width:680px}
+.reader-mode-1{max-width:900px}
+.reader-mode-1 h1{font-size:clamp(44px,8vw,77px)}
+.reader-mode-1 .reader-text p:first-child{font-size:1.12em}
+.reader-mode-2{max-width:630px;background:transparent;border:0;box-shadow:none}
+.reader-mode-2 .reader-text{line-height:2.05}
+.reader-mode-3,.reader-mode-9{display:grid;grid-template-columns:minmax(0,1fr) minmax(155px,.45fr);column-gap:22px;align-items:start}
+.reader-mode-3>.eyebrow,.reader-mode-3>h1,.reader-mode-3>.chips,.reader-mode-3>.reader-chapter-heading,.reader-mode-9>.eyebrow,.reader-mode-9>h1,.reader-mode-9>.chips,.reader-mode-9>.reader-chapter-heading{grid-column:1/-1}
+.reader-mode-3>.reader-text,.reader-mode-9>.reader-text{grid-column:1}
+.reader-mode-3>.source-note,.reader-mode-9>.source-note{grid-column:2;margin:0;position:sticky;top:15px}
+.reader-mode-3>.control-row,.reader-mode-9>.control-row{grid-column:1/-1}
+.reader-mode-4{border-left:5px solid #ae8be7;background:linear-gradient(120deg,#292037,#171320)}
+.reader-mode-4 .source-note{border-left-width:4px}
+.reader-mode-5{background:#e9dcc6;color:#2d2425}
+.reader-mode-5 .reader-text,.reader-mode-5 h1,.reader-mode-5 h2{color:#2d2425}
+.reader-mode-5 .eyebrow{color:#76548c}
+.reader-mode-6{background:#121019}
+.reader-mode-6 .reader-text{font-size:clamp(22px,3vw,27px)!important;line-height:2}
+.reader-mode-7{max-width:1000px}
+.reader-mode-7 .reader-text{columns:2;column-gap:32px}
+.reader-mode-8{max-width:720px;border-radius:5px}
+.reader-mode-8 h1{font-family:Georgia,serif;text-align:center}
+.reader-mode-8 .reader-chapter-heading{text-align:center;border-top:1px solid var(--line);padding-top:17px}
+.reader-preview .reader-paper{padding:14px!important;box-shadow:none;margin:0;width:100%;min-width:0;max-width:100%;border-radius:10px}
+.reader-preview .reader-paper h1{font-size:21px!important;line-height:1.1;margin:7px 0 12px}
+.reader-preview .reader-paper h2{font-size:16px}
+.reader-preview .reader-paper .reader-text{font-size:11px!important;line-height:1.6}
+.reader-preview .reader-paper .reader-text p{margin-bottom:8px}
+.reader-preview .reader-paper .drop:first-letter{font-size:30px;padding:2px 5px 0 0}
+.reader-preview .reader-paper .chips{gap:5px}
+.reader-preview .reader-paper .chip{font-size:8px;padding:4px}
+.reader-preview .reader-paper .source-note{font-size:9px;padding:8px}
+.reader-preview .reader-mode-3,.reader-preview .reader-mode-9{grid-template-columns:minmax(0,1fr) minmax(80px,.5fr);column-gap:7px}
+@media(max-width:640px){.reader-mode-3,.reader-mode-9{grid-template-columns:1fr}.reader-mode-3>.source-note,.reader-mode-9>.source-note{grid-column:1;position:static;margin-top:12px}.reader-mode-7 .reader-text{columns:1}}
