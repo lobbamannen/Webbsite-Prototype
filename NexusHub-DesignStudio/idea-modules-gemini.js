@@ -34,7 +34,13 @@
       return tag.replace(/^<button/,'<span').replace(/\s+type="button"/,'').replace(/\s+aria-(?:pressed|label)="[^"]*"/,'').replace(/cursor:[^;]+;?/g,'cursor:default;');
     });
   }
-  function demo(id) {
+  function demo(id, ctx) {
+    var data=ctx&&ctx.data||{};
+    var media=Array.isArray(data.media)?data.media:[];
+    var stories=Array.isArray(data.stories)?data.stories:[];
+    var files=Array.isArray(data.files)?data.files:[];
+    var nodes=Array.isArray(data.nodes)?data.nodes:[];
+    var plugins=Array.isArray(data.plugins)?data.plugins:[];
     var card = 'border:1px solid rgba(255,255,255,.12);background:#171720;color:#f3f1f7;border-radius:14px;padding:14px;';
     var muted = 'color:#a9a5b2;font-size:12px;';
     if (id==='001') return '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">'+['Film & serier','Berättelser','Kunskapsbank','Inkorg','Filer','Aktivitet'].map(function(x,i){return '<button type="button" data-go="'+['films','stories','knowledge','inbox','files','activity'][i]+'" style="'+card+'text-align:left;min-height:54px;cursor:pointer"><span style="color:#b99aff">'+['◉','◈','✳','⌑','▤','↻'][i]+'</span> '+x+'</button>';}).join('')+'</div>';
@@ -95,7 +101,12 @@
       registry[key] = {
         model:'Gemini Argon', id:id, family:family, kind:principles[num]?'design-principle':'interaction-prototype',
         render:function (idea, ctx) {
-          var example=neutralizeDisplayOnlyButtons(demo(num));
+          var example=neutralizeDisplayOnlyButtons(demo(num,ctx));
+          var sourceText=String(idea&&idea.text||'').replace(/\\u200b/g,'');
+          var noteMatch=sourceText.match(/(?:Förslag till anpassning|Nexus Hub|Relevans för Nexus Hub|Observation):\\s*([\\s\\S]{1,260})/i);
+          var findingNote=noteMatch?esc(noteMatch[1].split(/\\n\\s*(?:●|•|Varför|Källa|Prioritet|Förändring|---)/)[0].replace(/\\s+/g,' ').trim().slice(0,190)):'';
+          var note=findingNote?'<p style="margin:0 0 10px;color:#aaa;font-size:12px"><b style="color:#cbb8ff">Fyndets förslag:</b> '+findingNote+'</p>':'';
+          example=note+example;
           return principles[num] ? '<div><p style="margin:0 0 8px;color:#bca9dd;font-size:11px">DESIGNSYSTEMREGEL · visuell provyta, inte en separat komponent</p>'+example+'</div>' : example;
         }
       };
