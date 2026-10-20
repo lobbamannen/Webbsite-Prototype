@@ -40,7 +40,7 @@ families:[
 {id:"labels",name:"Avsnittsrubriker",group:"Visuell identitet",options:["Små versaler","Stora serifrubriker","Linjeaccent","Numrerade kapitel","Strama etiketter","Rubrik + undermening"]},
 {id:"quick",name:"Snabbåtgärd",group:"Skal & navigation",options:["Central +","Flytande FAB","Kommandopalett","Snabbvals-sheet","Rad i header","Ingen permanent knapp","Skapa-menykort"]}
 ,{id:"ux001",name:"Adaptivt snabbval",group:"AI-moduler",options:["Genvägar","Aktuell vy först"]},
-{id:"ux002",name:"Sektionsrubriker med räknare",group:"AI-moduler",options:["Rubriker","Rubriker med antal","Numrerade rubriker med antal"]},
+{id:"ux002",name:"Sektionsrubriker med räknare",group:"AI-moduler",options:["Rubriker","Rubriker med antal","Markerade räknare"]},
 {id:"ux003",name:"Fortsätt-karusell",group:"AI-moduler",options:["Affischrad","Fortsättkort med progress","Kompakt kortgrid"]},
 {id:"ux004",name:"Tonala bakgrundsytor",group:"AI-moduler",options:["Enhetlig","Tonala sektioner","Kontrastsektioner"]},
 {id:"ux005",name:"Accentlinje för aktiv sektion",group:"AI-moduler",options:["Standard","Accentlinje","Accentlinje med glöd"]},
