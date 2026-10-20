@@ -1,6 +1,8 @@
 // Source-only grouping for module dashboards; never fabricates categories or counts.
 export function databaseCategoryOverview(documents=[]){
- const entries=Array.isArray(documents)?documents.filter(d=>d&&d.module==='databas'&&!d.technical):[];
+ const source=Array.isArray(documents)?documents.filter(d=>d&&d.module==='databas'&&!d.technical):[];
+ const seen=new Set();
+ const entries=source.filter(d=>{const key=typeof d.path==='string'&&d.path?d.path:null;if(!key)return true;if(seen.has(key))return false;seen.add(key);return true;});
  const byCategory=new Map();
  for(const entry of entries){
   const name=typeof entry.category==='string'?entry.category.trim():'';
