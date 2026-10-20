@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import {BookOpen, Clapperboard, Database, FolderOpen, Bookmark, Puzzle, ChevronRight} from 'lucide-react';
-type Counts={files:number|null;stories:number|null;plugins:number|null;films:number|null;series:number|null;watchlist:number|null};
+type Counts={files:number|null;documents:number|null;stories:number|null;plugins:number|null;films:number|null;series:number|null;watchlist:number|null};
 type Props={counts:Counts;onNavigate:(view:string)=>void;onUpload:()=>void};
 const modules=[
  {id:'filmer',title:'Film & serier',description:'Dina filmer, serier och betyg',icon:Clapperboard,tone:'purple',art:'cinema'},
@@ -13,8 +13,8 @@ const modules=[
 ] as const;
 export default function ModuleGrid({counts,onNavigate,onUpload}:Props){
  const formatted=(n:number|null)=>typeof n==='number'?n.toLocaleString('sv-SE'):null;
- const films=formatted(counts.films),series=formatted(counts.series),stories=formatted(counts.stories),plugins=formatted(counts.plugins),watchlist=formatted(counts.watchlist);
- const details:Record<string,string|null>={filmer:films!==null&&series!==null?films+' filmer · '+series+' serier':null,berattelser:stories!==null?stories+' berättelser':null,plugins:plugins!==null?plugins+' pluginpaket':null,villse:watchlist!==null?watchlist+' objekt':null};
+ const films=formatted(counts.films),series=formatted(counts.series),stories=formatted(counts.stories),plugins=formatted(counts.plugins),watchlist=formatted(counts.watchlist),documents=formatted(counts.documents),files=formatted(counts.files);
+ const details:Record<string,string|null>={filmer:films!==null&&series!==null?films+' filmer · '+series+' serier':null,berattelser:stories!==null?stories+' berättelser':null,databas:documents!==null?documents+' dokument':null,sok:files!==null?files+' filer':null,plugins:plugins!==null?plugins+' pluginpaket':null,villse:watchlist!==null?watchlist+' objekt':null};
  return <section className="nh-modules" aria-label="Utforska Nexus Hub">
   <div className="nh-module-grid">{modules.map(({id,title,description,icon:Icon,tone,art})=>
    <button type="button" key={id} className={'nh-module-card nh-tone-'+tone+' nh-art-'+art} onClick={()=>onNavigate(id)}>
