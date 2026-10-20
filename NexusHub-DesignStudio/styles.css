@@ -482,3 +482,42 @@ body.focus-mode .view{padding-top:12px}
 .quick-mini .quick-fab{position:relative!important;right:auto!important;bottom:auto!important;top:auto!important;left:auto!important;margin:auto}
 .quick-mini .quick-menu-demo{display:grid;position:static}
 .quick-hidden-state{padding:20px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+
+
+/* Filter, film details, seasons: preview/live shared structures. */
+.nexus-filter{display:grid;gap:10px;min-width:0}
+.nexus-filter .filter-options{display:flex;flex-wrap:wrap;gap:7px}
+.filter-heading{display:grid;gap:4px}.filter-heading small,.filter-total{font-size:10px;color:var(--muted)}
+.filter-mode-0,.filter-mode-2{padding:16px;background:var(--surface2);border:1px solid var(--line);border-radius:16px}
+.filter-mode-2{min-height:170px;align-content:start}
+.filter-mode-3{border-left:3px solid var(--accent);padding-left:13px}
+.filter-mode-4 .filter-options{max-height:46px;overflow:hidden;border-radius:13px}
+.filter-mode-5 .filter-search{padding:15px;background:var(--surface2);border:1px solid var(--line);border-radius:14px}
+.filter-mode-6 .filter-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.filter-mode-6 .chip{text-align:center}
+.filter-mode-7{padding-bottom:9px;border-bottom:1px solid var(--line)}
+.filter-mini{padding:9px}.filter-mini .filter-options{gap:4px}.filter-mini .chip{font-size:9px;padding:4px 6px}.filter-mini.filter-mode-6 .filter-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.nexus-media-detail{display:grid;gap:12px}
+.nexus-media-detail .detail-content{display:grid;gap:11px}
+.detail-mode-1{padding:14px;background:var(--surface2);border-left:4px solid var(--accent);border-radius:12px}
+.detail-dossier-heading{letter-spacing:.18em;color:var(--accent);font-size:10px}
+.detail-mode-2 .detail-hero{display:none}.detail-mode-2 .detail-content{padding:15px;border:1px solid var(--line);border-radius:12px}
+.detail-mode-3,.detail-mode-6{grid-template-columns:minmax(0,1fr) minmax(160px,.65fr);align-items:start}
+.detail-mode-4 .detail-hero{max-width:280px;aspect-ratio:2/3;justify-self:center;width:100%}
+.detail-mode-5 .detail-hero{min-height:270px;background-blend-mode:multiply}
+.detail-mode-6 .detail-content{padding:14px;background:var(--surface2);border:1px solid var(--line);border-radius:10px}
+.detail-mini .detail-hero{min-height:80px!important;padding:10px}.detail-mini .detail-hero h2{font-size:17px}.detail-mini .detail-content{gap:5px}
+.detail-mini .detail-meta{gap:3px}.detail-mini .chip{font-size:8px;padding:3px}.detail-mini .notice{font-size:9px}
+.detail-mini.detail-mode-3,.detail-mini.detail-mode-6{grid-template-columns:1fr 1fr}
+.nexus-seasons{display:grid;gap:8px}
+.season-item{display:flex;align-items:center;gap:13px;padding:13px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.season-number{font-size:22px;color:var(--accent);font-weight:800}
+.season-item>div{flex:1;display:grid;gap:5px}
+.season-item strong{font-size:13px}.season-item small{font-size:10px;color:var(--muted)}
+.season-mode-0 .season-item{border-left:3px solid var(--accent)}
+.season-mode-2{grid-template-columns:repeat(3,minmax(0,1fr))}.season-mode-2 .season-item{display:grid;justify-items:center;text-align:center}
+.season-mode-3 .season-item{border-radius:0;border:0;border-bottom:1px solid var(--line);background:transparent}
+.season-mode-4{border-left:2px solid var(--accent);padding-left:13px}.season-mode-4 .season-item{position:relative}.season-mode-4 .season-item:before{content:"";width:8px;height:8px;position:absolute;left:-19px;background:var(--accent);border-radius:50%}
+.season-mode-5{display:flex;flex-wrap:wrap}.season-mode-5 .season-item{flex:1;min-width:100px;padding:8px}
+.season-mode-6 .season-item{min-height:115px;background:linear-gradient(130deg,#453056,#191421)}
+.season-mini .season-item{padding:6px}.season-mini .season-number{font-size:15px}.season-mini .season-item strong{font-size:10px}.season-mini .season-item small{font-size:8px}
+@media(max-width:430px){.detail-mode-3,.detail-mode-6{grid-template-columns:1fr}.season-mode-2{grid-template-columns:1fr 1fr}}
