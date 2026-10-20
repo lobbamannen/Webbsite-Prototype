@@ -19,7 +19,7 @@ var hostMap={
   'new:loadingState':'activity','loadingState':'activity','layoutStability':'activity',
   'new:errorState':'inbox','errorState':'inbox','new:feedbackState':'inbox','feedback':'inbox',
   'new:backToTop':'activity','scrollControls':'activity','refreshControl':'activity',
-  'flow-navigation':'nav','navigationState':'nav','navigationHistory':'nav','keyboardMenu':'search',
+  'emptyState':'search','highlights':'reader','flow-navigation':'nav','navigationState':'nav','navigationHistory':'nav','keyboardMenu':'search',
   'documentSearch':'search','savedFilters':'filter','favorites':'launcher','tagging':'knowledge',
   'systemStatus':'activity','storageUsage':'settings','discovery':'continue','bottomSheet':'filter',
   'settingsLayout':'settings','systemLog':'activity','dangerZone':'settings','unsupportedState':'settings',
@@ -38,7 +38,7 @@ var directHosts={
 };
 var existing={};N.families.forEach(function(f){existing[f.id]=f;});
 var groups={}, ruleRows=[];
-function norm(s){return String(s||'').toLocaleLowerCase().replace(/[^\\p{L}\\p{N}]+/gu,' ').trim();}
+function norm(s){return String(s||'').toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
 Object.keys(raw).sort().forEach(function(key){
  var v=raw[key]||{}, family=String(v.targetFamily||'').trim(), change=String(v.change||'').trim();
  if(!family||!change)return;
