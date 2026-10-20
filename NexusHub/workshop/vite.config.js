@@ -12,6 +12,7 @@ export default defineConfig({
   {find:'@',replacement:path.resolve(here,'src')},
   ...names.map(name=>({find:'./'+name+'.css',replacement:path.join(original,name+'.css')}))
  ]},
- build:{outDir:'../dist',emptyOutDir:true,cssCodeSplit:false},
+ build:{outDir:'../dist',emptyOutDir:true,cssCodeSplit:true,rollupOptions:{input:{main:path.join(here,'index.html'),studio:path.join(here,'studio.html')}}},
  esbuild:{jsx:'automatic'}
 });
+

@@ -1,3 +1,4 @@
+import {useDesign} from '@/studio/context';
 'use client';
 import React,{useEffect,useMemo,useState} from 'react';
 import {Film,Clapperboard,Search,Plus,ChevronLeft,ExternalLink,Star,Heart,CalendarDays,Play,RefreshCw,Save,X,Popcorn,Loader2,AlertCircle,Trash2,Edit3} from 'lucide-react';
@@ -73,6 +74,7 @@ function FilmForm({value,original,save,cancel,saving}:{value:FilmEntry,original:
  </form>;
 }
 export default function Films({initialItem}:{initialItem?:string|null}={}){
+ const design=useDesign();
  const [posterRevision,refreshPosters]=usePosterRevision();
  const [data,setData]=useState<FilmResponse|null>(null),[loading,setLoading]=useState(true),[error,setError]=useState(''),[notice,setNotice]=useState(''),[conflict,setConflict]=useState(false),[saving,setSaving]=useState(false);
  const [selected,setSelected]=useState<string|null>(null),[draft,setDraft]=useState<FilmEntry|null>(null),[isNew,setIsNew]=useState(false);
@@ -105,7 +107,7 @@ export default function Films({initialItem}:{initialItem?:string|null}={}){
   finally{setSaving(false);}};
  return <section className="film-library">
   {draft||film?<div className="film-intro film-compact-intro"><div><p className="eyebrow">NEXUS HUB · FILMER</p><h1><Film size={27}/>Filmer</h1></div></div>:<MediaOverview mode="films" total={discovery.total} metrics={discovery.metrics} groups={discovery.groups} selectedId={activeCategory} onSelect={chooseCategory} onShowAll={showAll} onCreate={startNew} onRefresh={load} loading={loading} toolbar={<DiscoveryToolbar query={query} onQuery={value=>{setQuery(value);if(value.trim())setBrowsing(true);}} placeholder="Sök titel, år eller IMDb-ID…" browsing={showing} onShowAll={showAll} onClose={closeBrowse} showAllLabel={'Visa alla '+films.length+' filmer'}>
-    {showing&&<details className="nh-discovery-options"><summary>Sortera och kombinera filter</summary><div className="film-filters nh-advanced-filters">
+    {showing&&<details className="nh-discovery-options" open={design['media.filters']==='open'||undefined}><summary>Sortera och kombinera filter</summary><div className="film-filters nh-advanced-filters">
      <label><span>Status</span><select value={status} onChange={e=>setStatus(e.target.value)}><option value="alla">Alla statusar</option>{STATUSES.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
      <label><span>Genre</span><select value={genre} onChange={e=>{setGenreGroup(null);setGenre(e.target.value);}}><option value="alla">Alla genrer</option>{genres.map(x=><option key={x}>{x}</option>)}</select></label>
      <label><span>Filmserie</span><select value={series} onChange={e=>setSeries(e.target.value)}><option value="alla">Alla filmserier</option>{seriesOptions.map(x=><option key={x}>{x}</option>)}</select></label>
@@ -131,3 +133,4 @@ export default function Films({initialItem}:{initialItem?:string|null}={}){
   </React.Fragment>}
  </section>;
 }
+

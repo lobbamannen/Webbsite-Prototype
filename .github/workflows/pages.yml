@@ -23,6 +23,8 @@ jobs:
           node-version: '22'
       - name: Install Nexus Hub workshop dependencies
         run: npm install --prefix NexusHub/workshop --no-audit --no-fund --no-package-lock
+      - name: Verify studio behavior before publishing
+        run: npm test --prefix NexusHub/workshop
       - name: Make original stylesheet imports resolve
         run: ln -s workshop/node_modules NexusHub/node_modules
       - name: Build the actual React UI components
@@ -30,6 +32,8 @@ jobs:
       - name: Include compiled Nexus Hub without dependencies
         run: |
           cp -R NexusHub/dist/. NexusHub/
+          cp NexusHub/dist/studio.html NexusHub-DesignStudio/index.html
+          test -s NexusHub-DesignStudio/index.html
           rm -f NexusHub/node_modules
           rm -rf NexusHub/workshop/node_modules NexusHub/dist
           test -s NexusHub/index.html
@@ -43,3 +47,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

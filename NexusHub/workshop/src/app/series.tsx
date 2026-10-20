@@ -1,3 +1,4 @@
+import {useDesign} from '@/studio/context';
 'use client';
 import React,{useEffect,useMemo,useState} from 'react';
 import {Tv,Search,RefreshCw,Loader2,Star,ChevronLeft,ExternalLink,CalendarDays,CheckCircle2,AlertCircle,Globe2,Heart,Bookmark} from 'lucide-react';
@@ -42,6 +43,7 @@ function Detail({item,back,onToggleWatchlist,watchSaving,posterRevision}:{item:E
  </article>;
 }
 export default function Series({initialItem}:{initialItem?:string|null}={}){
+ const design=useDesign();
  const [posterRevision,refreshPosters]=usePosterRevision();
  const [data,setData]=useState<Register|null>(null),[loading,setLoading]=useState(true),[error,setError]=useState(''),[query,setQuery]=useState(''),[genre,setGenre]=useState('alla'),[provider,setProvider]=useState('alla'),[status,setStatus]=useState('alla'),[sort,setSort]=useState('titel'),[page,setPage]=useState(0),[chosen,setChosen]=useState<number|null>(null);
  const [browsing,setBrowsing]=useState(false),[jump,setJump]=useState(0),[genreGroup,setGenreGroup]=useState<string|null>(null);
@@ -77,7 +79,7 @@ export default function Series({initialItem}:{initialItem?:string|null}={}){
  const choose=(x:number)=>{setChosen(x);window.scrollTo(0,0);};
  return <section className="film-library series-library">
   {chosen!==null&&items[chosen]?<div className="film-intro film-compact-intro"><div><p className="eyebrow">NEXUS HUB · SERIER</p><h1><Tv size={27}/>Serier</h1></div></div>:<MediaOverview mode="series" total={discovery.total} metrics={discovery.metrics} groups={discovery.groups} selectedId={activeCategory} onSelect={chooseCategory} onShowAll={showAll} onRefresh={load} loading={loading} toolbar={<DiscoveryToolbar query={query} onQuery={value=>{setQuery(value);if(value.trim())setBrowsing(true);setPage(0);}} placeholder="Sök titel, år eller IMDb-ID…" browsing={showing} onShowAll={showAll} onClose={closeBrowse} showAllLabel={'Visa alla '+items.length+' serier'}>
-    {showing&&<details className="nh-discovery-options"><summary>Sortera och kombinera filter</summary><div className="film-filters series-filters nh-advanced-filters">
+    {showing&&<details className="nh-discovery-options" open={design['media.filters']==='open'||undefined}><summary>Sortera och kombinera filter</summary><div className="film-filters series-filters nh-advanced-filters">
      <label><span>Status</span><select value={status} onChange={e=>{setStatus(e.target.value);setPage(0);}}><option value="alla">Alla statusar</option><option value="sedda">Sedda i Sverige</option><option value="villse">Vill se</option><option value="övriga">Övriga</option><option value="favoriter">Favoriter</option></select></label>
      <label><span>Genre</span><select value={genre} onChange={e=>{setGenreGroup(null);setGenre(e.target.value);setPage(0);}}><option value="alla">Alla genrer</option>{genres.map(x=><option key={x}>{x}</option>)}</select></label>
      <label><span>Streamingkatalog</span><select value={provider} onChange={e=>{setProvider(e.target.value);setPage(0);}}><option value="alla">Alla tjänster</option>{providers.map(x=><option key={x}>{x}</option>)}</select></label>
@@ -100,3 +102,4 @@ export default function Series({initialItem}:{initialItem?:string|null}={}){
   </>}
  </section>;
 }
+

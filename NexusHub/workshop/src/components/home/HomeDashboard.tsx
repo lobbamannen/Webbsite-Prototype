@@ -1,6 +1,7 @@
 'use client';
 import React,{useEffect,useState} from 'react';
 import DatabaseStats from './DatabaseStats';
+import {useDesign} from '@/studio/context';
 import ModuleGrid from './ModuleGrid';
 import RecentActivity from './RecentActivity';
 import {usePosterRevision} from '@/components/repository-poster';
@@ -13,6 +14,7 @@ type Props={
  onNavigate:(view:string)=>void;onOpenMedia:(view:'filmer'|'serier',item:string)=>void;onUpload:()=>void;onOpenStory:(path:string)=>void;onOpenFile:(item:any)=>void;
 };
 export default function HomeDashboard({catalog,pluginRepo,stories,recentFiles,commits,onNavigate,onOpenMedia,onUpload,onOpenStory,onOpenFile}:Props){
+ const design=useDesign();
  const [posterRevision,refreshPosters]=usePosterRevision();
  const [films,setFilms]=useState<any[]>([]);
  const [series,setSeries]=useState<any[]>([]);
@@ -42,9 +44,14 @@ export default function HomeDashboard({catalog,pluginRepo,stories,recentFiles,co
   series:seriesLoaded?series.length:null,
   watchlist:filmsLoaded&&seriesLoaded?films.filter(f=>f.status==="Vill se").length+series.filter(s=>seriesIsWatchlisted(s)).length:null
  };
- return <div className="nh-home">
-  <DatabaseStats counts={counts} checkedAt={catalog?.fetchedAt} onNavigate={onNavigate} loading={!catalog}/>
-  <ModuleGrid counts={counts} onNavigate={onNavigate} onUpload={onUpload}/>
-  <RecentActivity posterRevision={posterRevision} films={films} series={series} stories={stories} files={recentFiles} plugins={plugins} commits={commits} onNavigate={onNavigate} onOpenMedia={onOpenMedia} onOpenStory={onOpenStory} onOpenFile={onOpenFile}/>
+ const sections:Record<string,React.ReactNode>={
+  stats:design['home.stats']!=='hidden'?<DatabaseStats counts={counts} checkedAt={catalog?.fetchedAt} onNavigate={onNavigate} loading={!catalog}/>:null,
+  modules:<ModuleGrid counts={counts} onNavigate={onNavigate} onUpload={onUpload}/>,
+  recent:design['home.recent']!=='hidden'?<RecentActivity posterRevision={posterRevision} films={films} series={series} stories={stories} files={recentFiles} plugins={plugins} commits={commits} onNavigate={onNavigate} onOpenMedia={onOpenMedia} onOpenStory={onOpenStory} onOpenFile={onOpenFile}/>:null
+ };
+ const now=new Date(),hour=now.getHours(),greeting=hour<10?'God morgon':hour<18?'God eftermiddag':'God kväll';
+ return <div className="nh-home" data-studio-target="home">
+  {design['home.greeting']&&<p className="nh-studio-greeting" data-studio-target="home">{design['home.greeting']==='timed'?greeting+(design['home.name']?', '+design['home.name']:''):now.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</p>}
+  {(design['home.order']||['stats','modules','recent']).filter((id:string)=>!(design['home.hidden']||[]).includes(id)).map((id:string)=><React.Fragment key={id}>{sections[id]}</React.Fragment>)}
  </div>;
 }

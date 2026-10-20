@@ -21,7 +21,7 @@ function catalogTimeLabel(iso?:string|null,now=new Date()):string|null{
 }
 export default function DatabaseStats({counts,checkedAt,onNavigate,loading}:Props){
  const timestamp=catalogTimeLabel(checkedAt);
- return <section className="nh-dashboard-stats nh-surface" aria-labelledby="nh-statistics-title">
+ return <section className="nh-dashboard-stats nh-surface" data-studio-target="home" aria-labelledby="nh-statistics-title">
   <button type="button" className="nh-total-link" onClick={()=>onNavigate('sok')} aria-label="Utforska alla filer i databasen">
    <span className="nh-total-icon"><Database size={28} strokeWidth={1.7} aria-hidden="true"/></span>
    <span className="nh-total-copy">
@@ -35,3 +35,4 @@ export default function DatabaseStats({counts,checkedAt,onNavigate,loading}:Prop
   </div>
  </section>;
 }
+

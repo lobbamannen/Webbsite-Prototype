@@ -30,7 +30,7 @@ export default function RecentActivity({films,series,stories,files,plugins,commi
   :tab==='filer'?'Senast öppnade på den här enheten.'
   :tab==='plugins'?'Aktiva paket i GitHub-katalogen.'
   :'Senaste registrerade GitHub-ändringarna.';
- return <section className="nh-recent nh-surface" aria-labelledby="nh-recent-title">
+ return <section className="nh-recent nh-surface" data-studio-target="home" aria-labelledby="nh-recent-title">
   <div className="nh-section-top nh-recent-heading">
    <div className="nh-section-heading"><Clock3 size={28}/><div><h2 id="nh-recent-title">Senaste i Nexus Hub</h2><p>Fortsätt där du slutade · {note}</p></div></div>
    <button type="button" className="nh-see-all" onClick={()=>onNavigate(view)}>Visa {selected.toLowerCase()} <ArrowRight size={17}/></button>
@@ -68,3 +68,4 @@ export default function RecentActivity({films,series,stories,files,plugins,commi
   </div>}
  </section>;
 }
+

@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'NexusHub-DesignStudio/**'
+      - 'NexusHub/workshop/**'
       - '.github/workflows/design-studio-check.yml'
   workflow_dispatch:
 permissions:
@@ -51,9 +52,19 @@ jobs:
           for(const marker of ['function slot(','data-hide-slot','data-show-slot','hiddenSlots','function optionPreview(','function exportConfig(','function importConfig(']){
             if(!app.includes(marker))throw Error('Missing '+marker);
           }
-          const html=fs.readFileSync(dir+'index.html','utf8');
+          const html=fs.readFileSync(dir+'legacy.html','utf8');
           for(const file of scripts.concat(['app.js','styles.css'])){
             if(!html.includes(file))throw Error('Script/asset not in index: '+file);
           }
           console.log('PASS: 527 unique findings and 527 nonempty renders; '+N.families.length+' families, '+N.families.reduce((a,f)=>a+f.options.length,0)+' options; hide/restore and entrypoint wired.');
           NODE
+
+      - name: Install original UI and studio dependencies
+        run: npm install --prefix NexusHub/workshop --no-audit --no-fund --no-package-lock
+      - name: Verify real studio behavior
+        run: npm test --prefix NexusHub/workshop
+      - name: Build original UI and Design Studio
+        run: |
+          ln -s workshop/node_modules NexusHub/node_modules
+          npm run build --prefix NexusHub/workshop
+          test -s NexusHub/dist/studio.html

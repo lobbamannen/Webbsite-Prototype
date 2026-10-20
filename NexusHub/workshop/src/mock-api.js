@@ -1,4 +1,6 @@
-// Safe, isolated UX fixtures. No external API calls, credentials or user files.
+// Isolated UX fixtures. Changes below are local demo state, never production writes.
+const readDemo=(key)=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
+const writeDemo=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}};
 const timestamp='2026-10-20T13:15:27.000Z';
 const filmGenres=['Kriminal','Thriller','Action','Äventyr','Skräck','Drama','Science fiction','Fantasy','Dokumentär','Komedi','Mysterie','Familj','Historia'];
 const fNames=['Sagan om ringen: Härskarringen','Interstellar','The Dark Knight','Inception','Sagan om de två tornen','Sagan om konungens återkomst'];
@@ -42,7 +44,10 @@ const snapshot={
  plugins:{packages:plugins,files:[],recent:[]}
  },errors:[],fetchedAt:timestamp
 };
-let storyEntries={};
+let storyEntries=readDemo('nexus-workshop-story-marks');
+const filmEdits=readDemo('nexus-workshop-film-edits'),seriesEdits=readDemo('nexus-workshop-series-edits');
+for(const [id,film] of Object.entries(filmEdits)){if(!film||typeof film!=='object'||!/^tt\d+$/.test(id)||film.imdbId!==id)continue;const i=films.findIndex(f=>f.imdbId===id);if(i>=0)films[i]=film;else films.push(film);}
+for(const item of series)if(typeof seriesEdits[item.imdbId]==='boolean')item.wantToWatch=seriesEdits[item.imdbId];
 const originalFetch=window.fetch.bind(window);
 const result=(obj,status=200)=>new Response(JSON.stringify(obj),{status,headers:{'Content-Type':'application/json'}});
 window.fetch=async function(input,options={}){
@@ -55,15 +60,38 @@ window.fetch=async function(input,options={}){
  const url=new URL(raw,'https://designverkstad.invalid');
  const name=url.pathname.slice(5);
  const method=(options.method||'GET').toUpperCase();
- if(name==='films')return method==='GET'?result({sha,register:{schemaVersion:'1.0',lastUpdated:timestamp,description:'Exempeldata',films}}):result({error:'Designverkstad: inga filmändringar skickas till GitHub.'},403);
- if(name==='series')return method==='GET'?result({sha,register:{schemaVersion:1,lastUpdated:timestamp,series}}):result({error:'Designverkstad: inga serieändringar skickas till GitHub.'},403);
+ if(name==='films'){
+  const register=()=>({schemaVersion:'1.0',lastUpdated:timestamp,description:'Lokal exempeldata',films});
+  if(method==='GET')return result({sha,register:register()});
+  let body;try{body=JSON.parse(options.body||'{}');}catch{return result({error:'Ogiltig demoförfrågan.'},400);}
+  const film=body.film;
+  if(method!=='POST'||!['update','create'].includes(body.action)||!film||!/^tt\d{7,9}$/.test(film.imdbId)||typeof film.title!=='string'||!Array.isArray(film.genres)||!Array.isArray(film.viewings))return result({error:'Ogiltiga filmuppgifter för lokal demo.'},400);
+  const i=films.findIndex(f=>f.imdbId===film.imdbId);
+  if(body.action==='create'&&i>=0)return result({error:'Filmen finns redan i demobiblioteket.'},409);
+  const next={...filmEdits,[film.imdbId]:film};
+  if(!writeDemo('nexus-workshop-film-edits',next))return result({error:'Lokal lagring kunde inte användas. Ändringen sparades inte.'},507);
+  Object.assign(filmEdits,next);if(i>=0)films[i]=film;else films.push(film);
+  return result({sha,register:register(),warning:'Sparat endast som lokal demo i denna webbläsare. GitHub har inte ändrats.'});
+ }
+ if(name==='series'){
+  const register=()=>({schemaVersion:1,lastUpdated:timestamp,series});
+  if(method==='GET')return result({sha,register:register()});
+  let body;try{body=JSON.parse(options.body||'{}');}catch{return result({error:'Ogiltig demoförfrågan.'},400);}
+  const item=series.find(s=>s.imdbId===body.target?.imdbId);
+  if(method!=='POST'||body.action!=='set-watchlist'||!item||typeof body.wantToWatch!=='boolean')return result({error:'Ogiltigt serieval för lokal demo.'},400);
+  const next={...seriesEdits,[item.imdbId]:body.wantToWatch};
+  if(!writeDemo('nexus-workshop-series-edits',next))return result({error:'Ändringen kunde inte sparas lokalt.'},507);
+  Object.assign(seriesEdits,next);item.wantToWatch=body.wantToWatch;
+  return result({sha,register:register(),warning:'Vill se sparades endast i denna webbläsare. GitHub har inte ändrats.'});
+ }
  if(name==='story-status'){
   if(method==='POST'){
    try{
     const body=JSON.parse(options.body||'{}');
     if(body.action==='set'&&body.path&&body.field){storyEntries[body.path]={...(storyEntries[body.path]||{saved:false,read:false}),[body.field]:!!body.value,updatedAt:new Date().toISOString()};}
     if(body.action==='migrate')for(const p of body.paths||[])storyEntries[p.path]={saved:!!p.saved,read:!!p.read,updatedAt:new Date().toISOString()};
-   }catch{}
+   }catch{return result({error:'Ogiltig lokal markering.'},400);}
+   if(!writeDemo('nexus-workshop-story-marks',storyEntries))return result({error:'Markeringen kunde inte sparas lokalt.'},507);
   }
   return result({register:{schemaVersion:1,entries:storyEntries},saved:true,source:'local-demo',sha});
  }
@@ -84,3 +112,4 @@ window.fetch=async function(input,options={}){
  if(name.startsWith('mirror/'))return result({state:'same',verifiedAt:timestamp});
  return result({items:[],entries:[],total:0,files:[],packages:[],message:'Lokal designverkstad (exempeldata).'});
 };
+
