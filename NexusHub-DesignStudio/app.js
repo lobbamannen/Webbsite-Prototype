@@ -10,6 +10,7 @@ state.picks=Object.assign({},DEFAULT.picks,state.picks||{});
 state.order=Array.isArray(state.order)?state.order:DEFAULT.order.slice();
 state.hidden=Array.isArray(state.hidden)?state.hidden:[];
 state.ideaBoard=Array.isArray(state.ideaBoard)?state.ideaBoard:[];
+state.collapsedSections=state.collapsedSections&&typeof state.collapsedSections==='object'?state.collapsedSections:{};
 var runtime={sheet:null,slot:null,selectedMedia:null,selectedNode:null,selectedFile:null,filmFilter:'Alla',mediaSearch:'',researchQuery:'',researchModel:'Alla',researchLimit:25,builderFilter:'',readerFoot:false,chapter:0};
 var byId=function(id){return document.getElementById(id);};
 var esc=function(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
