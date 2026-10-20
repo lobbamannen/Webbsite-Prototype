@@ -32,3 +32,8 @@ if(api){
   for(const [id,b] of Object.entries(api.BINDINGS)){assert.ok(b.description,id);assert.ok(Object.keys(b.values).length,id);for(const [key,value] of Object.entries(b.values))assert.deepEqual(api.cleanDesign({values:{[key]:value}}).values[key],value,id+' '+key);}
  });
 }
+test('older hidden-section values migrate to the single visibility control',()=>{
+ const d=api.cleanDesign({values:{'home.stats':'hidden','home.recent':'hidden'}});
+ assert.equal(d.values['home.stats'],undefined);assert.equal(d.values['home.recent'],undefined);
+ assert.deepEqual(d.values['home.hidden'],['stats','recent']);
+});

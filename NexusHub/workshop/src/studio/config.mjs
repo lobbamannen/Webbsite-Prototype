@@ -18,8 +18,8 @@ export const CONTROLS=[
  choice('global.focus','Tangentbordsfokus',[['accent','Tydlig accentram']],'Markerar fokuserade kontroller utan att ändra deras klickbeteende.'),
  choice('home.greeting','Välkomsthälsning',[['timed','Diskret, tidsanpassad'],['date','Veckodag och datum']],'En liten rad ovanför startsidans innehåll. Inga demonstrationskort.'),
  {key:'home.name',label:'Namn i hälsningen',type:'text',max:40,description:'Valfritt. Används bara i den tidsanpassade hälsningen.'},
- choice('home.stats','Databasöversikt',[['compact','Kompakt remsa'],['hidden','Visa inte']],'Ändrar bara databasöversikten på startsidan.'),
- choice('home.recent','Senaste innehåll',[['rows','Kompakta rader'],['hidden','Visa inte']],'Samma innehåll och länkar; ändrad presentation på startsidan.'),
+ choice('home.stats','Databasöversikt',[['compact','Kompakt remsa']],'Ändrar bara databasöversikten på startsidan.'),
+ choice('home.recent','Senaste innehåll',[['rows','Kompakta rader']],'Samma innehåll och länkar; ändrad presentation på startsidan.'),
  choice('home.spacing','Mellanrum mellan sektioner',[['compact','Tätt'],['airy','Luftigt']],'Ändrar bara avstånden mellan startsidans sektioner.'),
  choice('cards.layout','Modulernas layout',[['list','Lista'],['compact','Kompakta brickor'],['bento','Bento med bred första modul']],'Ändrar de riktiga modulknapparna, med samma destinationer.'),
  choice('cards.icons','Ikonernas inramning',[['plain','Fristående ikoner'],['circle','Cirklar'],['outlined','Konturramar']],'Behåller originalets riktiga SVG-ikoner.'),
@@ -63,6 +63,7 @@ export function cleanDesign(input={}){
  for(const c of CONTROLS){const x=v[c.key];if(c.type==='text'){if(typeof x==='string'&&x.trim())values[c.key]=x.slice(0,c.max);}else if(x!=='original'&&c.options.some(([id])=>id===x))values[c.key]=x;}
  for(const [key,allowed] of [['home.order',SECTIONS],['cards.order',MODULES]]){if(Array.isArray(v[key]))values[key]=[...new Set(v[key].filter(x=>allowed.includes(x))),...allowed.filter(x=>!v[key].includes(x))];}
  for(const [key,allowed] of [['home.hidden',SECTIONS],['cards.hidden',MODULES]]){if(Array.isArray(v[key]))values[key]=[...new Set(v[key].filter(x=>allowed.includes(x)))];}
+ const oldHidden=['stats','recent'].filter(id=>v['home.'+id]==='hidden');if(oldHidden.length)values['home.hidden']=[...new Set([...(values['home.hidden']||[]),...oldHidden])];
  const savedIdeas=Array.isArray(input?.savedIdeas)?[...new Set(input.savedIdeas.filter(x=>typeof x==='string'&&x.length<150&&x.includes('::')))]:[];
  const out={version:2,values,savedIdeas};
  if(input?.legacySource&&typeof input.legacySource==='object')out.legacySource=JSON.parse(JSON.stringify(input.legacySource));
