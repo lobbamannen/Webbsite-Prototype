@@ -28,7 +28,7 @@ export default function StoryOverview({mode,stories,categories,counts,finishedCo
    {metrics.map(({label,value,icon:Icon,tone})=><div key={label} className={'nh-module-stat nh-tone-'+tone}><Icon size={23} aria-hidden="true"/><strong>{loading&&!total?'–':value.toLocaleString('sv-SE')}</strong><span>{label}</span></div>)}
   </div>
   {toolbar}
-  <div className="nh-module-category-head"><div><span className="nh-module-eyebrow">UPPTÄCK</span><h2>Utforska kategorier</h2><p>Välj ett ämne för att se dess berättelser direkt.</p></div></div>
+  <div className="nh-module-category-head"><div><span className="nh-module-eyebrow">UPPTÄCK</span><h2>Utforska kategorier</h2><p>Välj en kategori för att filtrera berättelserna.</p></div></div>
   <div className="nh-module-category-grid" aria-label="Berättelsekategorier">
    {categories.map((name,index)=>{const Icon=iconFor(name);const count=counts[name]||0;return <button className={'nh-module-category-card nh-category-'+index%4+(selectedCategory===name?' selected':'')} key={name} type="button" aria-pressed={selectedCategory===name} onClick={()=>onSelectCategory(name)}>
     <span className="nh-category-icon"><Icon size={25} aria-hidden="true"/></span><span className="nh-category-copy"><strong>{name}</strong><small>{count} {count===1?'berättelse':'berättelser'}</small></span><ChevronRight size={17} className="nh-category-arrow" aria-hidden="true"/>
