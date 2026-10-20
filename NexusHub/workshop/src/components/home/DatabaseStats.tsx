@@ -29,7 +29,7 @@ export default function DatabaseStats({counts,checkedAt,onNavigate,loading}:Prop
     <span className="nh-total-count"><strong>{typeof counts.files==='number'?counts.files.toLocaleString('sv-SE'):'–'}</strong><span>filer i GitHub</span></span>
    </span>
   </button>
-  <div className="nh-sync-state" aria-label={timestamp?'Katalog hämtad från GitHub':'Katalogstatus ej verifierad'}>
+  <div className="nh-sync-state" aria-label={timestamp?'Senast hämtad katalog från GitHub':'Katalogstatus ej verifierad'}>
    <span>{timestamp&&<CheckCircle2 size={15} aria-hidden="true"/>}{timestamp?'Katalog hämtad':loading?'Hämtar…':'Ej verifierad'}</span>
    {timestamp&&<time dateTime={checkedAt||undefined} title="Tidpunkt då katalogen hämtades">{timestamp}</time>}
   </div>
