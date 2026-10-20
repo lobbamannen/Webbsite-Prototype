@@ -51,7 +51,7 @@ function render(idea,ctx){
  case 'parallel-browse': html='<div class="idea-proto-split"><section><h4>Spelar nu</h4>'+posterCard('severance','')+'</section><section><h4>Bläddra vidare</h4>'+posterCard('dark','')+'</section></div>';break;
  default: html='<div class="idea-proto-principle"><b>Designregel</b><p>'+esc(idea.title)+'</p><small>Detta fynd är en systemprincip och visas som granskningskriterium, inte som fristående kontroll.</small></div>';
  }
- return '<section class="idea-specific-prototype" data-idea-key="'+esc(key)+'"><header><span>PROTOTYP · '+esc(idea.model)+' / '+esc(idea.id)+'</span><h3>'+title+'</h3></header><div class="idea-specific-body">'+html+'</div></section>';
+ return html;
 }
 Object.keys(types).forEach(function(key){
  var [model,id]=key.split('::');
