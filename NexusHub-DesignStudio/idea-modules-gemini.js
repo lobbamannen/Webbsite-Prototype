@@ -73,10 +73,7 @@
       registry[key] = {
         model:'Gemini Argon', id:id, family:family,
         render:function (idea, ctx) {
-          var safeTitle=esc(idea && idea.title || id);
-          var source=idea && idea.model==='Gemini Argon' && idea.id===id ? idea : null;
-          var detail=source ? esc((source.text || '').split(/\\n\\s*\\n/)[0].slice(0,180)) : '';
-          return '<div class="gemini-idea-prototype" data-idea="'+key+'" style="display:grid;gap:12px"><div><span style="font-size:10px;letter-spacing:.08em;color:#b9a2e8">GEMINI ARGON · '+id+' · '+family.toUpperCase()+'</span><h3 style="margin:5px 0">'+safeTitle+'</h3>'+(detail?'<p style="font-size:12px;color:#aaa">'+detail+'</p>':'')+'</div>'+demo(num)+'</div>';
+          return demo(num);
         }
       };
     });
