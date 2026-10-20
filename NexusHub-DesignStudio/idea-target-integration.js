@@ -52,10 +52,18 @@ auditedClusters.forEach(function(c){
  valid.forEach(function(id){clusterFor[id]=merged;merged.sourceFamilies[id]=raw[id].targetFamily;});
  mergedClusterCount++;mergedSourceCount+=valid.length;
 });
+var ruleClusterFor={},mergedRuleClusterCount=0,mergedRuleSourceCount=0;
+auditedClusters.forEach(function(c){
+ var ids=c.ids.filter(function(id){return !!raw[id]&&!!raw[id].rule;});
+ if(ids.length<2)return;
+ var item={name:c.name,key:ids[0]};
+ ids.forEach(function(id){ruleClusterFor[id]=item;});
+ mergedRuleClusterCount++;mergedRuleSourceCount+=ids.length;
+});
 Object.keys(raw).sort().forEach(function(key){
  var v=raw[key]||{}, sourceFamily=String(v.targetFamily||'').trim(), change=String(v.change||'').trim();
  if(!sourceFamily||!change)return;
- if(v.rule){var rsig=norm(change);var r=ruleRows.find(function(x){return x.sig===rsig;});if(!r){r={key:key,change:change,sources:[],family:sourceFamily};ruleRows.push(r);}r.sources.push(key);return;}
+ if(v.rule){var rc=ruleClusterFor[key],rsig=rc?'audited-rule:'+rc.name:norm(change),canonicalRule=rc&&raw[rc.key]?raw[rc.key]:v;var r=ruleRows.find(function(x){return x.sig===rsig;});if(!r){r={key:rc?rc.key:key,change:String(canonicalRule.change||change),sources:[],sourceFamilies:{},family:'designRules',sig:rsig,cluster:rc?rc.name:null};ruleRows.push(r);}if(r.sources.indexOf(key)<0)r.sources.push(key);r.sourceFamilies[key]=sourceFamily;return;}
  var cluster=clusterFor[key],family=cluster?cluster.family:sourceFamily;
  var bucket=groups[family]||(groups[family]=[]);
  var signature=cluster?'audited:'+cluster.name:norm(change);
@@ -90,6 +98,8 @@ w.NEXUS_IDEA_INTEGRATION={
  directHosts:directHosts,
  version:2,
  mergedClusters:mergedClusterCount,
- mergedSources:mergedSourceCount
+ mergedSources:mergedSourceCount,
+ mergedRuleClusters:mergedRuleClusterCount,
+ mergedRuleSources:mergedRuleSourceCount
 };
 })(window);
