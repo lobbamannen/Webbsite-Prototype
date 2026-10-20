@@ -138,3 +138,61 @@ body.focus-mode .view{padding-top:12px}
 .hero-designed.hero-mini .hero-resume{padding:10px}
 .hero-designed.hero-mini .hero-resume strong{font-size:13px}
 @media(max-width:380px){.hero-designed .hero-steps{gap:4px}.hero-designed .hero-steps>div{padding:9px 5px}.hero-designed .hero-steps strong{font-size:11px}}
+
+
+/* Real film card and library layout variants, shared by live prototype and thumbnails. */
+.poster-card{position:relative}
+.poster-card .poster-overlay{position:absolute;inset:auto 0 0;padding:26px 9px 11px;background:linear-gradient(transparent,#070510ee);display:grid;gap:3px;color:#fff;z-index:2}
+.poster-card .poster-overlay b{font-size:13px;line-height:1.15}.poster-card .poster-overlay small{font-size:9px}
+.media-card-mode-2 .poster{border-radius:6px}
+.media-card-mode-3 .poster-info{padding-top:4px}
+.media-card-mode-4{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.media-card-mode-4 .poster{border:0;border-radius:0}
+.poster-panel{padding:10px;display:grid;gap:5px}
+.poster-panel strong{font-size:12px}.poster-panel small{font-size:10px;color:var(--muted)}
+.media-card-mode-5,.media-card-mode-7{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);padding:8px;border-radius:13px}
+.media-card-mode-5 .poster,.media-card-mode-7 .poster{width:76px;min-width:76px;flex:none}
+.media-card-mode-5 .poster-info{flex:1}
+.media-card-mode-6{position:relative}
+.media-card-mode-6 .poster{aspect-ratio:16/10}
+.media-card-mode-6 .poster-glyph{font-size:58px}
+.media-card-mode-7 .poster{width:50px;min-width:50px}
+.poster-compact-info{display:grid;gap:5px;min-width:0}
+.poster-compact-info strong{font-size:11px}.poster-compact-info small{font-size:9px;color:var(--muted)}
+.poster-progress{margin-top:8px;display:grid;gap:5px;font-size:11px;color:#cdb8ef}
+.poster-progress>div{height:5px;background:#453655;border-radius:10px;overflow:hidden}.poster-progress i{display:block;width:57%;height:100%;background:var(--accent)}
+.poster-progress small{font-size:9px;color:var(--muted)}
+.media-card-mode-9 .poster-expand{display:none;position:absolute;inset:auto 0 0;padding:10px;background:#191222ef;border:1px solid var(--line);border-radius:9px;z-index:3}
+.media-card-mode-9:hover .poster-expand,.media-card-mode-9:focus-within .poster-expand{display:grid;gap:4px}
+.media-card-mode-9 .poster-expand strong{font-size:11px}.media-card-mode-9 .poster-expand small{font-size:9px}
+.media-layout-mode-1,.media-layout-mode-5{display:flex;overflow-x:auto;gap:12px;padding-bottom:8px;scroll-snap-type:x mandatory}
+.media-layout-mode-1>.poster-card,.media-layout-mode-5>.poster-card{flex:0 0 150px;scroll-snap-align:start}
+.media-layout-mode-2,.media-layout-mode-10{grid-template-columns:1fr}
+.media-layout-mode-2>.poster-card,.media-layout-mode-10>.poster-card{display:flex;align-items:center;gap:12px;padding:9px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.media-layout-mode-2>.poster-card .poster,.media-layout-mode-10>.poster-card .poster{width:60px;min-width:60px}
+.media-layout-mode-2>.poster-card .poster-info,.media-layout-mode-10>.poster-card .poster-info{flex:1}
+.media-layout-mode-3{grid-template-columns:1fr 1fr}
+.media-layout-mode-3>.poster-card:first-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.media-layout-mode-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.media-layout-mode-4>.poster-card:first-child{grid-column:span 2;grid-row:span 2}
+.media-layout-mode-6{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.media-layout-mode-6 .poster-info h3{font-size:10px}
+.media-layout-mode-7{grid-template-columns:1fr 1fr}
+.media-layout-mode-7>.poster-card:first-child{grid-column:1/-1}
+.media-layout-mode-8{grid-template-columns:1fr 1fr}
+.media-layout-mode-8 .poster-info{padding:7px;background:var(--surface)}
+.media-layout-mode-9{grid-template-columns:1fr}
+.media-layout-mode-9>.poster-card{display:grid;grid-template-columns:80px 1fr;gap:12px;padding:10px;background:var(--surface);border-left:3px solid var(--accent);border-radius:9px}
+.media-layout-mode-9 .poster{width:80px}
+.media-layout-preview .poster-card,.media-card-preview .poster-card{pointer-events:none}
+.media-card-preview>.poster-card{max-width:180px;margin:0 auto}
+.media-layout-mini{gap:6px}
+.media-layout-mini>.poster-card{min-width:0}
+.media-layout-mini .poster-info h3{font-size:9px}
+.media-layout-mini .poster-info p{font-size:8px}
+.media-layout-mini .poster-glyph{font-size:30px}
+.media-layout-mini.media-layout-mode-1>.poster-card,.media-layout-mini.media-layout-mode-5>.poster-card{flex-basis:75px}
+.media-layout-mini.media-layout-mode-4,.media-layout-mini.media-layout-mode-6{grid-template-columns:repeat(3,minmax(0,1fr))}
+.media-layout-mini.media-layout-mode-9>.poster-card{grid-template-columns:50px 1fr}
+.media-layout-mini.media-layout-mode-9 .poster{width:50px}
+@media(max-width:430px){.media-layout-mode-4,.media-layout-mode-6{grid-template-columns:repeat(3,minmax(0,1fr))}.media-layout-mode-3{grid-template-columns:1fr 1fr}.media-card-mode-5 .poster{width:55px;min-width:55px}}
