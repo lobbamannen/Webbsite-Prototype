@@ -6,6 +6,7 @@ import RecentActivity from './RecentActivity';
 import {usePosterRevision} from '@/components/repository-poster';
 import './home-dashboard.css';
 import {seriesIsWatchlisted} from '@/lib/media-discovery.mjs';
+import {databaseCategoryOverview} from '@/lib/module-dashboard.mjs';
 
 type Props={
  catalog:any;pluginRepo:any;stories:any[];recentFiles:any[];commits:any[];
@@ -34,6 +35,7 @@ export default function HomeDashboard({catalog,pluginRepo,stories,recentFiles,co
  const plugins=Array.isArray(pluginRepo?.packages)?pluginRepo.packages.filter((p:any)=>!p.archived&&!p.legacy):[];
  const counts={
   files:typeof catalog?.fileCount==='number'?catalog.fileCount:null,
+  documents:Array.isArray(catalog?.documents)?databaseCategoryOverview(catalog.documents).count:null,
   stories:catalog?stories.length:null,
   plugins:pluginRepo?plugins.length:null,
   films:filmsLoaded?films.length:null,
