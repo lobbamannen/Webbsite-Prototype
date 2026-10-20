@@ -628,3 +628,14 @@ body.focus-mode .view{padding-top:12px}
 .no-module-option .action-btn{justify-self:start}.no-module-option .mini-btn{justify-self:start}
 .studio-rescue{position:relative;display:flex;justify-content:flex-end;padding:10px 14px;z-index:30}
 .builder-grid .builder-item small{line-height:1.4}
+
+
+/* Reader exit must remain available even with custom header/nav choices */
+.reader-exit{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 16px}
+.reader-exit .action-btn,.reader-exit .mini-btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.emergency-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;justify-content:space-around;gap:6px;padding:9px 8px max(9px,env(safe-area-inset-bottom));background:#181321;border-top:1px solid #6d4f94}
+.emergency-nav button{min-height:46px;flex:1;background:#2a2038;color:#f1e9ff;border:1px solid #56416d;border-radius:11px;font-size:12px;font-weight:600}
+.reader-toolbar{max-width:100%;box-sizing:border-box;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.reader-toolbar .action-btn{min-height:44px;padding:9px 12px;font-size:12px;white-space:nowrap}
+.reader-tools-mode-0{width:auto!important;border-radius:16px!important}
+@media(max-width:480px){.reader-toolbar{gap:6px;padding:8px!important}.reader-toolbar .action-btn{padding:9px 10px;font-size:12px}.reader-exit{margin-bottom:12px}}
