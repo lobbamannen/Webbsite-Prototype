@@ -30,7 +30,9 @@ export default function Stories({mode,documents,onNavigate,mirrorChecks,onInspec
  useEffect(()=>{if(browsing&&jump>0)requestAnimationFrame(()=>document.getElementById('nh-story-results')?.scrollIntoView({behavior:'smooth',block:'start'}));},[jump,browsing]);
  const [selected,setSelected]=useState<string|null>(null),[article,setArticle]=useState<any>(null),[reading,setReading]=useState(false),[error,setError]=useState('');
  const {savedPaths:saved,readPaths:finished,loading:marksLoading,busy:marksBusy,error:marksError,reload:reloadMarks,mark:markInGitHub}=useStoryStatus();
- const [font,setFont]=useState(17);
+ const [baseFont,setBaseFont]=useState(17);
+ const font=Number(design['reader.size']||baseFont);
+ const setFont=(value:number|((n:number)=>number))=>{const next=typeof value==='function'?value(font):value;if(design['studio.setValue'])design['studio.setValue']('reader.size',String(next));else setBaseFont(next);};
  useEffect(()=>{if(initialPath&&initialPath.startsWith('Berattelser/')&&initialPath.endsWith('.md')){setSelected(initialPath);setArticle(null);}},[initialPath]);
  const summary=useMemo(()=>storyCategoryOverview(all),[all]);
  const categories=summary.categories,counts=summary.counts;

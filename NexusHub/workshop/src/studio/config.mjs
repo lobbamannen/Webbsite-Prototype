@@ -43,7 +43,7 @@ export const CONTROLS=[
  choice('stories.titles','Berättelsernas rubriker',[['serif','Serifrubriker']],'Gäller berättelsekort och läsvyns rubrik.'),
  choice('stories.metadata','Metadata på berättelsekort',[['minimal','Titel och kategori']],'Döljer sekundära etiketter på korten.'),
  choice('reader.font','Lästypsnitt',[['serif','Bokserif'],['sans','Sans serif'],['mono','Monospace']],'Ändrar bara den riktiga lästexten.'),
- choice('reader.size','Textstorlek',[['18','18 px'],['20','20 px'],['22','22 px'],['24','24 px']],'Samma inställning för dokument och berättelser.'),
+ choice('reader.size','Textstorlek',Array.from({length:14},(_,i)=>[String(i+15),(i+15)+' px']),'Samma inställning för dokument och berättelser.'),
  choice('reader.width','Radlängd',[['narrow','65 tecken'],['medium','75 tecken'],['wide','90 tecken']],'Begränsar lästextens bredd och centrerar den.'),
  choice('reader.lineHeight','Radavstånd',[['normal','1,65'],['airy','1,9'],['wide','2,1']],'Ändrar radavstånd i brödtexten.'),
  choice('reader.theme','Läsyta',[['paper','Varmt papper'],['dark','Mörkt bläck']],'Ändrar bara läsytan.'),
