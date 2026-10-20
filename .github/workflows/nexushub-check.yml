@@ -14,6 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check JavaScript syntax
-        run: |\n          node --check NexusHub/app.js\n          node --check NexusHub/original-app.js
+        run: |
+          node --check NexusHub/app.js
+          node --check NexusHub/original-app.js
       - name: Check required files
         run: test -s NexusHub/index.html && test -s NexusHub/styles.css && test -s NexusHub/app.js
