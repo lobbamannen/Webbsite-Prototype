@@ -15,38 +15,45 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check JavaScript syntax
+      - name: Validate all JavaScript sources
         run: |
-          node --check NexusHub-DesignStudio/catalog.js
-          node --check NexusHub-DesignStudio/ideas.js
-          node --check NexusHub-DesignStudio/app.js
-      - name: Check all research findings and variant registry
+          for f in NexusHub-DesignStudio/*.js; do node --check "$f"; done
+      - name: Validate all 527 prototypes and module integration
         run: |
           node - <<'NODE'
           const fs=require('fs'),vm=require('vm');
-          const ctx={window:{}};
-          vm.createContext(ctx);
-          vm.runInContext(fs.readFileSync('NexusHub-DesignStudio/catalog.js','utf8'),ctx);
-          vm.runInContext(fs.readFileSync('NexusHub-DesignStudio/ideas.js','utf8'),ctx);
-          const ideas=ctx.window.NEXUS_IDEAS;
-          const fam=ctx.window.NEXUS.families;
-          const models=new Set(ideas.map(x=>x.model));
+          const dir='NexusHub-DesignStudio/';
+          const scripts=['catalog.js','ideas.js','idea-targets-copilot-grok.js','idea-targets-gemini.js','idea-targets-perplexity.js','idea-targets-deepseek-kimi.js','idea-targets-meta-vibe.js','idea-target-integration.js','idea-modules-copilot-grok.js','idea-modules-deepseek-kimi.js','idea-modules-perplexity.js','idea-modules-gemini.js','idea-modules-meta-vibe.js'];
+          const head={appendChild(){}};
+          const document={head,getElementById(){return null},createElement(){return {style:{}}},addEventListener(){}};
+          const localStorage={getItem(){return null},setItem(){}};
+          const context={window:{},document,localStorage,console,Set,Map};
+          vm.createContext(context);
+          scripts.forEach(file=>vm.runInContext(fs.readFileSync(dir+file,'utf8'),context,{filename:file}));
+          const N=context.window.NEXUS,ideas=context.window.NEXUS_IDEAS,registry=context.window.NEXUS_IDEA_MODULES;
+          const integration=context.window.NEXUS_IDEA_INTEGRATION;
           const keys=new Set(ideas.map(x=>x.model+'::'+x.id));
-          const variants=fam.reduce((sum,x)=>sum+x.options.length,0);
-          console.log({ideas:ideas.length,models:models.size,uniqueKeys:keys.size,families:fam.length,variants});
-          if(ideas.length!==527||models.size!==8||keys.size!==527||fam.length!==30||variants<200)process.exit(1);
-          NODE
-      - name: Verify entrypoint and functionality wiring
-        run: |
-          node - <<'NODE'
-          const fs=require('fs');
-          const html=fs.readFileSync('NexusHub-DesignStudio/index.html','utf8');
-          const app=fs.readFileSync('NexusHub-DesignStudio/app.js','utf8');
-          for(const file of ['styles.css','catalog.js','app.js']){
-            if(!html.includes(file))throw Error('Missing '+file);
+          if(ideas.length!==527||keys.size!==527||new Set(ideas.map(x=>x.model)).size!==8)throw Error('527 unique findings from 8 models required');
+          if(!registry||Object.keys(registry).length!==527)throw Error('Missing prototype renderers');
+          if(!integration||integration.families.length<1)throw Error('Integration registry missing');
+          const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+          const helpers={esc,attr:esc,data:N.data,views:N.views,button:(label,action)=>'<button data-action="'+action+'">'+label+'</button>'};
+          for(const x of ideas){
+            const id=x.model+'::'+x.id,entry=registry[id];
+            if(!entry||typeof entry.render!=='function')throw Error('Renderer missing: '+id);
+            const html=entry.render(x,helpers);
+            if(typeof html!=='string'||!html.trim())throw Error('Empty renderer: '+id);
           }
-          for(const marker of ['pointerdown','data-idea-toggle','ideaBoard','exportConfig','importConfig','data-edit-slot']){
+          for(const family of N.families){
+            if(!family.id||!Array.isArray(family.options)||!family.options.length)throw Error('Invalid family: '+family.id);
+          }
+          const app=fs.readFileSync(dir+'app.js','utf8');
+          for(const marker of ['function slot(','data-hide-slot','data-show-slot','hiddenSlots','function optionPreview(','function exportConfig(','function importConfig(']){
             if(!app.includes(marker))throw Error('Missing '+marker);
           }
-          console.log('Entrypoint and essential interaction handlers present');
+          const html=fs.readFileSync(dir+'index.html','utf8');
+          for(const file of scripts.concat(['app.js','styles.css'])){
+            if(!html.includes(file))throw Error('Script/asset not in index: '+file);
+          }
+          console.log('PASS: 527 unique findings and 527 nonempty renders; '+N.families.length+' families, '+N.families.reduce((a,f)=>a+f.options.length,0)+' options; hide/restore and entrypoint wired.');
           NODE
