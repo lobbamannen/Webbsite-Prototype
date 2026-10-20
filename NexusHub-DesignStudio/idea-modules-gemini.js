@@ -23,7 +23,7 @@
   }
   function neutralizeDisplayOnlyButtons(html) {
     var stack=[];
-    return html.replace(/<\\/?button\\b[^>]*>/g,function(tag){
+    return html.replace(/<\/?button\b[^>]*>/g,function(tag){
       if(tag.slice(0,2)==='</'){
         var displayOnly=stack.pop();
         return displayOnly?'</span>':tag;
@@ -31,7 +31,7 @@
       var actionable=/data-(?:go|action|open-media|open-story|node|file|plugin|filter|chapter|inbox)=/.test(tag);
       stack.push(!actionable);
       if(actionable)return tag;
-      return tag.replace(/^<button/,'<span').replace(/\\s+type="button"/,'').replace(/\\s+aria-(?:pressed|label)="[^"]*"/,'').replace(/cursor:[^;]+;?/g,'cursor:default;');
+      return tag.replace(/^<button/,'<span').replace(/\s+type="button"/,'').replace(/\s+aria-(?:pressed|label)="[^"]*"/,'').replace(/cursor:[^;]+;?/g,'cursor:default;');
     });
   }
   function demo(id) {
