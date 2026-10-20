@@ -32,11 +32,11 @@ export default function RecentActivity({films,series,stories,files,plugins,commi
   :'Senaste registrerade GitHub-ändringarna.';
  return <section className="nh-recent nh-surface" aria-labelledby="nh-recent-title">
   <div className="nh-section-top nh-recent-heading">
-   <div className="nh-section-heading"><Clock3 size={28}/><div><h2 id="nh-recent-title">Senaste i Nexus Hub</h2><p>{note}</p></div></div>
+   <div className="nh-section-heading"><Clock3 size={28}/><div><h2 id="nh-recent-title">Senaste i Nexus Hub</h2><p>Fortsätt där du slutade · {note}</p></div></div>
    <button type="button" className="nh-see-all" onClick={()=>onNavigate(view)}>Visa {selected.toLowerCase()} <ArrowRight size={17}/></button>
   </div>
   <div role="tablist" aria-label="Senaste innehåll per kategori" className="nh-recent-tabs">
-   {tabs.map(([id,label])=><button key={id} role="tab" type="button" aria-selected={tab===id} className={tab===id?'active':''} onClick={()=>setTab(id)}>{label}</button>)}
+   {tabs.map(([id,label])=><button key={id} role="tab" type="button" aria-selected={tab===id} className={tab===id?'active':''} aria-label={'Visa senaste: '+label} onClick={()=>setTab(id)}>{label}</button>)}
   </div>
   {items.length===0?<div className="nh-recent-empty"><Images size={28}/><p>Inget innehåll att visa för {selected.toLowerCase()} just nu.</p><button className="nh-see-all" onClick={()=>onNavigate(view)}>Öppna modulen <ArrowRight size={16}/></button></div>:
   <div className="nh-recent-scroller">
@@ -51,15 +51,15 @@ export default function RecentActivity({films,series,stories,files,plugins,commi
       return <button key={(id||name)+index} className="nh-recent-film" type="button" onClick={()=>onOpenMedia(isFilm?'filmer':'serier',id||(String(item.title)+'|'+(item.startYear??'')))} aria-label={'Öppna '+(isFilm?'filmer':'serier')+': '+name}>
        <Poster title={name} kind={isFilm?'film':'series'} posterKey={id||String(item.title)+'|'+(item.startYear??'')} revision={posterRevision}/>
        <strong>{shownTitle}</strong>
-       <small>{item.status||'Status ej uppgiven'}</small>
+       <small>{isFilm?'Film':'Serie'} · {item.status||'Status ej uppgiven'}</small>
       </button>;
      }
      if(tab==='berattelser')return <button type="button" className="nh-recent-list-card" key={item.path||index} onClick={()=>item.path?onOpenStory(item.path):onNavigate('berattelser')}>
-      <BookOpen size={26}/><strong>{item.title||'Berättelse'}</strong><small>{item.category||'Berättelsebibliotek'}</small><ChevronRight size={17} className="nh-card-arrow"/></button>;
+      <BookOpen size={26}/><strong>{item.title||'Berättelse'}</strong><small>Berättelse · {item.category||'Berättelsebibliotek'}</small><ChevronRight size={17} className="nh-card-arrow"/></button>;
      if(tab==='filer')return <button type="button" className="nh-recent-list-card" key={item.path||index} onClick={()=>onOpenFile(item)}>
-      <FileText size={26}/><strong>{item.title||item.name||item.path||'Dokument'}</strong><small>Öppna dokumentet</small><ChevronRight size={17} className="nh-card-arrow"/></button>;
+      <FileText size={26}/><strong>{item.title||item.name||item.path||'Dokument'}</strong><small>Fil · Öppna dokumentet</small><ChevronRight size={17} className="nh-card-arrow"/></button>;
      if(tab==='plugins')return <button type="button" className="nh-recent-list-card" key={item.name||index} onClick={()=>onNavigate('plugins')}>
-      <Puzzle size={26}/><strong>{item.name||item.title||'Plugin'}</strong><small>{item.version?'Version '+item.version:'Pluginbibliotek'}</small><ChevronRight size={17} className="nh-card-arrow"/></button>;
+      <Puzzle size={26}/><strong>{item.name||item.title||'Plugin'}</strong><small>Plugin · {item.version?'Version '+item.version:'Pluginbibliotek'}</small><ChevronRight size={17} className="nh-card-arrow"/></button>;
      return <a className="nh-recent-list-card" key={(item.repo||'')+(item.sha||index)} href={typeof item.url==='string'&&item.url.startsWith('https://github.com/')?item.url:undefined} target="_blank" rel="noopener noreferrer">
       <Clock3 size={26}/><strong>{item.title||'GitHub-ändring'}</strong><small>{item.repo||'GitHub'} · {new Date(item.date).toLocaleDateString('sv-SE')}</small><ChevronRight size={17} className="nh-card-arrow"/></a>;
     })}
