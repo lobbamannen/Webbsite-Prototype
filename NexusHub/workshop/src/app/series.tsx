@@ -51,6 +51,7 @@ export default function Series({initialItem}:{initialItem?:string|null}={}){
  useEffect(()=>{if(browsing&&jump>0)requestAnimationFrame(()=>document.getElementById('nh-series-results')?.scrollIntoView({behavior:'smooth',block:'start'}));},[jump,browsing]);
  const load=async()=>{setLoading(true);setError('');void refreshPosters();try{const response=await fetch('/api/series',{cache:'no-store'}),body=await response.json();if(!response.ok)throw Error(body.error||'Kunde inte läsa serierna.');if(body.register?.schemaVersion!==1||!Array.isArray(body.register.series))throw Error('Okänt serieformat.');setData(body.register);setSourceSha(body.sha||'');}catch(e:any){setError(e.message||'Okänt fel.');}finally{setLoading(false);}};
  useEffect(()=>{load();},[]);
+ useEffect(()=>{if(design['studio.mediaRequest']){setChosen(null);setBrowsing(true);setJump(n=>n+1);}},[design['studio.mediaRequest']]);
  const toggleWatchlist=async(item:Entry)=>{
   if(!sourceSha||watchSaving){setError('Ladda serieregistret innan du ändrar Vill se.');return;}
   setWatchSaving(true);setError('');setNotice('');

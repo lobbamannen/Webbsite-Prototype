@@ -106,3 +106,10 @@ export const BINDINGS={
  'Grok::UX-007':{values:{'navigation.header':'glass'},description:'Glaseffekt på det riktiga toppfältet.'},
 };
 export function classifyIdea(idea,targets){const t=targets?.[idea.model+'::'+idea.id];if(t?.rule)return 'Global designregel';const f=String(t?.targetFamily||'');if(/^(new|proposed):/.test(f))return 'Funktion / interaktionsmönster';if(/surface|type|density|shape|motion|designRules|accessib/.test(f))return 'Global designregel';if(/Card|labels|stats|filter|readerTools|season/.test(f))return 'Komponentegenskap';return 'Visuell komponent';}
+
+export function previewView(area,hash,reading=false){
+ if(area==='reader'&&reading)return null;
+ if(area==='media')return hash.startsWith('#serier')?'serier':'filmer';
+ if(area==='files'&&hash.startsWith('#plugins'))return 'plugins';
+ return GROUPS.find(g=>g.id===area)?.view||null;
+}

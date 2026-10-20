@@ -84,6 +84,7 @@ export default function Films({initialItem}:{initialItem?:string|null}={}){
  const load=async()=>{setLoading(true);setError('');void refreshPosters();try{setData(await handleResponse(await fetch('/api/films',{cache:'no-store'})));}catch(e:any){setError(e.message);}finally{setLoading(false);}};
  useEffect(()=>{load();},[]);
   useEffect(()=>{if(initialItem){setSelected(initialItem);setDraft(null);setError('');}},[initialItem]);
+ useEffect(()=>{if(design['studio.mediaRequest']){setSelected(null);setDraft(null);setBrowsing(true);setJump(n=>n+1);}},[design['studio.mediaRequest']]);
  const films=data?.register.films||[];
  const discovery=useMemo(()=>filmDiscovery(films),[films]);
  const resetFilters=()=>{setStatus('alla');setGenre('alla');setGenreGroup(null);setSeries('alla');setFavorite('alla');setQuery('');setSort('titel');};

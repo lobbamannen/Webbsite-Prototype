@@ -1,3 +1,4 @@
+import {useDesign} from '@/studio/context';
 'use client';
 import React,{useEffect,useMemo,useState} from 'react';
 import {BookOpen,Eye,House,Globe2,Scale,ScrollText,Search,ChevronLeft,ChevronRight,Star,Bookmark,BookmarkCheck,CheckCircle2,ExternalLink,Download,RefreshCw,Shuffle,AlertTriangle,Loader2,Minus,Plus,Layers} from 'lucide-react';
@@ -22,6 +23,7 @@ function StoryCover({story,big=false}:{story:Story,big?:boolean}){return <div cl
  <div className="story-cover-text"><small>{story.category}</small><strong>{story.title}</strong></div>
  </div>;}
 export default function Stories({mode,documents,onNavigate,mirrorChecks,onInspect,onRefresh,loading=false,initialCategory='',initialPath=''}:Props){
+ const design=useDesign();
  const all=useMemo(()=>storyList(documents) as Story[],[documents]);
  const [query,setQuery]=useState(''),[category,setCategory]=useState('alla'),[rating,setRating]=useState('alla'),[sort,setSort]=useState('titel');
  const [browsing,setBrowsing]=useState(false),[jump,setJump]=useState(0);
@@ -42,6 +44,8 @@ export default function Stories({mode,documents,onNavigate,mirrorChecks,onInspec
  const visible=useMemo(()=>all.filter(x=>(category==='alla'||x.category===category)&&(rating==='alla'||(rating==='betygsatt'?x.numericRating!==null:rating==='obetygsatt'?x.numericRating===null:rating==='sparade'?saved.includes(x.path):finished.includes(x.path)))&&[x.title,x.rawName,x.category].join(' ').toLocaleLowerCase('sv').includes(query.trim().toLocaleLowerCase('sv'))).sort((a,b)=>sort==='betyg'?(b.numericRating??-1)-(a.numericRating??-1)||a.title.localeCompare(b.title,'sv'):sort==='kategori'?a.category.localeCompare(b.category,'sv')||a.title.localeCompare(b.title,'sv'):a.title.localeCompare(b.title,'sv')),[all,query,category,rating,sort,finished,saved]);
  const story=all.find(s=>s.path===selected)||null;
  const open=(path:string)=>{setSelected(path);setArticle(null);setError('');window.scrollTo(0,0);};
+ useEffect(()=>{if(design['studio.storyRequest']){setSelected(null);setArticle(null);setBrowsing(true);setJump(n=>n+1);}},[design['studio.storyRequest']]);
+ useEffect(()=>{if(design['studio.readerRequest']&&all.length){setSelected(all[0].path);setArticle(null);}},[design['studio.readerRequest'],all.length]);
  const back=()=>{setSelected(null);setArticle(null);setError('');window.scrollTo(0,0);};
  useEffect(()=>{if(!selected)return;let active=true;setReading(true);setArticle(null);setError('');
   fetch('/api/portal/document?repo=databas&path='+encodeURIComponent(selected),{cache:'no-store'})
@@ -90,3 +94,4 @@ export default function Stories({mode,documents,onNavigate,mirrorChecks,onInspec
   </>}
  </div>;
 }
+

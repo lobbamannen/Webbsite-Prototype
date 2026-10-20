@@ -37,3 +37,10 @@ test('older hidden-section values migrate to the single visibility control',()=>
  assert.equal(d.values['home.stats'],undefined);assert.equal(d.values['home.recent'],undefined);
  assert.deepEqual(d.values['home.hidden'],['stats','recent']);
 });
+test('research previews navigate to the real view they affect',()=>{
+ assert.equal(api.previewView('media','#hem',false),'filmer');
+ assert.equal(api.previewView('media','#serier',false),'serier');
+ assert.equal(api.previewView('reader','#hem',false),'berattelser');
+ assert.equal(api.previewView('reader','#databas',true),null);
+ assert.equal(api.previewView('global','#filmer',false),null);
+});
