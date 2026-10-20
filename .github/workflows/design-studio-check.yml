@@ -1,0 +1,52 @@
+name: Verify Nexus Hub Design Studio
+on:
+  push:
+    paths:
+      - 'NexusHub-DesignStudio/**'
+      - '.github/workflows/design-studio-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check NexusHub-DesignStudio/catalog.js
+          node --check NexusHub-DesignStudio/ideas.js
+          node --check NexusHub-DesignStudio/app.js
+      - name: Check all research findings and variant registry
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const ctx={window:{}};
+          vm.createContext(ctx);
+          vm.runInContext(fs.readFileSync('NexusHub-DesignStudio/catalog.js','utf8'),ctx);
+          vm.runInContext(fs.readFileSync('NexusHub-DesignStudio/ideas.js','utf8'),ctx);
+          const ideas=ctx.window.NEXUS_IDEAS;
+          const fam=ctx.window.NEXUS.families;
+          const models=new Set(ideas.map(x=>x.model));
+          const keys=new Set(ideas.map(x=>x.model+'::'+x.id));
+          const variants=fam.reduce((sum,x)=>sum+x.options.length,0);
+          console.log({ideas:ideas.length,models:models.size,uniqueKeys:keys.size,families:fam.length,variants});
+          if(ideas.length!==527||models.size!==8||keys.size!==527||fam.length!==30||variants<200)process.exit(1);
+          NODE
+      - name: Verify entrypoint and functionality wiring
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const html=fs.readFileSync('NexusHub-DesignStudio/index.html','utf8');
+          const app=fs.readFileSync('NexusHub-DesignStudio/app.js','utf8');
+          for(const file of ['styles.css','catalog.js','app.js']){
+            if(!html.includes(file))throw Error('Missing '+file);
+          }
+          for(const marker of ['pointerdown','data-idea-toggle','ideaBoard','exportConfig','importConfig','data-edit-slot']){
+            if(!app.includes(marker))throw Error('Missing '+marker);
+          }
+          console.log('Entrypoint and essential interaction handlers present');
+          NODE
