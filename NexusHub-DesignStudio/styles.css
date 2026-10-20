@@ -639,3 +639,12 @@ body.focus-mode .view{padding-top:12px}
 .reader-toolbar .action-btn{min-height:44px;padding:9px 12px;font-size:12px;white-space:nowrap}
 .reader-tools-mode-0{width:auto!important;border-radius:16px!important}
 @media(max-width:480px){.reader-toolbar{gap:6px;padding:8px!important}.reader-toolbar .action-btn{padding:9px 10px;font-size:12px}.reader-exit{margin-bottom:12px}}
+
+
+/* The builder must never trap a user when an experimental navigation design fails */
+.studio-always-nav{position:fixed;bottom:0;left:0;right:0;z-index:120;display:flex;align-items:stretch;gap:4px;padding:7px 8px calc(8px + env(safe-area-inset-bottom));background:#18131f;border-top:1px solid #614978;box-shadow:0 -8px 30px #0009}
+.studio-always-nav button{flex:1;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #51405f;background:#292136;color:#f1e9ff;border-radius:11px;font-size:18px;cursor:pointer}
+.studio-always-nav button span{font-size:11px;font-weight:650}
+.studio-shell .main{padding-bottom:115px}
+@media(max-width:410px){.studio-always-nav button{gap:3px;font-size:16px}.studio-always-nav button span{font-size:10px}}
+@media(min-width:1024px){.studio-always-nav{left:auto;right:18px;bottom:18px;width:370px;border:1px solid #614978;border-radius:16px;padding:8px}.studio-shell .main{padding-bottom:110px}}
