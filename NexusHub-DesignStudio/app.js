@@ -36,7 +36,31 @@ function sidebar(){return '<aside class="sidebar"><div class="side-brand">NEXUS 
 function quickAction(){return slot('quick','<button class="quick-fab" data-action="quick" aria-label="Snabbåtgärder">+</button>');}
 function bottomNav(){var main=[N.views[0],N.views[1],N.views[2],N.views[3],N.views[4]];var mid=variant('nav')===1;var links=main.map(function(v,i){return (mid&&i===2?'<button class="nav-plus" data-action="quick" aria-label="Snabbåtgärd">+</button>':'')+'<button class="nav-item '+(state.view===v.id?'active':'')+' '+(state.view===v.id&&variant('ux005')?'ux-active-accent ux-accent-'+variant('ux005'):'')+'" data-go="'+v.id+'"><b>'+v.icon+'</b><span>'+esc(v.name==='Film & serier'?'Film':v.name==='Kunskapsbank'?'Kunskap':v.name)+'</span></button>';}).join('');return slot('nav','<nav class="bottomnav v-'+variant('nav')+'" aria-label="Huvudnavigation">'+links+'</nav>','nav-wrapper');}
 function previewBanner(){return '<div class="studio-banner"><div><strong>DIN BYGGSTUDIO</strong><br><small>Kort tryck öppnar · håll inne 0,5 s för designval</small></div><button data-action="labels">'+(state.labels?'✓ Etiketter på':'▤ Visa etiketterna')+'</button></div>';}
-function hero(){var v=variant('hero');var titles=['Ditt universum. Din design.','Ett eget universum av berättelser.','Fortsätt där du slutade.','Vad vill du upptäcka?','Varje mysterium har en början.','Din kunskap, helt din.','Välkommen tillbaka.','Överblick över allt.','Allt samlat på ett ställe.'];return slot('hero','<div class="hero v-'+v+'"><div class="eyebrow">PERSONLIGT ARKIV · DEMO</div><h1>'+titles[v]+'</h1><p>Utforska dina filmer, mysterier och kunskapsobjekt. Byt ut varje del och forma din egen Nexus Hub.</p><div class="hero-buttons">'+button('Börja utforska','builder','primary')+'<button class="action-btn ghost" data-go="films">Film & serier →</button></div></div>');}
+function heroMarkup(v,mini){
+ var head='<div class="eyebrow">NEXUS HUB · DESIGNSTUDIO</div>';
+ var link=function(label,go){return mini?'<span class="hero-demo-link">'+label+'</span>':'<button class="action-btn ghost" data-go="'+go+'">'+label+'</button>';};
+ var action=function(label,act){return mini?'<span class="hero-demo-link">'+label+'</span>':button(label,act,'primary');};
+ var standard='<div class="hero-buttons">'+action('Utforska','builder')+link('Film & serier →','films')+'</div>';
+ var greeting=['God morgon','God förmiddag','God eftermiddag','God kväll'][new Date().getHours()<9?0:new Date().getHours()<12?1:new Date().getHours()<18?2:3];
+ var parts=[
+  head+'<h1>Ditt universum.<br>Din design.</h1><p>En personlig plats för allt du vill samla och upptäcka.</p>'+standard,
+  head+'<div class="hero-art"><span>FILM · BERÄTTELSER · MYSTERIER</span></div><h1>Ett eget universum av berättelser.</h1>'+standard,
+  head+'<h1>Fortsätt där du slutade.</h1><div class="hero-steps"><div><b>01</b><strong>Fortsätt läsa</strong><small>Öppna din berättelse</small></div><div><b>02</b><strong>Fortsätt titta</strong><small>Gå till film & serier</small></div><div><b>03</b><strong>Utforska</strong><small>Hitta något nytt</small></div></div>',
+  head+'<h1>Vad vill du upptäcka?</h1><div class="hero-search-demo">⌕　Sök bland filmer, berättelser och dokument…</div><div class="hero-tags"><span>Filmer</span><span>Berättelser</span><span>Kunskap</span></div>',
+  head+'<div class="hero-dossier"><small>DAGENS DOSSIER · UTVALT</small><h1>Varje mysterium har en början.</h1><p>Följ ledtrådar, utforska källor och återvänd till dina berättelser.</p>'+link('Utforska dossierer →','stories')+'</div>',
+  head+'<div class="hero-split"><div><h1>Din kunskap, helt din.</h1><p>Allt samlat på ett ställe.</p>'+standard+'</div><div class="hero-split-art">◈<small>DITT ARKIV</small></div></div>',
+  head+'<h1>Välkommen tillbaka.</h1>',
+  head+'<h1>Överblick över allt.</h1><div class="hero-steps"><div><strong>Film & serier</strong><b>Bibliotek</b></div><div><strong>Berättelser</strong><b>Dossierer</b></div><div><strong>Kunskap</strong><b>Arkiv</b></div></div>',
+  head+'<h1>Allt samlat på ett ställe.</h1><div class="hero-cover-strip"><span>FILM</span><span>SERIER</span><span>BERÄTTELSER</span></div>',
+  head+'<h1>Fortsätt där du var.</h1><div class="hero-resume"><div><small>PÅGÅENDE</small><strong>Din senaste berättelse</strong><p>Återuppta läsningen där du slutade.</p>'+link('Fortsätt →','reader')+'</div></div><div class="hero-tags"><span>Film & serier</span><span>Kunskapsbanken</span></div>',
+  '<div class="hero-greeting">'+greeting+'</div><h1>Ditt universum.</h1><p>Allt du samlar, på ett ställe.</p>'+standard,
+  head+'<h1>Du läser/ser just nu</h1><div class="hero-resume"><div><small>FORTSÄTT</small><strong>Din pågående berättelse</strong><p>Ta vid där du slutade.</p>'+link('Återuppta →','reader')+'</div></div>',
+  '<div class="hero-canvas"><small>DIN ARBETSYTA</small><h1>Vad vill du skapa idag?</h1><p>En lugn start utan distraktioner.</p>'+standard+'</div>',
+  '<div class="hero-cover-art"><small>UTVALT UR ARKIVET</small><h1>Upptäck nästa berättelse.</h1>'+link('Utforska →','stories')+'</div>'
+ ];
+ return '<div class="hero v-'+v+' hero-designed '+(mini?'hero-mini':'')+'">'+(parts[v]||parts[0])+'</div>';
+}
+function hero(){return slot('hero',heroMarkup(variant('hero'),false));}
 function moduleCard(m){return '<article class="card module-card clickable" data-go="'+m.id+'"><div class="module-icon">'+m.icon+'</div><div><div class="module-tag">'+m.tag+'</div><h3>'+esc(m.name)+'</h3><p>'+esc(m.desc)+'</p></div></article>';}
 function modules(){var ordered=state.order.map(function(id){return N.data.modules.find(function(m){return m.id===id;});}).filter(Boolean).filter(function(m){return !state.hidden.includes(m.id);});return slot('launcher','<div class="modules">'+ordered.map(moduleCard).join('')+'</div>');}
 function stats(){var cls=variant('ux009')?'stats ux-stats-pills':'stats';return slot('stats','<div class="'+cls+'"><div class="card stat"><small>Filmer & serier · demo</small><strong>'+N.data.media.length+'</strong></div><div class="card stat"><small>Berättelser · demo</small><strong>'+N.data.stories.length+'</strong></div><div class="card stat"><small>Dokument · demo</small><strong>'+N.data.files.length+'</strong></div></div>');}
@@ -122,7 +146,7 @@ function familyPreview(f,i){
   return cmd?'<div class="thumb-command">⌕　Sök eller kör kommando…<small>⌘K</small></div>':(id==='header'?'<div class="thumb-header"><b>NEXUS</b><span>⌕　☰</span></div>':'<div class="thumb-bottomnav '+(floating?'floating':'')+'">'+['⌂','▦','⌕','＋','◉'].map(function(x,j){return '<span>'+(icons?x:x+'<small>'+['Hem','Film','Sök','Lägg till','Mer'][j]+'</small>')+'</span>';}).join('')+'</div>');
  }
  if(id==='hero'){
-  return '<div class="thumb-hero '+(/filmisk|backdrop/i.test(lo)?'cinematic':'')+'"><small>GOD KVÄLL</small><h3>'+title+'</h3><div class="thumb-hero-actions"><span>Öppna</span><span>Sök</span></div></div>';
+  return heroMarkup(i,true);
  }
  if(id==='reader'||id==='storyCard'||id==='storyLayout'){
   var side=/delad|källpanel|fotnot/i.test(lo);
