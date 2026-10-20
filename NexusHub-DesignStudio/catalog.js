@@ -1,0 +1,72 @@
+/* Nexus Hub Design Studio · variantregister. Varje alternativ har stabilt ID. */
+window.NEXUS={
+themes:[
+{id:"velvet",name:"A · Velvet Dossier",detail:"Ametist, mysterier, editorial"},
+{id:"cinema",name:"B · Cinema Purple",detail:"Filmisk och posterstyrd"},
+{id:"fluid",name:"C · Fluid Canvas",detail:"Rumsligt, modulärt, flexibelt"},
+{id:"object",name:"D · Object Studio",detail:"Objekt, länkar, forskningsgraf"},
+{id:"midnight",name:"E · Midnight Instrument",detail:"Kompakt, exakt, tekniskt"},
+{id:"salon",name:"F · Reading Salon",detail:"Typografi och läsro"},
+{id:"hybrid",name:"G · Nexus Hybrid",detail:"Blandad identitet, inte förvald"}],
+families:[
+{id:"header",name:"Toppfält",group:"Skal & navigation",options:["Minimal ikonrad","Sökkapsel i headern","Stor redaktionell titel","Glassmorf toppfält","Kompakt kommandofält","Två nivåer","Flytande övre docka","Profil och snabbval"]},
+{id:"nav",name:"Mobilnavigation",group:"Skal & navigation",options:["Fem destinationer","Central plusknapp","Flytande docka","Kompakt fyraflik","Endast ikoner","Textbaserad underkant","Sidoskena","Kontextuell navigering","Dold fokusnavigation"]},
+{id:"surface",name:"Bakgrund & atmosfär",group:"Visuell identitet",options:["OLED-svart","Blålila grafit","Ametistdis","Mattsvart lager","Glasytor","Midnight blue","Varm bläcksvart","Kontrastpaneler","Ljust läsläge"]},
+{id:"type",name:"Typografi",group:"Visuell identitet",options:["Modern sans","Editorial serif","Cinema display","Kompakt instrument","Luftig premium","Boktypografi","Teknisk mono","Stor hero-typografi"]},
+{id:"shape",name:"Korthörn & konturer",group:"Visuell identitet",options:["Mjuka 18px","Strikta 8px","Piller och kapslar","Kantig arkivstil","Extra rundade","Ingen kantlinje","Dubbelkontur","Flytande kort"]},
+{id:"density",name:"Informationstäthet",group:"Visuell identitet",options:["Balanserad","Luftig","Kompakt","Maximal katalog","Stora touchytor","Editorial whitespace"]},
+{id:"motion",name:"Rörelse",group:"Visuell identitet",options:["Diskret","Ingen rörelse","Mjuk fjäder","Lätt lyft","Filmisk övergång","Snabb instrumentrespons"]},
+{id:"hero",name:"Startsideshero",group:"Startsida",options:["Redaktionellt välkommen","Filmisk backdrop","Trestegs snabbstart","Stort sökfokus","Dagens dossier","Split hero","Kompakt rubrik","Statistikdriven","Omslagskarusell"]},
+{id:"launcher",name:"Modulöversikt",group:"Startsida",options:["Ikonbrickor","Stora omslagskort","Kompakt lista","Mosaik/Bento","Horisontella band","Editorial sektioner","Minimal snabbstart","Färgkodade objektkort","Tvåkolumnskatalog","Stora typografiska länkar"]},
+{id:"continue",name:"Fortsätt-sektion",group:"Startsida",options:["Affischhylla","Horisontella kort","Tidslinje","En stor spotlight","Kompakta rader","Progresskort","Överlappande kort","Minimal återuppta"]},
+{id:"stats",name:"Översiktsstatistik",group:"Startsida",options:["Tre små siffror","Statusremsa","Ringindikatorer","Inga siffror","Kompakta räknare","Stora insiktskort","Ett enda statuskort"]},
+{id:"activity",name:"Aktivitetsflöde",group:"Startsida",options:["Tidslinje","Kortflöde","Minimal logg","Bento-händelser","Bara senaste","Grupperat per datum"]},
+{id:"mediaLayout",name:"Filmbibliotekets layout",group:"Film & serier",options:["Affischrutnät","Streaminghyllor","Kompakt tabell","Stora redaktionella kort","Mosaik affischer","Horisontell katalog","Täta miniatyrer","Split bibliotek","Omslag + metadata","Visuell tidslinje","Kort med detaljer"]},
+{id:"mediaCard",name:"Film- och seriekort",group:"Film & serier",options:["Titel under affisch","Text på affisch","Ren affisch","Statusbadge i hörnet","Affisch + infopanel","Horisontell posterrad","Stor filmisk scen","Kompakt objektkort","Gradering och progress","Hover/tryck-expansion"]},
+{id:"filter",name:"Filtrering",group:"Film & serier",options:["Bottom sheet","Chips över innehåll","Helskärmsfilter","Sidopanel","Kompakt dropdown","Sök först","Segmenterade flikar","Filterrad med räknare"]},
+{id:"mediaDetail",name:"Filmdetaljer",group:"Film & serier",options:["Backdrop + omslag","Dossierkort","Enkel metadata","Tvåkolumnspanel","Affischcentrerad","Cinema hero","Kataloginspektör"]},
+{id:"season",name:"Säsonger & avsnitt",group:"Film & serier",options:["Accordion","Progressrader","Avsnittskort","Säsongstabell","Vertikal tidslinje","Kompakta chips","Stora säsongsblock"]},
+{id:"storyLayout",name:"Berättelseöversikt",group:"Berättelser & läsning",options:["Dossierbibliotek","Bokomslag i grid","Editorial lista","Stora berättelsekort","Arkivmappar","Mysterietidslinje","Minimal katalog","Omslagskarusell"]},
+{id:"storyCard",name:"Berättelsekort",group:"Berättelser & läsning",options:["Förseglad dossier","Typografiskt omslag","Status och lästid","Foto + gradient","Minimal arkivrad","Researchkort","Bokomslag"]},
+{id:"reader",name:"Läsvy",group:"Berättelser & läsning",options:["Zen läsning","Redaktionellt magasin","Fokusläge","Delad källpanel","Dossier och fotnoter","Varmt papper","Stor text på mörkt","Två spalter desktop","Kapitelbok","Inspektör till höger"]},
+{id:"readerTools",name:"Läsverktyg",group:"Berättelser & läsning",options:["Flytande Aa-meny","Fast verktygsrad","Dold vid scroll","Kapitelindex som sheet","Fotnotspanel","Minimal progressbar","Annoteringsläge"]},
+{id:"knowledge",name:"Kunskapsbankens vy",group:"Kunskap & arkiv",options:["Graf i centrum","Objektgrid","Arkivträd","Backlinks-först","Kompakt tabell","Whiteboard","Sökbaserad portal","Split graf och lista","Taggkatalog","Forskningsdossier"]},
+{id:"graph",name:"Relationsgraf",group:"Kunskap & arkiv",options:["Orbit-graf","Stjärnbild","Nätverkskluster","Hierarkiskt träd","Radial karta","Länkkort","Graf med detaljinspektör","Minimal nodlista"]},
+{id:"fileLayout",name:"Filutforskaren",group:"Kunskap & arkiv",options:["Dokumentkort","Kompakt filtabell","Folder-grid","Kolumnvy","Inspektörsplit","Mosaikförhandsvisning","Taggbibliotek","Arbetsyta"]},
+{id:"fileCard",name:"Dokumentkort",group:"Kunskap & arkiv",options:["Ikon + metadata","Miniatyrförhandsvisning","Källinformation","Ren filrad","Taggkort","Detaljer på begäran","Visuellt bokmärke"]},
+{id:"inbox",name:"Inkorg",group:"Verktyg & system",options:["Prioriterad lista","Korta meddelandekort","Kanban-kolumner","Minimal händelselogg","Inkommande objekt","Tidslinje"]},
+{id:"plugin",name:"Pluginbibliotek",group:"Verktyg & system",options:["Plugin-grid","Kompakta rader","Switchkort","Detaljerad inspektör","App-galleri","Bento-funktioner","Statuslista"]},
+{id:"search",name:"Global sökning",group:"Skal & navigation",options:["Kommandopalett","Fullskärmssökning","Sökkapsel","Flytande sökpanel","Snabblänkar","Objektsökning","Filterbar arkivsök"]},
+{id:"labels",name:"Avsnittsrubriker",group:"Visuell identitet",options:["Små versaler","Stora serifrubriker","Linjeaccent","Numrerade kapitel","Strama etiketter","Rubrik + undermening"]},
+{id:"quick",name:"Snabbåtgärd",group:"Skal & navigation",options:["Central +","Flytande FAB","Kommandopalett","Snabbvals-sheet","Rad i header","Ingen permanent knapp","Skapa-menykort"]}
+],
+views:[
+{id:"home",name:"Hem",icon:"⌂"},{id:"films",name:"Film & serier",icon:"▣"},{id:"stories",name:"Berättelser",icon:"◈"},{id:"reader",name:"Läsaren",icon:"☷"},{id:"knowledge",name:"Kunskapsbank",icon:"✳"},{id:"files",name:"Utforska filer",icon:"▤"},{id:"inbox",name:"Inkorg",icon:"✉"},{id:"plugins",name:"Plugins",icon:"⬡"},{id:"activity",name:"Aktivitet",icon:"◷"},{id:"settings",name:"Inställningar",icon:"⚙"},{id:"research",name:"AI-idéarkiv",icon:"◇"}
+],
+data:{
+modules:[
+{id:"films",icon:"◩",name:"Film & serier",desc:"Affischer, status och säsonger",tag:"BIBLIOTEK"},
+{id:"stories",icon:"◈",name:"Berättelser",desc:"Mysterier och berättelser",tag:"UTFORSKA"},
+{id:"knowledge",icon:"✳",name:"Kunskapsbank",desc:"Samband, källor och objekt",tag:"FORSKNING"},
+{id:"files",icon:"▤",name:"Utforska filer",desc:"Dokument och arkiv",tag:"ARKIV"},
+{id:"inbox",icon:"✉",name:"Inkorg",desc:"Samla och bearbeta",tag:"IN"},
+{id:"plugins",icon:"⬡",name:"Plugins",desc:"Verktyg och integrationer",tag:"SYSTEM"}],
+media:[
+{id:"severance",title:"Severance",year:2022,type:"Serie",genres:["Mystik","Sci-fi"],seen:true,progress:"Säsong 2 · Avsnitt 4",poster:"linear-gradient(145deg,#d5b69b 0%,#2a4750 46%,#0b161a 100%)",glyph:"S",rating:"8.7"},
+{id:"dark",title:"Dark",year:2017,type:"Serie",genres:["Mystik","Drama"],seen:true,progress:"Alla säsonger sedda",poster:"linear-gradient(150deg,#1e403c,#0c131a 62%,#647262)",glyph:"D",rating:"8.7"},
+{id:"arrival",title:"Arrival",year:2016,type:"Film",genres:["Sci-fi","Drama"],seen:true,progress:"Sedd",poster:"linear-gradient(165deg,#696c86,#151a2c 63%,#907b67)",glyph:"A",rating:"7.9"},
+{id:"interstellar",title:"Interstellar",year:2014,type:"Film",genres:["Sci-fi","Drama"],seen:true,progress:"Sedd",poster:"linear-gradient(160deg,#717782,#151e27 55%,#07080c)",glyph:"I",rating:"8.7"},
+{id:"silo",title:"Silo",year:2023,type:"Serie",genres:["Sci-fi","Drama"],seen:false,progress:"Vill se",poster:"linear-gradient(160deg,#5a594c,#252a29 56%,#0b1118)",glyph:"S",rating:"8.1"},
+{id:"theprestige",title:"The Prestige",year:2006,type:"Film",genres:["Mystik","Thriller"],seen:false,progress:"Inte sett",poster:"linear-gradient(155deg,#607b8c,#23212b 50%,#100d19)",glyph:"P",rating:"8.5"},
+{id:"true",title:"True Detective",year:2014,type:"Serie",genres:["Thriller","Drama"],seen:true,progress:"Säsong 1 sedd",poster:"linear-gradient(155deg,#b59d76,#463c34 55%,#0d111c)",glyph:"T",rating:"8.9"},
+{id:"blade",title:"Blade Runner 2049",year:2017,type:"Film",genres:["Sci-fi","Thriller"],seen:false,progress:"Vill se",poster:"linear-gradient(165deg,#d67847,#482d41 60%,#17141b)",glyph:"B",rating:"8.0"}],
+stories:[
+{id:"dyatlov",title:"Djatlovpasset",eyebrow:"OLÖST MYSTERIUM · 1959",desc:"Nio vandrare. En övergiven tältplats. Ett händelseförlopp som fortfarande väcker frågor.",icon:"△"},
+{id:"voynich",title:"Voynichmanuskriptet",eyebrow:"HISTORISKT MYSTERIUM",desc:"Ett illustrerat manuskript skrivet på ett ännu oidentifierat skriftsystem.",icon:"✺"},
+{id:"mary",title:"Mary Celeste",eyebrow:"SJÖFART · 1872",desc:"Fartyget påträffades på drift, men besättningen var borta.",icon:"⚓"},
+{id:"tunguska",title:"Tunguska",eyebrow:"NATURFENOMEN · 1908",desc:"En våldsam explosion över Sibirien och spåren den lämnade.",icon:"✦"}],
+nodes:[{id:"Djatlovpasset",x:50,y:42,kind:"Dossier"},{id:"Expeditionen",x:22,y:27,kind:"Personer"},{id:"1959",x:77,y:21,kind:"Tid"},{id:"Uralbergen",x:79,y:70,kind:"Plats"},{id:"Källmaterial",x:22,y:76,kind:"Dokument"}],
+files:[{name:"Djatlov · källanteckningar",type:"Markdown",size:"18 KB",icon:"◫"},{name:"Expeditionens tidslinje",type:"Dokument",size:"42 KB",icon:"▤"},{name:"Observationer från arkivet",type:"PDF",size:"1,2 MB",icon:"▧"},{name:"Referenssamling",type:"Mapp",size:"12 objekt",icon:"▣"}],
+plugins:[{name:"Knowledge Explorer",desc:"Samband och fördjupning",icon:"✳"},{name:"Filmkatalog",desc:"Samlingar och metadata",icon:"▣"},{name:"Arkivassistent",desc:"Organisera dokument",icon:"▤"},{name:"Research Notes",desc:"Anteckningar och källor",icon:"✎"}]
+}
+};
