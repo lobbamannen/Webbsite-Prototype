@@ -397,3 +397,56 @@ body.focus-mode .view{padding-top:12px}
 .home-preview-wrap .home-activity{gap:5px}.home-preview-wrap .home-activity-item{padding:6px;gap:6px}.home-preview-wrap .home-activity-symbol{font-size:17px}.home-preview-wrap .home-activity-item strong{font-size:10px}.home-preview-wrap .home-activity-item p{font-size:8px}
 .home-preview-wrap .home-activity-1,.home-preview-wrap .home-activity-3{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:460px){.home-continue-5{grid-template-columns:1fr}.home-activity-3{grid-template-columns:repeat(2,minmax(0,1fr))}.home-activity-3 .home-activity-item:first-child{grid-column:span 2}}
+
+
+/* Real knowledge, graph and file designs shared with builder previews */
+.nexus-graph{min-width:0}.nexus-graph .graph-box{min-height:285px}
+.graph-mode-1 .graph-box{background:radial-gradient(circle at 45% 50%,#6a76c73e,transparent 65%),var(--surface)}
+.graph-mode-2 .graph-box{background:radial-gradient(circle at 75% 35%,#8b58b03e,transparent 70%),var(--surface)}
+.graph-mode-3 .graph-box{background:linear-gradient(135deg,#202c30,#191221)}
+.graph-mode-4 .graph-box{background:radial-gradient(circle,#63467b44,#13121d 70%)}
+.nexus-graph-list{display:grid;gap:8px}.nexus-graph-list-item{display:flex;align-items:center;gap:13px;padding:13px;background:var(--surface);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.nexus-graph-list-item b{font-size:22px;color:var(--accent)}.nexus-graph-list-item span{flex:1;font-size:13px}.nexus-graph-list-item small{color:var(--muted);font-size:10px}
+.graph-mode-5 .nexus-graph-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+.graph-mode-6{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,.4fr);gap:10px}
+.graph-inspector{background:var(--surface2);padding:14px;border:1px solid var(--line);border-radius:12px;display:grid;align-content:start;gap:12px}
+.graph-inspector small{font-size:10px;color:var(--muted)}.graph-inspector strong{font-size:15px}.graph-inspector p{font-size:11px}
+.knowledge-layout{display:grid;gap:12px}
+.knowledge-layout .knowledge-items{display:grid;gap:9px}
+.knowledge-layout .knowledge-item{margin:0}
+.knowledge-mode-1 .knowledge-items{grid-template-columns:repeat(2,minmax(0,1fr))}
+.knowledge-mode-2 .knowledge-tree{border-left:2px solid var(--accent);display:grid;gap:9px;padding:12px;background:var(--surface);border-radius:8px}
+.knowledge-mode-3 .knowledge-item{border-left:4px solid var(--accent)}
+.knowledge-mode-4 .knowledge-item{border-radius:0;background:transparent;box-shadow:none;border:0;border-bottom:1px solid var(--line);padding:8px}
+.knowledge-mode-5 .knowledge-items{grid-template-columns:repeat(2,minmax(0,1fr))}
+.knowledge-mode-6 .hero-search-demo{padding:18px;border-radius:12px;background:var(--surface2);border:1px solid var(--line)}
+.knowledge-mode-7{grid-template-columns:1fr 1fr}
+.knowledge-mode-8 .knowledge-items{grid-template-columns:repeat(2,minmax(0,1fr))}
+.knowledge-tags{display:flex;gap:7px;flex-wrap:wrap}.knowledge-tags span{background:#aa8bff24;border:1px solid #aa8bff50;padding:7px 10px;font-size:10px;border-radius:99px}
+.knowledge-dossier{background:linear-gradient(120deg,#392a50,#171321);padding:20px;border-radius:15px;border-left:4px solid var(--accent)}
+.knowledge-dossier small{font-size:10px;color:var(--accent)}.knowledge-dossier h3{font-family:var(--serif);font-size:26px;margin:10px 0}.knowledge-dossier p{font-size:12px}
+.file-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.file-layout .file-card{min-width:0;cursor:pointer}
+.file-layout-mode-1,.file-layout-mode-3{grid-template-columns:1fr}
+.file-layout-mode-1 .file-card,.file-layout-mode-3 .file-card{min-height:65px;flex-direction:row;align-items:center}
+.file-layout-mode-2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.file-layout-mode-2 .file-card{flex-direction:column;min-height:145px}
+.file-layout-mode-4{grid-template-columns:1fr 1fr}.file-layout-mode-4>.file-card:first-child{grid-column:1/-1}
+.file-layout-mode-5{grid-template-columns:repeat(3,minmax(0,1fr))}
+.file-layout-mode-5>.file-card:first-child{grid-column:span 2;grid-row:span 2}
+.file-layout-mode-6{grid-template-columns:1fr 1fr}.file-layout-mode-6>.knowledge-tags{grid-column:1/-1}
+.file-layout-mode-7{grid-template-columns:1fr 1fr}.file-layout-mode-7 .file-workspace-title{grid-column:1/-1;font-size:11px;letter-spacing:.12em;color:var(--accent)}
+.file-card-mode-1{display:flex;flex-direction:column}.file-thumb{height:80px;width:100%;display:grid;place-items:center;background:linear-gradient(145deg,#463052,#1b1a29);border-radius:9px;font-size:37px;color:var(--accent)}
+.file-thumb small{font-size:9px;color:#ddd}
+.file-card-mode-2{border-left:3px solid var(--accent)}
+.file-card-mode-3{border-radius:0;border:0;border-bottom:1px solid var(--line);box-shadow:none;background:transparent}
+.file-card-mode-4{flex-direction:column;align-items:start}.file-tag{font-size:10px;padding:6px 9px;background:#af8ee82a;border-radius:8px;color:var(--accent)}
+.file-card-mode-5{position:relative}.file-more{margin-left:auto;color:var(--accent)}
+.file-card-mode-6{border-top:3px solid var(--accent)}.file-bookmark{font-size:31px;color:var(--accent)}
+.graph-mini .graph-box{min-height:145px}.graph-mini .graph-node{padding:4px 6px;font-size:8px;white-space:normal;max-width:86px}
+.graph-mini.graph-mode-6{grid-template-columns:minmax(0,1fr) 85px}.graph-mini .graph-inspector{padding:7px}
+.knowledge-mini .knowledge-item{padding:6px}.knowledge-mini .knowledge-item strong{font-size:9px}.knowledge-mini .knowledge-item small{font-size:8px}.knowledge-mini .node-ico{width:23px;height:23px;font-size:13px}
+.knowledge-mini .knowledge-dossier{padding:10px}.knowledge-mini .knowledge-dossier h3{font-size:16px}
+.file-layout-mini{gap:5px}.file-layout-mini .file-card{padding:6px;min-height:55px}.file-layout-mini .file-card h3{font-size:9px}.file-layout-mini .file-card p{font-size:8px}.file-layout-mini .file-icon{font-size:20px}
+.file-mini{max-width:200px;margin:auto}
+@media(max-width:600px){.graph-mode-6,.knowledge-mode-7{grid-template-columns:1fr}.graph-mode-6 .graph-inspector{display:none}.file-layout-mode-2,.file-layout-mode-5{grid-template-columns:repeat(2,minmax(0,1fr))}}
