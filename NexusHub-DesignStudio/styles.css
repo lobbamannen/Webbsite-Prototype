@@ -620,3 +620,11 @@ body.focus-mode .view{padding-top:12px}
 .visual-preview .section-head{min-height:100px;justify-content:center}
 .visual-preview .section-heading{color:#e7daf7}
 @media(prefers-reduced-motion:reduce){.visual-motion-object{animation:none!important}}
+
+
+/* Per-family "Visa inget" choice and recovery */
+.no-module-option{display:grid;gap:10px;padding:17px;border:1px dashed var(--accent);margin:12px 0 20px;border-radius:14px;background:var(--surface2)}
+.no-module-option strong{font-size:15px}.no-module-option small{font-size:12px;color:var(--muted);line-height:1.5}
+.no-module-option .action-btn{justify-self:start}.no-module-option .mini-btn{justify-self:start}
+.studio-rescue{position:relative;display:flex;justify-content:flex-end;padding:10px 14px;z-index:30}
+.builder-grid .builder-item small{line-height:1.4}
