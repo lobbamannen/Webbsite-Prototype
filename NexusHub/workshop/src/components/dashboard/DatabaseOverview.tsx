@@ -19,7 +19,7 @@ export default function DatabaseOverview({documents,fileCount,fetchedAt,complete
  const dataReady=!!fetchedAt||total>0;
  return <section className="nh-module-dashboard nh-database-dashboard" aria-labelledby="nh-db-title">
   <header className="nh-module-dashboard-header">
-   <div className="nh-module-dashboard-title"><span className="nh-module-heading-icon"><Database size={29} aria-hidden="true"/></span><div><span className="nh-module-eyebrow">NEXUS HUB · KUNSKAPSBANKEN</span><h1 id="nh-db-title">Utforska databasen</h1><p>Hitta dokument, metoder och kunskap i din GitHub-databas.</p></div></div>
+   <div className="nh-module-dashboard-title"><span className="nh-module-heading-icon"><Database size={29} aria-hidden="true"/></span><div><span className="nh-module-eyebrow">NEXUS HUB · KUNSKAPSBANKEN</span><h1 id="nh-db-title">Utforska databasen</h1><p>Bläddra bland ämnen eller sök efter dokument i GitHub-arkivet.</p></div></div>
    <span className="nh-catalog-status"><span className="nh-status-line">{timestamp?<CheckCircle2 size={16} aria-hidden="true"/>:<Clock3 size={16} aria-hidden="true"/>}{timestamp?'Katalog hämtad':loading?'Hämtar katalog…':'Katalog ej verifierad'}</span>{timestamp&&<small>{timestamp}</small>}</span>
   </header>
   <div className="nh-module-stat-row" aria-label="Databasöversikt">
@@ -29,7 +29,7 @@ export default function DatabaseOverview({documents,fileCount,fetchedAt,complete
   </div>
   {complete===false&&<p className="nh-dashboard-note">GitHub-katalogen är ofullständig. Visade antal gäller endast det innehåll som kunde hämtas.</p>}
   {toolbar}
-  <div className="nh-module-category-head"><div><span className="nh-module-eyebrow">BLÄDDRA</span><h2>Välj ett ämne</h2><p>Tryck på en kategori för att filtrera dokumentlistan.</p></div></div>
+  <div className="nh-module-category-head"><div><span className="nh-module-eyebrow">BLÄDDRA</span><h2>Välj ett ämne</h2><p>Välj en kategori för att visa tillhörande dokument.</p></div></div>
   <div className="nh-module-category-grid" aria-label="Databasens kategorier">
    {visible.map(({name,count},index)=><button type="button" key={name} className={'nh-module-category-card nh-category-'+index%4+(selectedCategory===name?' selected':'')} aria-pressed={selectedCategory===name} onClick={()=>onSelectCategory(name)}>
     <span className="nh-category-icon"><Layers size={23} aria-hidden="true"/></span><span className="nh-category-copy"><strong>{name}</strong><small>{format(count)} {count===1?'post':'poster'}</small></span><ArrowDown size={17} className="nh-category-arrow" aria-hidden="true"/>
