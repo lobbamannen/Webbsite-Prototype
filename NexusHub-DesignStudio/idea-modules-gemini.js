@@ -21,6 +21,19 @@
   function button(text, style) {
     return '<span style="display:inline-block;border:1px solid #55417c;background:#292136;color:#f5f0ff;border-radius:999px;padding:10px 14px;min-height:22px;' + (style || '') + '">' + text + '</span>';
   }
+  function neutralizeDisplayOnlyButtons(html) {
+    var stack=[];
+    return html.replace(/<\\/?button\\b[^>]*>/g,function(tag){
+      if(tag.slice(0,2)==='</'){
+        var displayOnly=stack.pop();
+        return displayOnly?'</span>':tag;
+      }
+      var actionable=/data-(?:go|action|open-media|open-story|node|file|plugin|filter|chapter|inbox)=/.test(tag);
+      stack.push(!actionable);
+      if(actionable)return tag;
+      return tag.replace(/^<button/,'<span').replace(/\\s+type="button"/,'').replace(/\\s+aria-(?:pressed|label)="[^"]*"/,'').replace(/cursor:[^;]+;?/g,'cursor:default;');
+    });
+  }
   function demo(id) {
     var card = 'border:1px solid rgba(255,255,255,.12);background:#171720;color:#f3f1f7;border-radius:14px;padding:14px;';
     var muted = 'color:#a9a5b2;font-size:12px;';
