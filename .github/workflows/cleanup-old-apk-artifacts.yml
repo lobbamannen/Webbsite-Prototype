@@ -1,0 +1,65 @@
+name: One-time cleanup of old APK artifacts
+on:
+  workflow_dispatch:
+permissions:
+  actions: write
+jobs:
+  cleanup:
+    name: Delete old APK artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete APK artifacts older than three days
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const cutoff = Date.now() - 3 * 24 * 60 * 60 * 1000;
+            const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, {
+              owner, repo, per_page: 100
+            });
+            let deleted = 0;
+            let skipped = 0;
+            const deletedRows = [];
+
+            for (const artifact of artifacts) {
+              if (!artifact.name.toLowerCase().includes('apk')) continue;
+              if (artifact.expired || Date.parse(artifact.created_at) >= cutoff) continue;
+              const runId = artifact.workflow_run?.id;
+              if (!runId) {
+                skipped++;
+                core.warning(`Skipped ${artifact.name}: no workflow run metadata.`);
+                continue;
+              }
+
+              let run;
+              try {
+                run = (await github.rest.actions.getWorkflowRun({ owner, repo, run_id: runId })).data;
+              } catch (error) {
+                skipped++;
+                core.warning(`Skipped ${artifact.name}: could not inspect run ${runId} (${error.message}).`);
+                continue;
+              }
+
+              const isPullRequestRun = ['pull_request', 'pull_request_target'].includes(run.event)
+                || (run.pull_requests?.length ?? 0) > 0
+                || run.head_branch?.startsWith('refs/pull/');
+              if (run.status !== 'completed' || isPullRequestRun) {
+                skipped++;
+                core.info(`Kept ${artifact.name}: run ${runId} is active or associated with a pull request.`);
+                continue;
+              }
+
+              await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+              deleted++;
+              deletedRows.push([artifact.name, new Date(artifact.created_at).toISOString(), `${(artifact.size_in_bytes / 1048576).toFixed(1)} MB`]);
+              core.info(`Deleted ${artifact.name} (${artifact.size_in_bytes} bytes), run ${runId}.`);
+            }
+
+            core.summary
+              .addHeading(`APK artifact cleanup: ${repo}`)
+              .addRaw(`Deleted ${deleted} old APK artifact(s); skipped ${skipped} candidate(s). Only completed non-PR runs older than 3 days were eligible. Releases and non-APK artifacts were not touched.`);
+            if (deletedRows.length) {
+              core.summary.addTable([['Artifact', 'Created', 'Size'], ...deletedRows]);
+            }
+            await core.summary.write();
+            core.info(`Cleanup complete. Deleted ${deleted}; skipped ${skipped}.`);
